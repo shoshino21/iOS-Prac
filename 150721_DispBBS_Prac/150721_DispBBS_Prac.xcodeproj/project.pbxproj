@@ -7,9 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0F19C6139013B2596A7C7E1D /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 53D472D02DE50F54EC8D4F5C /* libPods.a */; };
+		EF1FB9D51B5ECE7E00990F3A /* ReadingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF1FB9D41B5ECE7E00990F3A /* ReadingViewController.m */; };
+		EF3D83821B5E9DAB00311BDC /* HotText.png in Resources */ = {isa = PBXBuildFile; fileRef = EF3D83811B5E9DAB00311BDC /* HotText.png */; };
+		EF3D83851B5EA5F300311BDC /* HotTextTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF3D83841B5EA5F300311BDC /* HotTextTableViewController.m */; };
+		EF3D83881B5EA64900311BDC /* HotTextTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EF3D83871B5EA64900311BDC /* HotTextTableViewCell.m */; };
+		EF3D838A1B5EAE2B00311BDC /* displogo120.png in Resources */ = {isa = PBXBuildFile; fileRef = EF3D83891B5EAE2B00311BDC /* displogo120.png */; };
 		EFC6BC0B1B5E4C0900A3A5C2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EFC6BC0A1B5E4C0900A3A5C2 /* main.m */; };
 		EFC6BC0E1B5E4C0900A3A5C2 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EFC6BC0D1B5E4C0900A3A5C2 /* AppDelegate.m */; };
-		EFC6BC111B5E4C0900A3A5C2 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EFC6BC101B5E4C0900A3A5C2 /* ViewController.m */; };
 		EFC6BC141B5E4C0900A3A5C2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EFC6BC121B5E4C0900A3A5C2 /* Main.storyboard */; };
 		EFC6BC161B5E4C0900A3A5C2 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EFC6BC151B5E4C0900A3A5C2 /* Images.xcassets */; };
 		EFC6BC191B5E4C0900A3A5C2 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = EFC6BC171B5E4C0900A3A5C2 /* LaunchScreen.xib */; };
@@ -27,13 +32,22 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		28B5251186F32160640897B8 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		53D472D02DE50F54EC8D4F5C /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B949EF5652E3F9CABC0EB5D5 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		EF1FB9D31B5ECE7E00990F3A /* ReadingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReadingViewController.h; sourceTree = "<group>"; };
+		EF1FB9D41B5ECE7E00990F3A /* ReadingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReadingViewController.m; sourceTree = "<group>"; };
+		EF3D83811B5E9DAB00311BDC /* HotText.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HotText.png; sourceTree = "<group>"; };
+		EF3D83831B5EA5F300311BDC /* HotTextTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HotTextTableViewController.h; sourceTree = "<group>"; };
+		EF3D83841B5EA5F300311BDC /* HotTextTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HotTextTableViewController.m; sourceTree = "<group>"; };
+		EF3D83861B5EA64900311BDC /* HotTextTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HotTextTableViewCell.h; sourceTree = "<group>"; };
+		EF3D83871B5EA64900311BDC /* HotTextTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HotTextTableViewCell.m; sourceTree = "<group>"; };
+		EF3D83891B5EAE2B00311BDC /* displogo120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = displogo120.png; sourceTree = "<group>"; };
 		EFC6BC051B5E4C0900A3A5C2 /* 150721_DispBBS_Prac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = 150721_DispBBS_Prac.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EFC6BC091B5E4C0900A3A5C2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EFC6BC0A1B5E4C0900A3A5C2 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		EFC6BC0C1B5E4C0900A3A5C2 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		EFC6BC0D1B5E4C0900A3A5C2 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		EFC6BC0F1B5E4C0900A3A5C2 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		EFC6BC101B5E4C0900A3A5C2 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		EFC6BC131B5E4C0900A3A5C2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		EFC6BC151B5E4C0900A3A5C2 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		EFC6BC181B5E4C0900A3A5C2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -47,6 +61,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0F19C6139013B2596A7C7E1D /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -60,12 +75,40 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0C51649AAB664585FB69C406 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				53D472D02DE50F54EC8D4F5C /* libPods.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		DC09F42BC0420402072A3D79 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				28B5251186F32160640897B8 /* Pods.debug.xcconfig */,
+				B949EF5652E3F9CABC0EB5D5 /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		EF3D83801B5E9D6100311BDC /* Icons */ = {
+			isa = PBXGroup;
+			children = (
+				EF3D83811B5E9DAB00311BDC /* HotText.png */,
+				EF3D83891B5EAE2B00311BDC /* displogo120.png */,
+			);
+			name = Icons;
+			sourceTree = "<group>";
+		};
 		EFC6BBFC1B5E4C0900A3A5C2 = {
 			isa = PBXGroup;
 			children = (
 				EFC6BC071B5E4C0900A3A5C2 /* 150721_DispBBS_Prac */,
 				EFC6BC211B5E4C0900A3A5C2 /* 150721_DispBBS_PracTests */,
 				EFC6BC061B5E4C0900A3A5C2 /* Products */,
+				DC09F42BC0420402072A3D79 /* Pods */,
+				0C51649AAB664585FB69C406 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -81,11 +124,16 @@
 		EFC6BC071B5E4C0900A3A5C2 /* 150721_DispBBS_Prac */ = {
 			isa = PBXGroup;
 			children = (
+				EF3D83801B5E9D6100311BDC /* Icons */,
 				EFC6BC0C1B5E4C0900A3A5C2 /* AppDelegate.h */,
 				EFC6BC0D1B5E4C0900A3A5C2 /* AppDelegate.m */,
-				EFC6BC0F1B5E4C0900A3A5C2 /* ViewController.h */,
-				EFC6BC101B5E4C0900A3A5C2 /* ViewController.m */,
 				EFC6BC121B5E4C0900A3A5C2 /* Main.storyboard */,
+				EF1FB9D31B5ECE7E00990F3A /* ReadingViewController.h */,
+				EF1FB9D41B5ECE7E00990F3A /* ReadingViewController.m */,
+				EF3D83831B5EA5F300311BDC /* HotTextTableViewController.h */,
+				EF3D83841B5EA5F300311BDC /* HotTextTableViewController.m */,
+				EF3D83861B5EA64900311BDC /* HotTextTableViewCell.h */,
+				EF3D83871B5EA64900311BDC /* HotTextTableViewCell.m */,
 				EFC6BC151B5E4C0900A3A5C2 /* Images.xcassets */,
 				EFC6BC171B5E4C0900A3A5C2 /* LaunchScreen.xib */,
 				EFC6BC081B5E4C0900A3A5C2 /* Supporting Files */,
@@ -126,9 +174,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = EFC6BC281B5E4C0900A3A5C2 /* Build configuration list for PBXNativeTarget "150721_DispBBS_Prac" */;
 			buildPhases = (
+				4B02DDC53C8B6709D92520EC /* Check Pods Manifest.lock */,
 				EFC6BC011B5E4C0900A3A5C2 /* Sources */,
 				EFC6BC021B5E4C0900A3A5C2 /* Frameworks */,
 				EFC6BC031B5E4C0900A3A5C2 /* Resources */,
+				CAFE594FCE8DA5F0AC5565DA /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -199,8 +249,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EF3D838A1B5EAE2B00311BDC /* displogo120.png in Resources */,
 				EFC6BC141B5E4C0900A3A5C2 /* Main.storyboard in Resources */,
 				EFC6BC191B5E4C0900A3A5C2 /* LaunchScreen.xib in Resources */,
+				EF3D83821B5E9DAB00311BDC /* HotText.png in Resources */,
 				EFC6BC161B5E4C0900A3A5C2 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -214,13 +266,48 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		4B02DDC53C8B6709D92520EC /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		CAFE594FCE8DA5F0AC5565DA /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		EFC6BC011B5E4C0900A3A5C2 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EFC6BC111B5E4C0900A3A5C2 /* ViewController.m in Sources */,
+				EF3D83881B5EA64900311BDC /* HotTextTableViewCell.m in Sources */,
 				EFC6BC0E1B5E4C0900A3A5C2 /* AppDelegate.m in Sources */,
+				EF3D83851B5EA5F300311BDC /* HotTextTableViewController.m in Sources */,
+				EF1FB9D51B5ECE7E00990F3A /* ReadingViewController.m in Sources */,
 				EFC6BC0B1B5E4C0900A3A5C2 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -347,6 +434,7 @@
 		};
 		EFC6BC291B5E4C0900A3A5C2 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 28B5251186F32160640897B8 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = 150721_DispBBS_Prac/Info.plist;
@@ -357,6 +445,7 @@
 		};
 		EFC6BC2A1B5E4C0900A3A5C2 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B949EF5652E3F9CABC0EB5D5 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = 150721_DispBBS_Prac/Info.plist;
@@ -418,6 +507,7 @@
 				EFC6BC2A1B5E4C0900A3A5C2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		EFC6BC2B1B5E4C0900A3A5C2 /* Build configuration list for PBXNativeTarget "150721_DispBBS_PracTests" */ = {
 			isa = XCConfigurationList;
@@ -426,6 +516,7 @@
 				EFC6BC2D1B5E4C0900A3A5C2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
