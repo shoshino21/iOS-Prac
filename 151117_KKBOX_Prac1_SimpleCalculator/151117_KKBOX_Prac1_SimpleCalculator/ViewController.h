@@ -10,6 +10,9 @@
 
 @interface ViewController : UIViewController
 
+@property (weak, nonatomic) IBOutlet UILabel *numLabel1;
+@property (weak, nonatomic) IBOutlet UILabel *numLabel2;
+@property (weak, nonatomic) IBOutlet UILabel *operatorLabel;
 
 @end
 
