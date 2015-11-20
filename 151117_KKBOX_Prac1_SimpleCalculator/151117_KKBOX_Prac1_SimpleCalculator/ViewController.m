@@ -6,13 +6,11 @@
 //  Copyright (c) 2015 shoshino21. All rights reserved.
 //
 
-#define ADD_DIGIT(x) [self.resultText appendFormat:@"%d", x]
-
 #import "ViewController.h"
 
 @interface ViewController ()
 
-@property (copy, nonatomic) NSMutableString *resultText;
+@property (strong, nonatomic) NSMutableString *resultText;
 @property (strong, nonatomic) NSDecimalNumber *leftDecNumber;
 @property (strong, nonatomic) NSDecimalNumber *rightDecNumber;
 
@@ -30,7 +28,8 @@
 - (void)viewDidLoad {
   [super viewDidLoad];
 
-  [self.resultText setString:@""];
+  self.resultText = [NSMutableString stringWithString:@"0"];
+  self.resultLabel.text = self.resultText;
   self.leftDecNumber = nil;
   self.rightDecNumber = nil;
 
@@ -118,21 +117,16 @@
   }
 
   switch ([sender tag]) {
-#warning 待補完
-    case SCButton0:
-      if ([self.resultText isEqualToString:@"0"] && !_hasDot) {
-
-      }
-
-    case SCButton1: ADD_DIGIT(1); break;
-    case SCButton2: ADD_DIGIT(2); break;
-    case SCButton3: ADD_DIGIT(3); break;
-    case SCButton4: ADD_DIGIT(4); break;
-    case SCButton5: ADD_DIGIT(5); break;
-    case SCButton6: ADD_DIGIT(6); break;
-    case SCButton7: ADD_DIGIT(7); break;
-    case SCButton8: ADD_DIGIT(8); break;
-    case SCButton9: ADD_DIGIT(9); break;
+    case SCButton0: [self p_appendNumber:0]; break;
+    case SCButton1: [self p_appendNumber:1]; break;
+    case SCButton2: [self p_appendNumber:2]; break;
+    case SCButton3: [self p_appendNumber:3]; break;
+    case SCButton4: [self p_appendNumber:4]; break;
+    case SCButton5: [self p_appendNumber:5]; break;
+    case SCButton6: [self p_appendNumber:6]; break;
+    case SCButton7: [self p_appendNumber:7]; break;
+    case SCButton8: [self p_appendNumber:8]; break;
+    case SCButton9: [self p_appendNumber:9]; break;
 
     case SCButtonDot:
       if (!_hasDot) {
@@ -144,38 +138,38 @@
     default:
       break;
   }
+  self.resultLabel.text = self.resultText;
 }
 
 - (IBAction)operateButtonPressed:(UIButton *)sender {
+  switch ([sender tag]) {
+    case SCButtonClear:
+      [self p_reset];
+      break;
+
+    default:
+      break;
+  }
 }
 
 #pragma mark - Private
 
 - (void)p_reset {
-#warning 所有東西歸零，開始新算式
+  [self.resultText setString:@"0"];
+  self.resultLabel.text = self.resultText;
+  _hasDot = NO;
 }
 
 - (void)p_appendNumber:(int)aNumber {
-//  if ([self.resultText isEqualToString:@"0"] && !_hasDot) {
-//    if (aNumber == 0) {
-//      return;
-//    } else {
-//      [self.resultText setString:[NSString stringWithFormat:@"%d", aNumber]];
-//    }
-//  } else {
-//    [self.resultText appendFormat:@"%d", aNumber];
-//  }
-//
-  if (![self.resultText isEqualToString:@"0"] || _hasDot) {
-    [self.resultText appendFormat:@"%d", aNumber];
+  // 目前為0且沒小數點 -> 0:不變，其他:取代0
+  if ([self.resultText isEqualToString:@"0"] && !_hasDot) {
+    if (aNumber != 0) {
+      [self.resultText setString:[NSString stringWithFormat:@"%d", aNumber]];
+    }
     return;
   }
 
-  if (aNumber == 0) {
-    return;
-  } else {
-    [self.resultText setString:[NSString stringWithFormat:@"%d", aNumber]];
-  }
+  [self.resultText appendFormat:@"%d", aNumber];
 }
 
 @end
