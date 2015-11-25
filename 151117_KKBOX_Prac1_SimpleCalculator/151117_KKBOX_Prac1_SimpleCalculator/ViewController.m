@@ -20,6 +20,7 @@
   SEL _savedSelector;
   BOOL _hasDot;
   BOOL _shouldClearInput;
+  BOOL _isJustInputOperator;
   BOOL _isLastOperatorEql;
 }
 
@@ -36,6 +37,7 @@
   _savedSelector = nil;
   _hasDot = NO;
   _shouldClearInput = NO;
+  _isJustInputOperator = NO;
   _isLastOperatorEql = NO;
 
   self.clearButton.tag = SCButtonClear;
@@ -63,32 +65,27 @@
 - (void)performOperation:(NSInteger)theOperation {
   if (!self.leftDecNumber) {
     self.leftDecNumber = [NSDecimalNumber decimalNumberWithString:self.resultText];
-//    [self.resultText setString:@"0"];
     _savedSelector = [self p_getSelectorWithOperation:theOperation];
     return;
   }
 
-  // 未輸入數字就先輸入運算子
-//  if (self.resultText.length == 0) {
-//    _savedSelector = [self p_getSelectorWithOperation:theOperation];
-//    return;
-//  }
-#warning 寫法要改，不能判斷length == 0，也不能判斷resultText為"0" (否則第二個數字就無法輸入0了)，先放置，可以用個isJustInputOperator flag去判斷
+  // 若連續輸入兩次運算子
+  if (_isJustInputOperator) {
+    _savedSelector = [self p_getSelectorWithOperation:theOperation];
+    return;
+  }
 
   self.rightDecNumber = [NSDecimalNumber decimalNumberWithString:self.resultText];
   [self.resultText setString:@"0"];
 
-
   if (_savedSelector) {
-#warning debug
-    NSLog(@"SEL: %s", sel_getName(_savedSelector));
-
     self.leftDecNumber = [self.leftDecNumber performSelector:_savedSelector withObject:self.rightDecNumber];
     [self.resultText setString:[NSString stringWithFormat:@"%@", self.leftDecNumber]];
     self.resultLabel.text = self.resultText;
   }
   
   _savedSelector = [self p_getSelectorWithOperation:theOperation];
+  _isJustInputOperator = YES;
 }
 
 - (NSMutableString *)readableNumberFromString:(NSString *)aString {
@@ -140,6 +137,7 @@
     _shouldClearInput = NO;
   }
 
+  // 等號後直接輸入數字，表示開始新一輪計算
   if (_isLastOperatorEql) {
     [self p_reset];
   }
@@ -168,6 +166,7 @@
   }
 
   self.resultLabel.text = self.resultText;
+  _isJustInputOperator = NO;
 }
 
 - (IBAction)operateButtonPressed:(UIButton *)sender {
@@ -176,29 +175,26 @@
       [self p_reset];
       break;
 
-
+#warning 待修改
     case SCButtonChangeSign:
-      /// 直接 * -1
+      [self.resultText setString:[NSString stringWithFormat:@"-%@", self.resultText]];
+      self.resultLabel.text = self.resultText;
       break;
 
     case SCButtonAdd:
     case SCButtonSub:
     case SCButtonMul:
     case SCButtonDiv:
-      _isLastOperatorEql = NO;
       _shouldClearInput = YES;
+      _isLastOperatorEql = NO;
       [self performOperation:[sender tag]];
-//#warning debug
-//      NSLog(@"%ld", (long)[sender tag]);
       break;
 
     case SCButtonEql:
-      _isLastOperatorEql = YES;
       _shouldClearInput = YES;
+      _isLastOperatorEql = YES;
       [self performOperation:[sender tag]];
       break;
-
-
 
     default:
       break;
@@ -216,6 +212,7 @@
   _savedSelector = nil;
   _hasDot = NO;
   _shouldClearInput = NO;
+  _isJustInputOperator = NO;
   _isLastOperatorEql = NO;
 }
 
@@ -247,9 +244,14 @@
       selector = @selector(decimalNumberByDividingBy:);
       break;
     default:
+      selector = nil;
       break;
   }
   return selector;
 }
+//
+//- (NSString *)p_resultChangeSign {
+//
+//}
 
 @end
