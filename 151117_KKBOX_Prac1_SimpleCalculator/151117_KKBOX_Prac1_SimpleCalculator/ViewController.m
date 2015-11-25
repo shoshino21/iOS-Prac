@@ -63,15 +63,17 @@
 #pragma mark - Methods
 
 - (void)performOperation:(NSInteger)theOperation {
-  if (!self.leftDecNumber) {
-    self.leftDecNumber = [NSDecimalNumber decimalNumberWithString:self.resultText];
-    _savedSelector = [self p_getSelectorWithOperation:theOperation];
+  // 若連續輸入兩次運算子
+  if (_isJustInputOperator) {
+    _savedSelector = [self p_selectorWithOperation:theOperation];
     return;
   }
 
-  // 若連續輸入兩次運算子
-  if (_isJustInputOperator) {
-    _savedSelector = [self p_getSelectorWithOperation:theOperation];
+  _isJustInputOperator = YES;
+
+  if (!self.leftDecNumber) {
+    self.leftDecNumber = [NSDecimalNumber decimalNumberWithString:self.resultText];
+    _savedSelector = [self p_selectorWithOperation:theOperation];
     return;
   }
 
@@ -79,52 +81,18 @@
   [self.resultText setString:@"0"];
 
   if (_savedSelector) {
+    if (_savedSelector == @selector(decimalNumberByDividingBy:) && [self.rightDecNumber isEqualToNumber:[NSDecimalNumber zero]]) {
+      [self p_showDivideByZeroAlert];
+      [self p_reset];
+      return;
+    }
+
     self.leftDecNumber = [self.leftDecNumber performSelector:_savedSelector withObject:self.rightDecNumber];
     [self.resultText setString:[NSString stringWithFormat:@"%@", self.leftDecNumber]];
     self.resultLabel.text = self.resultText;
   }
   
-  _savedSelector = [self p_getSelectorWithOperation:theOperation];
-  _isJustInputOperator = YES;
-}
-
-- (NSMutableString *)readableNumberFromString:(NSString *)aString {
-  // given 12.30000 we remove the trailing zeros
-  NSMutableString *result = [NSMutableString stringWithString:aString];
-
-  // check if it contains a . character.
-  if ([result rangeOfString:@"."].location != NSNotFound) {
-
-    // start from the end, and remove any 0 or . you find until you find a number greater than 0
-    for (int i = (int)[result length] - 1; i >= 0; i--) {
-      // get the char
-      unichar currentChar = [result characterAtIndex:i];
-
-      if (currentChar == '0') {
-        // remove it from the string
-        [result replaceCharactersInRange:NSMakeRange(i, 1) withString:@""];
-      } else if (currentChar == '.') {
-        // remove it from the string
-        [result replaceCharactersInRange:NSMakeRange(i, 1) withString:@""];
-        break;
-      }
-      else {
-        break;
-      }
-    }
-  }
-
-  // assign default value if needed
-  if ([result isEqualToString:@""]) {
-    [result appendString:@"0"];
-  }
-
-  // remove the initial 0 if present
-  if ([result length] > 1 && [result characterAtIndex:0] == '0') {
-    [result replaceCharactersInRange:NSMakeRange(0, 1) withString:@""];
-  }
-
-  return result;
+  _savedSelector = [self p_selectorWithOperation:theOperation];
 }
 
 #pragma mark - Actions
@@ -137,7 +105,7 @@
     _shouldClearInput = NO;
   }
 
-  // 等號後直接輸入數字，表示開始新一輪計算
+  // 輸入等號後再直接輸入數字，表示開始新一輪計算
   if (_isLastOperatorEql) {
     [self p_reset];
   }
@@ -175,10 +143,8 @@
       [self p_reset];
       break;
 
-#warning 待修改
     case SCButtonChangeSign:
-      [self.resultText setString:[NSString stringWithFormat:@"-%@", self.resultText]];
-      self.resultLabel.text = self.resultText;
+      [self p_changeSign];
       break;
 
     case SCButtonAdd:
@@ -228,7 +194,7 @@
   [self.resultText appendFormat:@"%d", aNumber];
 }
 
-- (SEL)p_getSelectorWithOperation:(NSInteger)theOperation {
+- (SEL)p_selectorWithOperation:(NSInteger)theOperation {
   SEL selector = nil;
   switch (theOperation) {
     case SCButtonAdd:
@@ -244,14 +210,27 @@
       selector = @selector(decimalNumberByDividingBy:);
       break;
     default:
-      selector = nil;
+      selector = _savedSelector;
       break;
   }
   return selector;
 }
-//
-//- (NSString *)p_resultChangeSign {
-//
-//}
+
+- (void)p_changeSign {
+  if ([self.resultText isEqualToString:@"0"]) { return; }
+
+  if ([self.resultText characterAtIndex:0] == '-') {
+    [self.resultText setString:[self.resultText substringFromIndex:1]];
+  } else {
+    [self.resultText setString:[NSString stringWithFormat:@"-%@", self.resultText]];
+  }
+
+  self.resultLabel.text = self.resultText;
+}
+
+- (void)p_showDivideByZeroAlert {
+  UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"計算錯誤" message:@"無法除以0！" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+  [alert show];
+}
 
 @end
