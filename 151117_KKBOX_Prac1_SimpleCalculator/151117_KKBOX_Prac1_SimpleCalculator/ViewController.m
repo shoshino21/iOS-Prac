@@ -217,7 +217,9 @@
 }
 
 - (void)p_changeSign {
-  if ([self.resultText isEqualToString:@"0"]) { return; }
+  if ([[NSDecimalNumber decimalNumberWithString:self.resultText] isEqualToNumber:[NSDecimalNumber zero]]) {
+    return;
+  }
 
   if ([self.resultText characterAtIndex:0] == '-') {
     [self.resultText setString:[self.resultText substringFromIndex:1]];
