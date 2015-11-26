@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import "NSString+ReversedString.h"
 
 @interface ViewController ()
 
@@ -17,6 +18,15 @@
 - (void)viewDidLoad {
   [super viewDidLoad];
   // Do any additional setup after loading the view, typically from a nib.
+
+  NSString *strA = @"abcde";
+  NSLog(@"%@", [strA reversedString]);
+  NSString *strB = @"1 2 3 4    5";
+  NSLog(@"%@", [strB reversedString]);
+  NSString *strC = @"測試";
+  NSLog(@"%@", [strC reversedString]);
+  NSString *strD = @"KKBOX iOS 開發教材";
+  NSLog(@"%@", [strD reversedString]);
 }
 
 - (void)didReceiveMemoryWarning {

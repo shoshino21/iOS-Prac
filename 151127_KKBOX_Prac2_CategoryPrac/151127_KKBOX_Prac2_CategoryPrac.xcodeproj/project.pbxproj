@@ -14,6 +14,7 @@
 		EF449D261C07568700F7CD6B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EF449D251C07568700F7CD6B /* Images.xcassets */; };
 		EF449D291C07568700F7CD6B /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = EF449D271C07568700F7CD6B /* LaunchScreen.xib */; };
 		EF449D351C07568700F7CD6B /* _51127_KKBOX_Prac2_CategoryPracTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EF449D341C07568700F7CD6B /* _51127_KKBOX_Prac2_CategoryPracTests.m */; };
+		EF449D401C07588700F7CD6B /* NSString+ReversedString.m in Sources */ = {isa = PBXBuildFile; fileRef = EF449D3F1C07588700F7CD6B /* NSString+ReversedString.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +41,8 @@
 		EF449D2E1C07568700F7CD6B /* 151127_KKBOX_Prac2_CategoryPracTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = 151127_KKBOX_Prac2_CategoryPracTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		EF449D331C07568700F7CD6B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EF449D341C07568700F7CD6B /* _51127_KKBOX_Prac2_CategoryPracTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = _51127_KKBOX_Prac2_CategoryPracTests.m; sourceTree = "<group>"; };
+		EF449D3E1C07588700F7CD6B /* NSString+ReversedString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+ReversedString.h"; sourceTree = "<group>"; };
+		EF449D3F1C07588700F7CD6B /* NSString+ReversedString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+ReversedString.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +88,8 @@
 				EF449D1D1C07568700F7CD6B /* AppDelegate.m */,
 				EF449D1F1C07568700F7CD6B /* ViewController.h */,
 				EF449D201C07568700F7CD6B /* ViewController.m */,
+				EF449D3E1C07588700F7CD6B /* NSString+ReversedString.h */,
+				EF449D3F1C07588700F7CD6B /* NSString+ReversedString.m */,
 				EF449D221C07568700F7CD6B /* Main.storyboard */,
 				EF449D251C07568700F7CD6B /* Images.xcassets */,
 				EF449D271C07568700F7CD6B /* LaunchScreen.xib */,
@@ -221,6 +226,7 @@
 			files = (
 				EF449D211C07568700F7CD6B /* ViewController.m in Sources */,
 				EF449D1E1C07568700F7CD6B /* AppDelegate.m in Sources */,
+				EF449D401C07588700F7CD6B /* NSString+ReversedString.m in Sources */,
 				EF449D1B1C07568700F7CD6B /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
