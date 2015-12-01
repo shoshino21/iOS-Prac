@@ -29,7 +29,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		EF9A1E771AFCE494001E823A /* 150508_ToDoList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = 150508_ToDoList.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		EF9A1E771AFCE494001E823A /* ToDoList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ToDoList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EF9A1E7B1AFCE494001E823A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EF9A1E7C1AFCE494001E823A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		EF9A1E7E1AFCE494001E823A /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -78,7 +78,7 @@
 		EF9A1E781AFCE494001E823A /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				EF9A1E771AFCE494001E823A /* 150508_ToDoList.app */,
+				EF9A1E771AFCE494001E823A /* ToDoList.app */,
 				EF9A1E901AFCE494001E823A /* 150508_ToDoListTests.xctest */,
 			);
 			name = Products;
@@ -146,7 +146,7 @@
 			);
 			name = 150508_ToDoList;
 			productName = 150508_ToDoList;
-			productReference = EF9A1E771AFCE494001E823A /* 150508_ToDoList.app */;
+			productReference = EF9A1E771AFCE494001E823A /* ToDoList.app */;
 			productType = "com.apple.product-type.application";
 		};
 		EF9A1E8F1AFCE494001E823A /* 150508_ToDoListTests */ = {
@@ -362,8 +362,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = 150508_ToDoList/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = ToDoList;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -373,8 +374,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = 150508_ToDoList/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = ToDoList;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

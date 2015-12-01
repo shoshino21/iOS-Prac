@@ -43,7 +43,7 @@
 		EF3D83861B5EA64900311BDC /* HotTextTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HotTextTableViewCell.h; sourceTree = "<group>"; };
 		EF3D83871B5EA64900311BDC /* HotTextTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HotTextTableViewCell.m; sourceTree = "<group>"; };
 		EF3D83891B5EAE2B00311BDC /* displogo120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = displogo120.png; sourceTree = "<group>"; };
-		EFC6BC051B5E4C0900A3A5C2 /* 150721_DispBBS_Prac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = 150721_DispBBS_Prac.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		EFC6BC051B5E4C0900A3A5C2 /* DispBBS_Prac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DispBBS_Prac.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EFC6BC091B5E4C0900A3A5C2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EFC6BC0A1B5E4C0900A3A5C2 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		EFC6BC0C1B5E4C0900A3A5C2 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -115,7 +115,7 @@
 		EFC6BC061B5E4C0900A3A5C2 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				EFC6BC051B5E4C0900A3A5C2 /* 150721_DispBBS_Prac.app */,
+				EFC6BC051B5E4C0900A3A5C2 /* DispBBS_Prac.app */,
 				EFC6BC1E1B5E4C0900A3A5C2 /* 150721_DispBBS_PracTests.xctest */,
 			);
 			name = Products;
@@ -186,7 +186,7 @@
 			);
 			name = 150721_DispBBS_Prac;
 			productName = 150721_DispBBS_Prac;
-			productReference = EFC6BC051B5E4C0900A3A5C2 /* 150721_DispBBS_Prac.app */;
+			productReference = EFC6BC051B5E4C0900A3A5C2 /* DispBBS_Prac.app */;
 			productType = "com.apple.product-type.application";
 		};
 		EFC6BC1D1B5E4C0900A3A5C2 /* 150721_DispBBS_PracTests */ = {
@@ -440,7 +440,7 @@
 				INFOPLIST_FILE = 150721_DispBBS_Prac/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = DispBBS_Prac;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -453,7 +453,7 @@
 				INFOPLIST_FILE = 150721_DispBBS_Prac/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = DispBBS_Prac;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

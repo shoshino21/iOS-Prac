@@ -27,7 +27,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		EF170E341BFB567200306C90 /* 151117_KKBOX_Prac1_SimpleCalculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = 151117_KKBOX_Prac1_SimpleCalculator.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		EF170E341BFB567200306C90 /* SimpleCalculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SimpleCalculator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EF170E381BFB567200306C90 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EF170E391BFB567200306C90 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		EF170E3B1BFB567200306C90 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -72,7 +72,7 @@
 		EF170E351BFB567200306C90 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				EF170E341BFB567200306C90 /* 151117_KKBOX_Prac1_SimpleCalculator.app */,
+				EF170E341BFB567200306C90 /* SimpleCalculator.app */,
 				EF170E4D1BFB567200306C90 /* 151117_KKBOX_Prac1_SimpleCalculatorTests.xctest */,
 			);
 			name = Products;
@@ -136,7 +136,7 @@
 			);
 			name = 151117_KKBOX_Prac1_SimpleCalculator;
 			productName = 151117_KKBOX_Prac1_SimpleCalculator;
-			productReference = EF170E341BFB567200306C90 /* 151117_KKBOX_Prac1_SimpleCalculator.app */;
+			productReference = EF170E341BFB567200306C90 /* SimpleCalculator.app */;
 			productType = "com.apple.product-type.application";
 		};
 		EF170E4C1BFB567200306C90 /* 151117_KKBOX_Prac1_SimpleCalculatorTests */ = {
@@ -342,7 +342,8 @@
 				INFOPLIST_FILE = 151117_KKBOX_Prac1_SimpleCalculator/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = SimpleCalculator;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -353,7 +354,8 @@
 				INFOPLIST_FILE = 151117_KKBOX_Prac1_SimpleCalculator/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = SimpleCalculator;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -410,6 +412,7 @@
 				EF170E591BFB567200306C90 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		EF170E5A1BFB567200306C90 /* Build configuration list for PBXNativeTarget "151117_KKBOX_Prac1_SimpleCalculatorTests" */ = {
 			isa = XCConfigurationList;
@@ -418,6 +421,7 @@
 				EF170E5C1BFB567200306C90 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
