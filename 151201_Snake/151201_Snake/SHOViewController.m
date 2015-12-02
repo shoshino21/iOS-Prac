@@ -7,6 +7,7 @@
 //
 
 #import "SHOViewController.h"
+#import "SHOSnakePoint.h"
 
 @interface SHOViewController ()
 
@@ -15,13 +16,18 @@
 @implementation SHOViewController
 
 - (void)viewDidLoad {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view.
-}
+  [super viewDidLoad];
+  // Do any additional setup after loading the view.
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+#warning TEST
+//  NSLog(@"TEST");
+//  CGFloat sw = [UIScreen mainScreen].bounds.size.width;
+//  CGFloat sh = [UIScreen mainScreen].bounds.size.height;
+//
+//  NSLog(@"%f x %f", sw, sh);
+  SHOSnakePoint *sp = [SHOSnakePoint snakePointWithX:20 Y:10];
+  NSLog(@"%@", sp);
+  
 }
 
 /*

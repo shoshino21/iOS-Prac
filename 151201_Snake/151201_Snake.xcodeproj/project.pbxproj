@@ -11,10 +11,11 @@
 		EF984E461C0DB7C200C9B506 /* SHOAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EF984E451C0DB7C200C9B506 /* SHOAppDelegate.m */; };
 		EF984E4E1C0DB7C200C9B506 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EF984E4D1C0DB7C200C9B506 /* Images.xcassets */; };
 		EF984E511C0DB7C200C9B506 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = EF984E4F1C0DB7C200C9B506 /* LaunchScreen.xib */; };
-		EF984E5D1C0DB7C200C9B506 /* _51201_SnakeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EF984E5C1C0DB7C200C9B506 /* _51201_SnakeTests.m */; };
 		EFAC0C0D1C0DEB0100BFAF04 /* SHOViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EFAC0C0C1C0DEB0100BFAF04 /* SHOViewController.m */; };
 		EFAC0C101C0DEC0800BFAF04 /* SHOSnakeView.m in Sources */ = {isa = PBXBuildFile; fileRef = EFAC0C0F1C0DEC0800BFAF04 /* SHOSnakeView.m */; };
 		EFAC0C131C0DEC2A00BFAF04 /* SHOSnake.m in Sources */ = {isa = PBXBuildFile; fileRef = EFAC0C121C0DEC2A00BFAF04 /* SHOSnake.m */; };
+		EFAC0C161C0F785B00BFAF04 /* SHOSnakePoint.m in Sources */ = {isa = PBXBuildFile; fileRef = EFAC0C151C0F785B00BFAF04 /* SHOSnakePoint.m */; };
+		EFAC0C1A1C0F821100BFAF04 /* SHOSnakeBoardSize.m in Sources */ = {isa = PBXBuildFile; fileRef = EFAC0C191C0F821100BFAF04 /* SHOSnakeBoardSize.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -28,22 +29,24 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		EF984E3D1C0DB7C100C9B506 /* Snake.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Snake.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		EF984E3D1C0DB7C100C9B506 /* Snake.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = Snake.app; path = "/Users/shoshino21/Dropbox/@Coding/@GitHub/iOS-Prac/151201_Snake/build/Debug-iphoneos/Snake.app"; sourceTree = "<absolute>"; };
 		EF984E411C0DB7C200C9B506 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EF984E421C0DB7C200C9B506 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		EF984E441C0DB7C200C9B506 /* SHOAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SHOAppDelegate.h; sourceTree = "<group>"; };
 		EF984E451C0DB7C200C9B506 /* SHOAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SHOAppDelegate.m; sourceTree = "<group>"; };
 		EF984E4D1C0DB7C200C9B506 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		EF984E501C0DB7C200C9B506 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		EF984E561C0DB7C200C9B506 /* 151201_SnakeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = 151201_SnakeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		EF984E5B1C0DB7C200C9B506 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		EF984E5C1C0DB7C200C9B506 /* _51201_SnakeTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = _51201_SnakeTests.m; sourceTree = "<group>"; };
+		EF984E561C0DB7C200C9B506 /* 151201_SnakeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = 151201_SnakeTests.xctest; path = "/Users/shoshino21/Dropbox/@Coding/@GitHub/iOS-Prac/151201_Snake/build/Debug-iphoneos/151201_SnakeTests.xctest"; sourceTree = "<absolute>"; };
 		EFAC0C0B1C0DEB0100BFAF04 /* SHOViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHOViewController.h; sourceTree = "<group>"; };
 		EFAC0C0C1C0DEB0100BFAF04 /* SHOViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHOViewController.m; sourceTree = "<group>"; };
 		EFAC0C0E1C0DEC0800BFAF04 /* SHOSnakeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHOSnakeView.h; sourceTree = "<group>"; };
 		EFAC0C0F1C0DEC0800BFAF04 /* SHOSnakeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHOSnakeView.m; sourceTree = "<group>"; };
 		EFAC0C111C0DEC2A00BFAF04 /* SHOSnake.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHOSnake.h; sourceTree = "<group>"; };
 		EFAC0C121C0DEC2A00BFAF04 /* SHOSnake.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHOSnake.m; sourceTree = "<group>"; };
+		EFAC0C141C0F785B00BFAF04 /* SHOSnakePoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHOSnakePoint.h; sourceTree = "<group>"; };
+		EFAC0C151C0F785B00BFAF04 /* SHOSnakePoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHOSnakePoint.m; sourceTree = "<group>"; };
+		EFAC0C181C0F821100BFAF04 /* SHOSnakeBoardSize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHOSnakeBoardSize.h; sourceTree = "<group>"; };
+		EFAC0C191C0F821100BFAF04 /* SHOSnakeBoardSize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHOSnakeBoardSize.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,18 +71,7 @@
 			isa = PBXGroup;
 			children = (
 				EF984E3F1C0DB7C100C9B506 /* 151201_Snake */,
-				EF984E591C0DB7C200C9B506 /* 151201_SnakeTests */,
-				EF984E3E1C0DB7C100C9B506 /* Products */,
 			);
-			sourceTree = "<group>";
-		};
-		EF984E3E1C0DB7C100C9B506 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				EF984E3D1C0DB7C100C9B506 /* Snake.app */,
-				EF984E561C0DB7C200C9B506 /* 151201_SnakeTests.xctest */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		EF984E3F1C0DB7C100C9B506 /* 151201_Snake */ = {
@@ -93,6 +85,7 @@
 				EFAC0C0F1C0DEC0800BFAF04 /* SHOSnakeView.m */,
 				EFAC0C0B1C0DEB0100BFAF04 /* SHOViewController.h */,
 				EFAC0C0C1C0DEB0100BFAF04 /* SHOViewController.m */,
+				EFAC0C171C0F7EDD00BFAF04 /* DTO */,
 				EF984E4D1C0DB7C200C9B506 /* Images.xcassets */,
 				EF984E4F1C0DB7C200C9B506 /* LaunchScreen.xib */,
 				EF984E401C0DB7C100C9B506 /* Supporting Files */,
@@ -109,21 +102,15 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		EF984E591C0DB7C200C9B506 /* 151201_SnakeTests */ = {
+		EFAC0C171C0F7EDD00BFAF04 /* DTO */ = {
 			isa = PBXGroup;
 			children = (
-				EF984E5C1C0DB7C200C9B506 /* _51201_SnakeTests.m */,
-				EF984E5A1C0DB7C200C9B506 /* Supporting Files */,
+				EFAC0C141C0F785B00BFAF04 /* SHOSnakePoint.h */,
+				EFAC0C151C0F785B00BFAF04 /* SHOSnakePoint.m */,
+				EFAC0C181C0F821100BFAF04 /* SHOSnakeBoardSize.h */,
+				EFAC0C191C0F821100BFAF04 /* SHOSnakeBoardSize.m */,
 			);
-			path = 151201_SnakeTests;
-			sourceTree = "<group>";
-		};
-		EF984E5A1C0DB7C200C9B506 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				EF984E5B1C0DB7C200C9B506 /* Info.plist */,
-			);
-			name = "Supporting Files";
+			name = DTO;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -192,7 +179,7 @@
 				Base,
 			);
 			mainGroup = EF984E341C0DB7C100C9B506;
-			productRefGroup = EF984E3E1C0DB7C100C9B506 /* Products */;
+			productRefGroup = EF984E341C0DB7C100C9B506;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
@@ -228,6 +215,8 @@
 			files = (
 				EFAC0C101C0DEC0800BFAF04 /* SHOSnakeView.m in Sources */,
 				EFAC0C0D1C0DEB0100BFAF04 /* SHOViewController.m in Sources */,
+				EFAC0C1A1C0F821100BFAF04 /* SHOSnakeBoardSize.m in Sources */,
+				EFAC0C161C0F785B00BFAF04 /* SHOSnakePoint.m in Sources */,
 				EF984E461C0DB7C200C9B506 /* SHOAppDelegate.m in Sources */,
 				EF984E431C0DB7C200C9B506 /* main.m in Sources */,
 				EFAC0C131C0DEC2A00BFAF04 /* SHOSnake.m in Sources */,
@@ -238,7 +227,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EF984E5D1C0DB7C200C9B506 /* _51201_SnakeTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

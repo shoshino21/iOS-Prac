@@ -9,5 +9,24 @@
 #import "SHOSnake.h"
 
 @implementation SHOSnake
+//
+//SHOSnakePoint SHOSnakePointMake(NSUInteger x, NSUInteger y) {
+//  SHOSnakePoint sp;
+//  sp.x = x;
+//  sp.y = y;
+//  return sp;
+//}
+//
+
+SHOSnakeBoardSize SHOSnakeBoardSizeMake(NSUInteger width, NSUInteger height) {
+  SHOSnakePoint *sp = [SHOSnakePoint snakePointWithX:2 Y:3];
+
+  SHOSnakeBoardSize sbs;
+  sbs.width = width;
+  sbs.height = height;
+  return sbs;
+}
+
+
 
 @end
