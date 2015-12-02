@@ -10,21 +10,6 @@
 #import "SHOSnakePoint.h"
 #import "SHOSnakeBoardSize.h"
 
-//
-//typedef struct {
-//  NSUInteger x;
-//  NSUInteger y;
-//} SHOSnakePoint;
-//
-//SHOSnakePoint SHOSnakePointMake(NSUInteger x, NSUInteger y);
-//
-//typedef struct {
-//  NSUInteger width;
-//  NSUInteger height;
-//} SHOSnakeBoardSize;
-//
-//SHOSnakeBoardSize SHOSnakeBoardSizeMake(NSUInteger width, NSUInteger height);
-
 typedef enum {
   SHOSnakeDirectionUp,
   SHOSnakeDirectionDown,
@@ -33,5 +18,14 @@ typedef enum {
 } SHOSnakeDirection;
 
 @interface SHOSnake : NSObject
+
+@property (strong, readonly, nonatomic) NSArray *points;
+
+- (instancetype)initWithLength:(NSUInteger)inLength boardSize:(SHOSnakeBoardSize *)inBoardSize;
+
+- (void)move;
+- (void)increaseLength:(NSUInteger)inLength;
+- (void)toDirection:(SHOSnakeDirection)theDirection;
+- (BOOL)isHeadHitBody;
 
 @end
