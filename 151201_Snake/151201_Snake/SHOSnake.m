@@ -18,6 +18,8 @@
 
 @implementation SHOSnake
 
+#pragma mark - Initialize
+
 - (instancetype)initWithLength:(NSUInteger)inLength boardSize:(SHOSnakeBoardSize *)inBoardSize {
   self = [super init];
   if (self) {
@@ -34,6 +36,14 @@
   }
   return self;
 }
+
+#pragma mark - Properties
+
+- (NSUInteger)length {
+  return [_points count];
+}
+
+#pragma mark - Methods
 
 - (void)move {
   [_points removeLastObject];
@@ -67,11 +77,47 @@
 }
 
 - (void)increaseLength:(NSUInteger)inLength {
+  SHOSnakePoint *last1Point = [_points objectAtIndex:self.length - 1];
+  NSUInteger x1 = last1Point.x;
+  NSUInteger y1 = last1Point.y;
+  SHOSnakePoint *last2Point = [_points objectAtIndex:self.length - 2];
+  NSUInteger x2 = last2Point.x;
+  NSUInteger y2 = last2Point.y;
 
+  if (x1 == x2 && y1 < y2) {
+    // append to up
+    for (int i = 1; i <= inLength; i++) {
+      [_points addObject:[SHOSnakePoint snakePointWithX:x1 Y:y1 - i]];
+    }
+    return;
+  }
+  if (x1 == x2 && y1 > y2) {
+    // append to down
+    for (int i = 1; i <= inLength; i++) {
+      [_points addObject:[SHOSnakePoint snakePointWithX:x1 Y:y1 + i]];
+    }
+    return;
+  }
+  if (x1 < x2 && y1 == y2) {
+    // append to left
+    for (int i = 1; i <= inLength; i++) {
+      [_points addObject:[SHOSnakePoint snakePointWithX:x1 - i Y:y1]];
+    }
+    return;
+  }
+  if (x1 > x2 && y1 == y2) {
+    // append to right
+    for (int i = 1; i <= inLength; i++) {
+      [_points addObject:[SHOSnakePoint snakePointWithX:x1 + i Y:y1]];
+    }
+    return;
+  }
 }
 
 - (void)toDirection:(SHOSnakeDirection)theDirection {
-
+  if (_currDirection == SHOSnakeDirectionUp || _currDirection == SHOSnakeDirectionDown) {
+    
+  }
 }
 
 - (BOOL)isHeadHitBody {

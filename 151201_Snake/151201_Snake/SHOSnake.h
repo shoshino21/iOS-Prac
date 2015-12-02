@@ -20,6 +20,7 @@ typedef enum {
 @interface SHOSnake : NSObject
 
 @property (strong, readonly, nonatomic) NSArray *points;
+@property (assign, readonly, nonatomic) NSUInteger length;
 
 - (instancetype)initWithLength:(NSUInteger)inLength boardSize:(SHOSnakeBoardSize *)inBoardSize;
 
