@@ -116,11 +116,28 @@
 
 - (void)toDirection:(SHOSnakeDirection)theDirection {
   if (_currDirection == SHOSnakeDirectionUp || _currDirection == SHOSnakeDirectionDown) {
-    
+    if (theDirection == SHOSnakeDirectionLeft || theDirection == SHOSnakeDirectionRight) {
+      _currDirection = theDirection;
+    }
+  }
+  else if (_currDirection == SHOSnakeDirectionLeft || _currDirection == SHOSnakeDirectionRight) {
+    if (theDirection == SHOSnakeDirectionUp || theDirection == SHOSnakeDirectionDown) {
+      _currDirection = theDirection;
+    }
   }
 }
 
 - (BOOL)isHeadHitBody {
+  SHOSnakePoint *headPoint = [_points firstObject];
+  SHOSnakePoint *bodyPoint;
+
+  // The first four blocks never be hit by head.
+  for (int i = 4; i < self.length; i++) {
+    bodyPoint = _points[i];
+    if (bodyPoint.x == headPoint.x && bodyPoint.y == headPoint.y) {
+      return YES;
+    }
+  }
   return NO;
 }
 
