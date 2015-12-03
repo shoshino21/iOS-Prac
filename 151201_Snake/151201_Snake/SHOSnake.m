@@ -27,8 +27,8 @@
     _boardSize = inBoardSize;
     _currDirection = SHOSnakeDirectionLeft;
 
-    NSUInteger centerX = (NSUInteger)inBoardSize.width / 2;
-    NSUInteger centerY = (NSUInteger)inBoardSize.height / 2;
+    NSUInteger centerX = (NSUInteger)inBoardSize.width / 2 + 1;
+    NSUInteger centerY = (NSUInteger)inBoardSize.height / 2 + 1;
 
     for (int i = 0; i < inLength; i++) {
       [_points[i] addObject:[SHOSnakePoint snakePointWithX:centerX + i Y:centerY]];
@@ -78,53 +78,84 @@
 
 - (void)increaseLength:(NSUInteger)inLength {
   SHOSnakePoint *last1Point = [_points objectAtIndex:self.length - 1];
-  NSUInteger x1 = last1Point.x;
-  NSUInteger y1 = last1Point.y;
+  NSUInteger l1x = last1Point.x;
+  NSUInteger l1y = last1Point.y;
   SHOSnakePoint *last2Point = [_points objectAtIndex:self.length - 2];
-  NSUInteger x2 = last2Point.x;
-  NSUInteger y2 = last2Point.y;
+  NSUInteger l2x = last2Point.x;
+  NSUInteger l2y = last2Point.y;
 
-  if (x1 == x2 && y1 < y2) {
+  NSUInteger newX, newY;
+  NSUInteger throughBoundCount = 0;
+
+  if (l1x == l2x && l1y < l2y) {
     // append to up
     for (int i = 1; i <= inLength; i++) {
-      [_points addObject:[SHOSnakePoint snakePointWithX:x1 Y:y1 - i]];
+      if (l1y - i > 0) {
+        newY = l1y - i;
+      } else {
+        ++throughBoundCount;
+        newY = _boardSize.height - throughBoundCount + 1;
+      }
+      [_points addObject:[SHOSnakePoint snakePointWithX:l1x Y:newY]];
     }
     return;
   }
-  if (x1 == x2 && y1 > y2) {
+
+  if (l1x == l2x && l1y > l2y) {
     // append to down
     for (int i = 1; i <= inLength; i++) {
-      [_points addObject:[SHOSnakePoint snakePointWithX:x1 Y:y1 + i]];
+      if (l1y + i <= _boardSize.height) {
+        newY = l1y + i;
+      } else {
+        newY = ++throughBoundCount;
+      }
+      [_points addObject:[SHOSnakePoint snakePointWithX:l1x Y:newY]];
     }
     return;
   }
-  if (x1 < x2 && y1 == y2) {
+
+  if (l1x < l2x && l1y == l2y) {
     // append to left
     for (int i = 1; i <= inLength; i++) {
-      [_points addObject:[SHOSnakePoint snakePointWithX:x1 - i Y:y1]];
+      if (l1x - i > 0) {
+        newX = l1x - i;
+      } else {
+        ++throughBoundCount;
+        newX = _boardSize.width - throughBoundCount + 1;
+      }
+      [_points addObject:[SHOSnakePoint snakePointWithX:newX Y:l1y]];
     }
     return;
   }
-  if (x1 > x2 && y1 == y2) {
+
+  if (l1x > l2x && l1y == l2y) {
     // append to right
     for (int i = 1; i <= inLength; i++) {
-      [_points addObject:[SHOSnakePoint snakePointWithX:x1 + i Y:y1]];
+      if (l1x + i <= _boardSize.width) {
+        newX = l1x + i;
+      } else {
+        newX = ++throughBoundCount;
+      }
+      [_points addObject:[SHOSnakePoint snakePointWithX:newX Y:l1y]];
     }
     return;
   }
 }
 
-- (void)toDirection:(SHOSnakeDirection)theDirection {
+- (BOOL)toDirection:(SHOSnakeDirection)theDirection {
   if (_currDirection == SHOSnakeDirectionUp || _currDirection == SHOSnakeDirectionDown) {
     if (theDirection == SHOSnakeDirectionLeft || theDirection == SHOSnakeDirectionRight) {
       _currDirection = theDirection;
+      return YES;
     }
   }
-  else if (_currDirection == SHOSnakeDirectionLeft || _currDirection == SHOSnakeDirectionRight) {
+  if (_currDirection == SHOSnakeDirectionLeft || _currDirection == SHOSnakeDirectionRight) {
     if (theDirection == SHOSnakeDirectionUp || theDirection == SHOSnakeDirectionDown) {
       _currDirection = theDirection;
+      return YES;
     }
   }
+  return NO;
 }
 
 - (BOOL)isHeadHitBody {
@@ -139,6 +170,11 @@
     }
   }
   return NO;
+}
+
+- (BOOL)isHeadHitPoint:(SHOSnakePoint *)aPoint {
+  SHOSnakePoint *headPoint = [_points firstObject];
+  return (headPoint.x == aPoint.x && headPoint.y == aPoint.y);
 }
 
 @end

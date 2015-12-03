@@ -14,7 +14,6 @@
 @property (assign, nonatomic) NSUInteger y;
 
 - (instancetype)initWithX:(NSUInteger)x Y:(NSUInteger)y;
-- (instancetype)init;
 + (SHOSnakePoint *)snakePointWithX:(NSUInteger)x Y:(NSUInteger)y;
 
 @end

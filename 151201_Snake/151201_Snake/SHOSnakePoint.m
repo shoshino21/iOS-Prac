@@ -19,10 +19,6 @@
   return self;
 }
 
-- (instancetype)init {
-  return [self initWithX:0 Y:0];
-}
-
 + (SHOSnakePoint *)snakePointWithX:(NSUInteger)x Y:(NSUInteger)y {
   return [[SHOSnakePoint alloc] initWithX:x Y:y];
 }

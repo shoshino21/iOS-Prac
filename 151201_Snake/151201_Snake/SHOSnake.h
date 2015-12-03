@@ -26,7 +26,8 @@ typedef enum {
 
 - (void)move;
 - (void)increaseLength:(NSUInteger)inLength;
-- (void)toDirection:(SHOSnakeDirection)theDirection;
+- (BOOL)toDirection:(SHOSnakeDirection)theDirection;
 - (BOOL)isHeadHitBody;
+- (BOOL)isHeadHitPoint:(SHOSnakePoint *)aPoint;
 
 @end
