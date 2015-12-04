@@ -65,6 +65,35 @@
   XCTAssertEqual(lastPoint.x, 1);
   XCTAssertEqual(lastPoint.y, 5);
   XCTAssertEqual(snake.length, 6);
+
+  snake = [[SHOSnake alloc] initWithLength:2 boardSize:boardSize];
+  [snake toDirection:SHOSnakeDirectionUp];
+  [snake move];
+  [snake increaseLength:5];
+  lastPoint = [[snake points] lastObject];
+  XCTAssertEqual(lastPoint.x, 5);
+  XCTAssertEqual(lastPoint.y, 1);
+  XCTAssertEqual(snake.length, 7);
+
+  snake = [[SHOSnake alloc] initWithLength:2 boardSize:boardSize];
+  [snake toDirection:SHOSnakeDirectionDown];
+  [snake move];
+  [snake increaseLength:5];
+  lastPoint = [[snake points] lastObject];
+  XCTAssertEqual(lastPoint.x, 5);
+  XCTAssertEqual(lastPoint.y, 9);
+  XCTAssertEqual(snake.length, 7);
+
+  snake = [[SHOSnake alloc] initWithLength:2 boardSize:boardSize];
+  [snake toDirection:SHOSnakeDirectionDown];
+  [snake move];
+  [snake toDirection:SHOSnakeDirectionRight];
+  [snake move];
+  [snake increaseLength:5];
+  lastPoint = [[snake points] lastObject];
+  XCTAssertEqual(lastPoint.x, 9);
+  XCTAssertEqual(lastPoint.y, 6);
+  XCTAssertEqual(snake.length, 7);
 }
 
 - (void)testToDirection {
@@ -131,6 +160,22 @@
     [snake move];
   }
   XCTAssertEqual([snake isHeadHitPoint:[SHOSnakePoint snakePointWithX:2 Y:6]], YES);
+}
+
+- (void)testRolling {
+  [snake increaseLength:2];
+
+  for (int i = 0; i < 5; i++) {
+    [snake move];
+    [snake toDirection:SHOSnakeDirectionDown];
+    [snake move];
+    [snake toDirection:SHOSnakeDirectionRight];
+    [snake move];
+    [snake toDirection:SHOSnakeDirectionUp];
+    [snake move];
+    [snake toDirection:SHOSnakeDirectionLeft];
+    XCTAssertEqual([snake isHeadHitBody], NO);
+  }
 }
 
 @end
