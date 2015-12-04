@@ -19,6 +19,10 @@
   return self;
 }
 
+- (instancetype)init {
+  return [self initWithWidth:10 height:10];
+}
+
 - (NSString *)description {
   return [NSString stringWithFormat:@"W:%lu H:%lu", (unsigned long)_width, (unsigned long)_height];
 }

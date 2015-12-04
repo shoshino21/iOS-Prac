@@ -31,7 +31,7 @@
     NSUInteger centerY = (NSUInteger)inBoardSize.height / 2 + 1;
 
     for (int i = 0; i < inLength; i++) {
-      [_points[i] addObject:[SHOSnakePoint snakePointWithX:centerX + i Y:centerY]];
+      [_points addObject:[SHOSnakePoint snakePointWithX:centerX + i Y:centerY]];
     }
   }
   return self;
