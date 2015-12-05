@@ -11,10 +11,14 @@
 
 @interface SHOViewController () <SHOSnakeViewDelegate>
 
-@property(strong, nonatomic) SHOSnake *snake;
-@property(strong, nonatomic) SHOSnakePoint *fruitPoint;
-@property(strong, nonatomic) SHOSnakeView *snakeView;
-@property(strong, nonatomic) NSTimer *timer;
+@property (strong, nonatomic) SHOSnake *snake;
+@property (strong, nonatomic) SHOSnakePoint *fruitPoint;
+@property (strong, nonatomic) SHOSnakeView *snakeView;
+@property (strong, nonatomic) NSTimer *timer;
+
+@property (strong, nonatomic) UIButton *startButton;
+
+//- (void)gameStart;
 
 @end
 
@@ -22,8 +26,49 @@
 
 - (void)viewDidLoad {
   [super viewDidLoad];
-  // Do any additional setup after loading the view.
+
+  self.snakeView = [[SHOSnakeView alloc] initWithFrame:[UIScreen mainScreen].bounds];
+  self.snakeView.backgroundColor = [UIColor whiteColor];
+  self.view = self.snakeView;
+
+  CGSize screenSize = [UIScreen mainScreen].bounds.size;
+  self.startButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+  self.startButton.frame = CGRectMake( (screenSize.width - 150) / 2, (screenSize.height - 50) / 2, 150, 50 );
+  self.startButton.backgroundColor = [UIColor greenColor];
+  self.startButton.tintColor = [UIColor blackColor];
+  self.startButton.layer.cornerRadius = 8.f;
+
+  [self.startButton setTitle:@"Start" forState:UIControlStateNormal];
+  [self.startButton addTarget:self action:@selector(gameStart) forControlEvents:UIControlEventTouchUpInside];
+  [self.snakeView addSubview:self.startButton];
 }
+
+- (void)gameStart {
+  self.startButton.hidden = YES;
+
+  SHOSnakeBoardSize *boardSize = [[SHOSnakeBoardSize alloc] initWithWidth:24 height:16];
+  self.snake = [[SHOSnake alloc] initWithLength:2 boardSize:boardSize];
+  
+}
+
+- (void)gameOver {
+}
+
+- (void)addNewFruit {
+
+}
+
+- (void)swipe:(UISwipeGestureRecognizer *)sgr {
+}
+
+- (void)snakeMove {
+}
+
+- (void)timerMethod:(NSTimer *)inTimer {
+}
+
+
+
 
 #pragma mark - SHOSnakeViewDelegate
 

@@ -10,8 +10,8 @@
 
 @interface SHOSnakePoint : NSObject
 
-@property(assign, nonatomic) NSUInteger x;
-@property(assign, nonatomic) NSUInteger y;
+@property (assign, nonatomic) NSUInteger x;
+@property (assign, nonatomic) NSUInteger y;
 
 - (instancetype)initWithX:(NSUInteger)x Y:(NSUInteger)y;
 + (SHOSnakePoint *)snakePointWithX:(NSUInteger)x Y:(NSUInteger)y;

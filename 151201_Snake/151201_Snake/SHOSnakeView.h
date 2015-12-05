@@ -20,6 +20,6 @@
 
 @interface SHOSnakeView : UIView
 
-@property(weak, nonatomic) id<SHOSnakeViewDelegate> delegate;
+@property (weak, nonatomic) id<SHOSnakeViewDelegate> delegate;
 
 @end
