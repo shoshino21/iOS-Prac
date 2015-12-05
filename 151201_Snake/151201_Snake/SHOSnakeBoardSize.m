@@ -20,7 +20,7 @@
 }
 
 - (instancetype)init {
-  return [self initWithWidth:10 height:10];
+  return [self initWithWidth:9 height:9];
 }
 
 - (NSString *)description {

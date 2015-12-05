@@ -142,16 +142,16 @@
   }
 }
 
-- (BOOL)toDirection:(SHOSnakeDirection)theDirection {
+- (BOOL)toDirection:(SHOSnakeDirection)inDirection {
   if (_currDirection == SHOSnakeDirectionUp || _currDirection == SHOSnakeDirectionDown) {
-    if (theDirection == SHOSnakeDirectionLeft || theDirection == SHOSnakeDirectionRight) {
-      _currDirection = theDirection;
+    if (inDirection == SHOSnakeDirectionLeft || inDirection == SHOSnakeDirectionRight) {
+      _currDirection = inDirection;
       return YES;
     }
   }
   if (_currDirection == SHOSnakeDirectionLeft || _currDirection == SHOSnakeDirectionRight) {
-    if (theDirection == SHOSnakeDirectionUp || theDirection == SHOSnakeDirectionDown) {
-      _currDirection = theDirection;
+    if (inDirection == SHOSnakeDirectionUp || inDirection == SHOSnakeDirectionDown) {
+      _currDirection = inDirection;
       return YES;
     }
   }
@@ -172,9 +172,9 @@
   return NO;
 }
 
-- (BOOL)isHeadHitPoint:(SHOSnakePoint *)aPoint {
+- (BOOL)isHeadHitPoint:(SHOSnakePoint *)inPoint {
   SHOSnakePoint *headPoint = [_points firstObject];
-  return (headPoint.x == aPoint.x && headPoint.y == aPoint.y);
+  return (headPoint.x == inPoint.x && headPoint.y == inPoint.y);
 }
 
 @end

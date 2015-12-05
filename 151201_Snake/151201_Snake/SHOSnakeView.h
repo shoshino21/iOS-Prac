@@ -7,7 +7,19 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SHOSnake.h"
+
+@class SHOSnakeView;
+
+@protocol SHOSnakeViewDelegate <NSObject>
+
+- (SHOSnake *)snakeForView:(SHOSnakeView *)inView;
+- (SHOSnakePoint *)fruitPointForView:(SHOSnakeView *)inView;
+
+@end
 
 @interface SHOSnakeView : UIView
+
+@property(weak, nonatomic) id<SHOSnakeViewDelegate> delegate;
 
 @end

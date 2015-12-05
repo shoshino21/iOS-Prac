@@ -10,8 +10,8 @@
 
 @interface SHOSnakeBoardSize : NSObject
 
-@property (assign, nonatomic) NSUInteger width;
-@property (assign, nonatomic) NSUInteger height;
+@property(assign, nonatomic) NSUInteger width;
+@property(assign, nonatomic) NSUInteger height;
 
 - (instancetype)initWithWidth:(NSUInteger)inWidth height:(NSUInteger)inHeight;
 

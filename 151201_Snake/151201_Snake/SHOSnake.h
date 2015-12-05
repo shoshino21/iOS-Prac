@@ -19,15 +19,16 @@ typedef enum {
 
 @interface SHOSnake : NSObject
 
-@property (strong, readonly, nonatomic) NSArray *points;
-@property (assign, readonly, nonatomic) NSUInteger length;
+@property(strong, readonly, nonatomic) NSArray *points;
+@property(strong, readonly, nonatomic) SHOSnakeBoardSize *boardSize;
+@property(assign, readonly, nonatomic) NSUInteger length;
 
 - (instancetype)initWithLength:(NSUInteger)inLength boardSize:(SHOSnakeBoardSize *)inBoardSize;
 
 - (void)move;
 - (void)increaseLength:(NSUInteger)inLength;
-- (BOOL)toDirection:(SHOSnakeDirection)theDirection;
+- (BOOL)toDirection:(SHOSnakeDirection)inDirection;
 - (BOOL)isHeadHitBody;
-- (BOOL)isHeadHitPoint:(SHOSnakePoint *)aPoint;
+- (BOOL)isHeadHitPoint:(SHOSnakePoint *)inPoint;
 
 @end
