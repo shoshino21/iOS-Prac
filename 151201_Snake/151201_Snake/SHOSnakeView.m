@@ -16,7 +16,7 @@
 
   CGFloat cellW = self.bounds.size.width / boardSize.width;
   CGFloat cellH = self.bounds.size.height / boardSize.height;
-	CGContextRef currContext = UIGraphicsGetCurrentContext();
+  CGContextRef currContext = UIGraphicsGetCurrentContext();
 
   if (snake) {
     [[UIColor blackColor] set];
