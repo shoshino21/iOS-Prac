@@ -6,10 +6,6 @@
 //  Copyright (c) 2015 shoshino21. All rights reserved.
 //
 
-#define FRUIT_PERCENTAGE_LV1 0.5
-#define FRUIT_PERCENTAGE_LV2 0.3
-#define FRUIT_PERCENTAGE_LV3 0.2
-
 #import <UIKit/UIKit.h>
 #import "SHOSnakePoint.h"
 

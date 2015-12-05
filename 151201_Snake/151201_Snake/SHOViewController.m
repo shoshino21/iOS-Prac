@@ -15,6 +15,10 @@
 #define BOARD_W 30
 #define BOARD_H 15
 
+#define FRUIT_PERCENTAGE_LV1 0.5
+#define FRUIT_PERCENTAGE_LV2 0.3
+#define FRUIT_PERCENTAGE_LV3 0.2
+
 #import "SHOViewController.h"
 #import "SHOSnakeView.h"
 
