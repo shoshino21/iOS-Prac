@@ -48,7 +48,7 @@
 
   SHOSnakeBoardSize *boardSize = [[SHOSnakeBoardSize alloc] initWithWidth:24 height:16];
   self.snake = [[SHOSnake alloc] initWithLength:2 boardSize:boardSize];
-  
+
 }
 
 - (void)gameOver {
@@ -65,6 +65,22 @@
 }
 
 - (void)timerMethod:(NSTimer *)inTimer {
+  [self.snake move];
+  if (self.snake.isHeadHitBody) {
+#warning temp
+    NSLog(@"gameOver");
+    [self gameOver];
+  }
+
+  SHOSnakePoint *headPoint = [self.snake.points firstObject];
+  if (headPoint.x == self.fruitPoint.x && headPoint.y == self.fruitPoint.y) {
+#warning temp
+    NSLog(@"getFruit");
+    [self.snake increaseLength:2];
+    [self addNewFruit];
+  }
+
+  [self.snakeView setNeedsDisplay];
 }
 
 
