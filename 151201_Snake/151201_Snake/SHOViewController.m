@@ -50,15 +50,15 @@
   if (self.timer) return;
 
   self.startButton.hidden = YES;
-  SHOSnakeBoardSize *boardSize = [[SHOSnakeBoardSize alloc] initWithWidth:24 height:16];
+  SHOSnakeBoardSize *boardSize = [[SHOSnakeBoardSize alloc] initWithWidth:28 height:16];
   self.snake = [[SHOSnake alloc] initWithLength:2 boardSize:boardSize];
   [self addNewFruit];
   self.timer = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(timerMethod:) userInfo:nil repeats:YES];
 }
 
 - (void)gameOver {
-  self.startButton.hidden = NO;
   [self.startButton setTitle:@"Play again" forState:UIControlStateNormal];
+  self.startButton.hidden = NO;
 
   [self.timer invalidate];
   self.timer = nil;
@@ -100,7 +100,7 @@
     [self addNewFruit];
   }
 
-  [self.snakeView setNeedsDisplay];
+  [self.snakeView setNeedsDisplay]; 
 }
 
 #pragma mark - Swipe
