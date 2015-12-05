@@ -49,13 +49,34 @@
   SHOSnakeBoardSize *boardSize = [[SHOSnakeBoardSize alloc] initWithWidth:24 height:16];
   self.snake = [[SHOSnake alloc] initWithLength:2 boardSize:boardSize];
 
+  [self addNewFruit];
 }
 
 - (void)gameOver {
 }
 
 - (void)addNewFruit {
+  NSUInteger newFruitX;
+  NSUInteger newFruitY;
+  BOOL isConflict = NO;
 
+  while (1) {
+    newFruitX = (arc4random() % self.snake.boardSize.width) + 1;
+    newFruitY = (arc4random() % self.snake.boardSize.height) + 1;
+    isConflict = NO;
+
+    for (SHOSnakePoint *point in self.snake.points) {
+      if (point.x == newFruitX && point.y == newFruitY) {
+        isConflict = YES;
+        break;
+      }
+    }
+
+    if (!isConflict) {
+      self.fruitPoint = [SHOSnakePoint snakePointWithX:newFruitX Y:newFruitY];
+      break;
+    }
+  }
 }
 
 - (void)swipe:(UISwipeGestureRecognizer *)sgr {
