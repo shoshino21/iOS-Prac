@@ -15,10 +15,7 @@
 @property (strong, nonatomic) SHOSnakePoint *fruitPoint;
 @property (strong, nonatomic) SHOSnakeView *snakeView;
 @property (strong, nonatomic) NSTimer *timer;
-
 @property (strong, nonatomic) UIButton *startButton;
-
-//- (void)gameStart;
 
 @end
 
@@ -28,6 +25,7 @@
   [super viewDidLoad];
 
   self.snakeView = [[SHOSnakeView alloc] initWithFrame:[UIScreen mainScreen].bounds];
+  self.snakeView.delegate = self;
   self.snakeView.backgroundColor = [UIColor whiteColor];
   self.view = self.snakeView;
 
@@ -41,15 +39,21 @@
   [self.startButton setTitle:@"Start" forState:UIControlStateNormal];
   [self.startButton addTarget:self action:@selector(gameStart) forControlEvents:UIControlEventTouchUpInside];
   [self.snakeView addSubview:self.startButton];
+
+  [self addGestureRecognizerWithDirection:UISwipeGestureRecognizerDirectionUp];
+  [self addGestureRecognizerWithDirection:UISwipeGestureRecognizerDirectionDown];
+  [self addGestureRecognizerWithDirection:UISwipeGestureRecognizerDirectionLeft];
+  [self addGestureRecognizerWithDirection:UISwipeGestureRecognizerDirectionRight];
 }
 
 - (void)gameStart {
-  self.startButton.hidden = YES;
+  if (self.timer) return;
 
+  self.startButton.hidden = YES;
   SHOSnakeBoardSize *boardSize = [[SHOSnakeBoardSize alloc] initWithWidth:24 height:16];
   self.snake = [[SHOSnake alloc] initWithLength:2 boardSize:boardSize];
-
   [self addNewFruit];
+  self.timer = [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(timerMethod:) userInfo:nil repeats:YES];
 }
 
 - (void)gameOver {
@@ -79,12 +83,6 @@
   }
 }
 
-- (void)swipe:(UISwipeGestureRecognizer *)sgr {
-}
-
-- (void)snakeMove {
-}
-
 - (void)timerMethod:(NSTimer *)inTimer {
   [self.snake move];
   if (self.snake.isHeadHitBody) {
@@ -104,8 +102,34 @@
   [self.snakeView setNeedsDisplay];
 }
 
+#pragma mark - Swipe
 
+- (void)addGestureRecognizerWithDirection:(UISwipeGestureRecognizerDirection)direction {
+  UISwipeGestureRecognizer *sgr = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipe:)];
+  sgr.direction = direction;
+  [self.snakeView addGestureRecognizer:sgr];
+}
 
+- (void)swipe:(UISwipeGestureRecognizer *)sgr {
+  SHOSnakeDirection toDirection;
+  switch (sgr.direction) {
+    case UISwipeGestureRecognizerDirectionUp:
+      toDirection = SHOSnakeDirectionUp;
+      break;
+    case UISwipeGestureRecognizerDirectionDown:
+      toDirection = SHOSnakeDirectionDown;
+      break;
+    case UISwipeGestureRecognizerDirectionLeft:
+      toDirection = SHOSnakeDirectionLeft;
+      break;
+    case UISwipeGestureRecognizerDirectionRight:
+      toDirection = SHOSnakeDirectionRight;
+      break;
+    default:
+      return;
+  }
+  [self.snake toDirection:toDirection];
+}
 
 #pragma mark - SHOSnakeViewDelegate
 
