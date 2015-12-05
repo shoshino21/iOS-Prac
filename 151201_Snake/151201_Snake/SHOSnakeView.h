@@ -8,13 +8,14 @@
 
 #import <UIKit/UIKit.h>
 #import "SHOSnake.h"
+#import "SHOFruit.h"
 
 @class SHOSnakeView;
 
 @protocol SHOSnakeViewDelegate <NSObject>
 
 - (SHOSnake *)snakeForView:(SHOSnakeView *)inView;
-- (SHOSnakePoint *)fruitPointForView:(SHOSnakeView *)inView;
+- (SHOFruit *)fruitforView:(SHOSnakeView *)inView;
 
 @end
 

@@ -17,6 +17,7 @@
 		EFAC0C161C0F785B00BFAF04 /* SHOSnakePoint.m in Sources */ = {isa = PBXBuildFile; fileRef = EFAC0C151C0F785B00BFAF04 /* SHOSnakePoint.m */; };
 		EFAC0C1A1C0F821100BFAF04 /* SHOSnakeBoardSize.m in Sources */ = {isa = PBXBuildFile; fileRef = EFAC0C191C0F821100BFAF04 /* SHOSnakeBoardSize.m */; };
 		EFAC0C331C1048E000BFAF04 /* _51201_SnakeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EFAC0C321C1048E000BFAF04 /* _51201_SnakeTests.m */; };
+		EFAC0C3C1C133FE900BFAF04 /* SHOFruit.m in Sources */ = {isa = PBXBuildFile; fileRef = EFAC0C3B1C133FE900BFAF04 /* SHOFruit.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +51,8 @@
 		EFAC0C311C1048E000BFAF04 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EFAC0C321C1048E000BFAF04 /* _51201_SnakeTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = _51201_SnakeTests.m; sourceTree = "<group>"; };
 		EFAC0C391C11335400BFAF04 /* Snake.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Snake.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		EFAC0C3A1C133FE900BFAF04 /* SHOFruit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHOFruit.h; sourceTree = "<group>"; };
+		EFAC0C3B1C133FE900BFAF04 /* SHOFruit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHOFruit.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,6 +118,8 @@
 				EFAC0C151C0F785B00BFAF04 /* SHOSnakePoint.m */,
 				EFAC0C181C0F821100BFAF04 /* SHOSnakeBoardSize.h */,
 				EFAC0C191C0F821100BFAF04 /* SHOSnakeBoardSize.m */,
+				EFAC0C3A1C133FE900BFAF04 /* SHOFruit.h */,
+				EFAC0C3B1C133FE900BFAF04 /* SHOFruit.m */,
 			);
 			name = DTO;
 			sourceTree = "<group>";
@@ -237,6 +242,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EFAC0C101C0DEC0800BFAF04 /* SHOSnakeView.m in Sources */,
+				EFAC0C3C1C133FE900BFAF04 /* SHOFruit.m in Sources */,
 				EFAC0C0D1C0DEB0100BFAF04 /* SHOViewController.m in Sources */,
 				EFAC0C1A1C0F821100BFAF04 /* SHOSnakeBoardSize.m in Sources */,
 				EFAC0C161C0F785B00BFAF04 /* SHOSnakePoint.m in Sources */,

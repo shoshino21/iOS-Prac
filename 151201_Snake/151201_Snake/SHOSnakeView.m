@@ -22,16 +22,15 @@
     [[UIColor blackColor] set];
 
     for (SHOSnakePoint *point in snake.points) {
-      CGRect rect = CGRectMake((point.x - 1) * cellW, (point.y - 1) * cellH, cellW, cellH);
+      CGRect rect = CGRectMake( (point.x - 1) * cellW, (point.y - 1) * cellH, cellW, cellH );
       CGContextFillRect(currContext, rect);
     }
   }
 
-  SHOSnakePoint *fruitPoint = [self.delegate fruitPointForView:self];
-
-  if (fruitPoint) {
-    [[UIColor redColor] set];
-    CGRect rect = CGRectMake((fruitPoint.x - 1) * cellW, (fruitPoint.y - 1) * cellH, cellW, cellH);
+  SHOFruit *fruit = [self.delegate fruitforView:self];
+  if (fruit) {
+    [fruit.color set];
+    CGRect rect = CGRectMake( (fruit.point.x - 1) * cellW, (fruit.point.y - 1) * cellH, cellW, cellH );
     CGContextFillEllipseInRect(currContext, rect);
   }
 }
