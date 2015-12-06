@@ -1,0 +1,431 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		EF6551081C142EFE007ED37B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EF6551071C142EFE007ED37B /* main.m */; };
+		EF65510B1C142EFE007ED37B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EF65510A1C142EFE007ED37B /* AppDelegate.m */; };
+		EF65510E1C142EFE007ED37B /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF65510D1C142EFE007ED37B /* ViewController.m */; };
+		EF6551111C142EFE007ED37B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EF65510F1C142EFE007ED37B /* Main.storyboard */; };
+		EF6551131C142EFE007ED37B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EF6551121C142EFE007ED37B /* Images.xcassets */; };
+		EF6551161C142EFE007ED37B /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = EF6551141C142EFE007ED37B /* LaunchScreen.xib */; };
+		EF6551221C142EFE007ED37B /* _51206_WebServiceSDKTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EF6551211C142EFE007ED37B /* _51206_WebServiceSDKTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		EF65511C1C142EFE007ED37B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EF6550FA1C142EFE007ED37B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = EF6551011C142EFE007ED37B;
+			remoteInfo = 151206_WebServiceSDK;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		EF6551021C142EFE007ED37B /* 151206_WebServiceSDK.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = 151206_WebServiceSDK.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		EF6551061C142EFE007ED37B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EF6551071C142EFE007ED37B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		EF6551091C142EFE007ED37B /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		EF65510A1C142EFE007ED37B /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		EF65510C1C142EFE007ED37B /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		EF65510D1C142EFE007ED37B /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		EF6551101C142EFE007ED37B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		EF6551121C142EFE007ED37B /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		EF6551151C142EFE007ED37B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		EF65511B1C142EFE007ED37B /* 151206_WebServiceSDKTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = 151206_WebServiceSDKTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		EF6551201C142EFE007ED37B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EF6551211C142EFE007ED37B /* _51206_WebServiceSDKTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = _51206_WebServiceSDKTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		EF6550FF1C142EFE007ED37B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EF6551181C142EFE007ED37B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		EF6550F91C142EFE007ED37B = {
+			isa = PBXGroup;
+			children = (
+				EF6551041C142EFE007ED37B /* 151206_WebServiceSDK */,
+				EF65511E1C142EFE007ED37B /* 151206_WebServiceSDKTests */,
+				EF6551031C142EFE007ED37B /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		EF6551031C142EFE007ED37B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				EF6551021C142EFE007ED37B /* 151206_WebServiceSDK.app */,
+				EF65511B1C142EFE007ED37B /* 151206_WebServiceSDKTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		EF6551041C142EFE007ED37B /* 151206_WebServiceSDK */ = {
+			isa = PBXGroup;
+			children = (
+				EF6551091C142EFE007ED37B /* AppDelegate.h */,
+				EF65510A1C142EFE007ED37B /* AppDelegate.m */,
+				EF65510C1C142EFE007ED37B /* ViewController.h */,
+				EF65510D1C142EFE007ED37B /* ViewController.m */,
+				EF65510F1C142EFE007ED37B /* Main.storyboard */,
+				EF6551121C142EFE007ED37B /* Images.xcassets */,
+				EF6551141C142EFE007ED37B /* LaunchScreen.xib */,
+				EF6551051C142EFE007ED37B /* Supporting Files */,
+			);
+			path = 151206_WebServiceSDK;
+			sourceTree = "<group>";
+		};
+		EF6551051C142EFE007ED37B /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				EF6551061C142EFE007ED37B /* Info.plist */,
+				EF6551071C142EFE007ED37B /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		EF65511E1C142EFE007ED37B /* 151206_WebServiceSDKTests */ = {
+			isa = PBXGroup;
+			children = (
+				EF6551211C142EFE007ED37B /* _51206_WebServiceSDKTests.m */,
+				EF65511F1C142EFE007ED37B /* Supporting Files */,
+			);
+			path = 151206_WebServiceSDKTests;
+			sourceTree = "<group>";
+		};
+		EF65511F1C142EFE007ED37B /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				EF6551201C142EFE007ED37B /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		EF6551011C142EFE007ED37B /* 151206_WebServiceSDK */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EF6551251C142EFE007ED37B /* Build configuration list for PBXNativeTarget "151206_WebServiceSDK" */;
+			buildPhases = (
+				EF6550FE1C142EFE007ED37B /* Sources */,
+				EF6550FF1C142EFE007ED37B /* Frameworks */,
+				EF6551001C142EFE007ED37B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = 151206_WebServiceSDK;
+			productName = 151206_WebServiceSDK;
+			productReference = EF6551021C142EFE007ED37B /* 151206_WebServiceSDK.app */;
+			productType = "com.apple.product-type.application";
+		};
+		EF65511A1C142EFE007ED37B /* 151206_WebServiceSDKTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EF6551281C142EFE007ED37B /* Build configuration list for PBXNativeTarget "151206_WebServiceSDKTests" */;
+			buildPhases = (
+				EF6551171C142EFE007ED37B /* Sources */,
+				EF6551181C142EFE007ED37B /* Frameworks */,
+				EF6551191C142EFE007ED37B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				EF65511D1C142EFE007ED37B /* PBXTargetDependency */,
+			);
+			name = 151206_WebServiceSDKTests;
+			productName = 151206_WebServiceSDKTests;
+			productReference = EF65511B1C142EFE007ED37B /* 151206_WebServiceSDKTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		EF6550FA1C142EFE007ED37B /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0630;
+				ORGANIZATIONNAME = shoshino21;
+				TargetAttributes = {
+					EF6551011C142EFE007ED37B = {
+						CreatedOnToolsVersion = 6.3.1;
+					};
+					EF65511A1C142EFE007ED37B = {
+						CreatedOnToolsVersion = 6.3.1;
+						TestTargetID = EF6551011C142EFE007ED37B;
+					};
+				};
+			};
+			buildConfigurationList = EF6550FD1C142EFE007ED37B /* Build configuration list for PBXProject "151206_WebServiceSDK" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = EF6550F91C142EFE007ED37B;
+			productRefGroup = EF6551031C142EFE007ED37B /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				EF6551011C142EFE007ED37B /* 151206_WebServiceSDK */,
+				EF65511A1C142EFE007ED37B /* 151206_WebServiceSDKTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		EF6551001C142EFE007ED37B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EF6551111C142EFE007ED37B /* Main.storyboard in Resources */,
+				EF6551161C142EFE007ED37B /* LaunchScreen.xib in Resources */,
+				EF6551131C142EFE007ED37B /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EF6551191C142EFE007ED37B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		EF6550FE1C142EFE007ED37B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EF65510E1C142EFE007ED37B /* ViewController.m in Sources */,
+				EF65510B1C142EFE007ED37B /* AppDelegate.m in Sources */,
+				EF6551081C142EFE007ED37B /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EF6551171C142EFE007ED37B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EF6551221C142EFE007ED37B /* _51206_WebServiceSDKTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		EF65511D1C142EFE007ED37B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = EF6551011C142EFE007ED37B /* 151206_WebServiceSDK */;
+			targetProxy = EF65511C1C142EFE007ED37B /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		EF65510F1C142EFE007ED37B /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EF6551101C142EFE007ED37B /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		EF6551141C142EFE007ED37B /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EF6551151C142EFE007ED37B /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		EF6551231C142EFE007ED37B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		EF6551241C142EFE007ED37B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		EF6551261C142EFE007ED37B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = 151206_WebServiceSDK/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		EF6551271C142EFE007ED37B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = 151206_WebServiceSDK/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		EF6551291C142EFE007ED37B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = 151206_WebServiceSDKTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/151206_WebServiceSDK.app/151206_WebServiceSDK";
+			};
+			name = Debug;
+		};
+		EF65512A1C142EFE007ED37B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = 151206_WebServiceSDKTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/151206_WebServiceSDK.app/151206_WebServiceSDK";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		EF6550FD1C142EFE007ED37B /* Build configuration list for PBXProject "151206_WebServiceSDK" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EF6551231C142EFE007ED37B /* Debug */,
+				EF6551241C142EFE007ED37B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EF6551251C142EFE007ED37B /* Build configuration list for PBXNativeTarget "151206_WebServiceSDK" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EF6551261C142EFE007ED37B /* Debug */,
+				EF6551271C142EFE007ED37B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		EF6551281C142EFE007ED37B /* Build configuration list for PBXNativeTarget "151206_WebServiceSDKTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EF6551291C142EFE007ED37B /* Debug */,
+				EF65512A1C142EFE007ED37B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = EF6550FA1C142EFE007ED37B /* Project object */;
+}
