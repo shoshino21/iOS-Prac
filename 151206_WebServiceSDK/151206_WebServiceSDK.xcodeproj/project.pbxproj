@@ -14,6 +14,7 @@
 		EF6551131C142EFE007ED37B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EF6551121C142EFE007ED37B /* Images.xcassets */; };
 		EF6551161C142EFE007ED37B /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = EF6551141C142EFE007ED37B /* LaunchScreen.xib */; };
 		EF6551221C142EFE007ED37B /* _51206_WebServiceSDKTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EF6551211C142EFE007ED37B /* _51206_WebServiceSDKTests.m */; };
+		EF65512D1C1430E2007ED37B /* SHOWebService.m in Sources */ = {isa = PBXBuildFile; fileRef = EF65512C1C1430E2007ED37B /* SHOWebService.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +41,8 @@
 		EF65511B1C142EFE007ED37B /* 151206_WebServiceSDKTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = 151206_WebServiceSDKTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		EF6551201C142EFE007ED37B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EF6551211C142EFE007ED37B /* _51206_WebServiceSDKTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = _51206_WebServiceSDKTests.m; sourceTree = "<group>"; };
+		EF65512B1C1430E2007ED37B /* SHOWebService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHOWebService.h; sourceTree = "<group>"; };
+		EF65512C1C1430E2007ED37B /* SHOWebService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHOWebService.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +88,8 @@
 				EF65510A1C142EFE007ED37B /* AppDelegate.m */,
 				EF65510C1C142EFE007ED37B /* ViewController.h */,
 				EF65510D1C142EFE007ED37B /* ViewController.m */,
+				EF65512B1C1430E2007ED37B /* SHOWebService.h */,
+				EF65512C1C1430E2007ED37B /* SHOWebService.m */,
 				EF65510F1C142EFE007ED37B /* Main.storyboard */,
 				EF6551121C142EFE007ED37B /* Images.xcassets */,
 				EF6551141C142EFE007ED37B /* LaunchScreen.xib */,
@@ -222,6 +227,7 @@
 				EF65510E1C142EFE007ED37B /* ViewController.m in Sources */,
 				EF65510B1C142EFE007ED37B /* AppDelegate.m in Sources */,
 				EF6551081C142EFE007ED37B /* main.m in Sources */,
+				EF65512D1C1430E2007ED37B /* SHOWebService.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -348,6 +354,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = 151206_WebServiceSDK/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -358,6 +365,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = 151206_WebServiceSDK/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
