@@ -33,11 +33,41 @@
 }
 
 - (void)postCustomerName:(NSString *)name callback:(void (^)(NSDictionary *, NSError *))callback {
+  NSURL *url = [NSURL URLWithString:URL_POST];
+  NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:60.0];
+  NSString *paramString = [NSString stringWithFormat:@"custname=%@", name];
 
+  [request setHTTPMethod:@"POST"];
+  [request setHTTPBody:[paramString dataUsingEncoding:NSUTF8StringEncoding]];
+  [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+  [request setValue:[NSString stringWithFormat:@"%lu", (unsigned long) [paramString length]] forHTTPHeaderField:@"Content-length"];
+
+  NSURLSession *session = [NSURLSession sharedSession];
+  NSURLSessionTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error)
+  {
+    NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
+    if (error) {
+      NSLog(@"Error: %@", error.localizedDescription);
+    }
+    callback(dict, error);
+  }];
+  
+  [task resume];
 }
 
 - (void)fetchImageWithCallback:(void (^)(UIImage *, NSError *))callback {
+  NSURL *url = [NSURL URLWithString:URL_IMAGE];
+  NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:60.0];
+  NSURLSession *session = [NSURLSession sharedSession];
+  NSURLSessionTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+    UIImage *image = [UIImage imageWithData:data];
+    if (error) {
+      NSLog(@"Error: %@", error.localizedDescription);
+    }
+    callback(image, error);
+  }];
 
+  [task resume];
 }
 
 @end

@@ -11,17 +11,16 @@
 
 @interface ViewController ()
 
+@property (strong, nonatomic) SHOWebService *ws;
+@property (weak, nonatomic) IBOutlet UIImageView *imageView;
+
 @end
 
 @implementation ViewController
 
 - (void)viewDidLoad {
   [super viewDidLoad];
-  // Do any additional setup after loading the view, typically from a nib.
-//  SHOWebService *ws = [[SHOWebService alloc] init];
-//  [ws fetchGetResponseWithCallback:^(NSDictionary *dict, NSError *error) {
-//    NSLog(@"dict: %@", dict);
-//  }];
+  self.ws = [SHOWebService new];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -30,11 +29,21 @@
 }
 
 - (IBAction)get:(UIButton *)sender {
-  SHOWebService *ws = [[SHOWebService alloc] init];
-  [ws fetchGetResponseWithCallback:^(NSDictionary *dict, NSError *error) {
+  [self.ws fetchGetResponseWithCallback:^(NSDictionary *dict, NSError *error) {
     NSLog(@"dict: %@", dict);
   }];
+}
 
+- (IBAction)post:(UIButton *)sender {
+  [self.ws postCustomerName:@"shoshino21" callback:^(NSDictionary *dict, NSError *error) {
+    NSLog(@"dict: %@", dict);
+  }];
+}
+
+- (IBAction)fetchImage:(UIButton *)sender {
+  [self.ws fetchImageWithCallback:^(UIImage *image, NSError *error) {
+    self.imageView.image = image;
+  }];
 }
 
 @end
