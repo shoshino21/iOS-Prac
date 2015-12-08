@@ -15,6 +15,7 @@
 		EF6551161C142EFE007ED37B /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = EF6551141C142EFE007ED37B /* LaunchScreen.xib */; };
 		EF6551221C142EFE007ED37B /* _51206_WebServiceSDKTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EF6551211C142EFE007ED37B /* _51206_WebServiceSDKTests.m */; };
 		EF65512D1C1430E2007ED37B /* SHOWebService.m in Sources */ = {isa = PBXBuildFile; fileRef = EF65512C1C1430E2007ED37B /* SHOWebService.m */; };
+		EF6551301C167946007ED37B /* SHOWebService2.m in Sources */ = {isa = PBXBuildFile; fileRef = EF65512F1C167946007ED37B /* SHOWebService2.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,6 +44,8 @@
 		EF6551211C142EFE007ED37B /* _51206_WebServiceSDKTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = _51206_WebServiceSDKTests.m; sourceTree = "<group>"; };
 		EF65512B1C1430E2007ED37B /* SHOWebService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHOWebService.h; sourceTree = "<group>"; };
 		EF65512C1C1430E2007ED37B /* SHOWebService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHOWebService.m; sourceTree = "<group>"; };
+		EF65512E1C167946007ED37B /* SHOWebService2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHOWebService2.h; sourceTree = "<group>"; };
+		EF65512F1C167946007ED37B /* SHOWebService2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHOWebService2.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +93,8 @@
 				EF65510D1C142EFE007ED37B /* ViewController.m */,
 				EF65512B1C1430E2007ED37B /* SHOWebService.h */,
 				EF65512C1C1430E2007ED37B /* SHOWebService.m */,
+				EF65512E1C167946007ED37B /* SHOWebService2.h */,
+				EF65512F1C167946007ED37B /* SHOWebService2.m */,
 				EF65510F1C142EFE007ED37B /* Main.storyboard */,
 				EF6551121C142EFE007ED37B /* Images.xcassets */,
 				EF6551141C142EFE007ED37B /* LaunchScreen.xib */,
@@ -225,6 +230,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EF65510E1C142EFE007ED37B /* ViewController.m in Sources */,
+				EF6551301C167946007ED37B /* SHOWebService2.m in Sources */,
 				EF65510B1C142EFE007ED37B /* AppDelegate.m in Sources */,
 				EF6551081C142EFE007ED37B /* main.m in Sources */,
 				EF65512D1C1430E2007ED37B /* SHOWebService.m in Sources */,
