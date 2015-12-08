@@ -13,10 +13,10 @@
 @protocol SHOWebService2Delegate <NSObject>
 
 @optional
-- (void)URLSession:(NSURLSession *)session dataTask:(NSURLSessionDataTask *)dataTask didReceiveData:(NSData *)data;
-- (void)URLSession:(NSURLSession *)session dataTask:(NSURLSessionDataTask *)dataTask didReceiveDictionary:(NSDictionary *)dictionary;
-- (void)URLSession:(NSURLSession *)session dataTask:(NSURLSessionDataTask *)dataTask didReceiveImage:(UIImage *)image;
-- (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task didCompleteWithError:(NSError *)error;
+- (void)SHOWebService2:(SHOWebService2 *)webService didReceiveData:(NSData *)data;
+- (void)SHOWebService2:(SHOWebService2 *)webService didReceiveDictionary:(NSDictionary *)dictionary;
+- (void)SHOWebService2:(SHOWebService2 *)webService didReceiveImage:(UIImage *)image;
+- (void)SHOWebService2:(SHOWebService2 *)webService didCompleteWithError:(NSError *)error;
 
 @end
 

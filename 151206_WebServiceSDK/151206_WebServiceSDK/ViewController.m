@@ -69,15 +69,15 @@
 
 #pragma mark - SHOWebService2Delegate
 
-- (void)URLSession:(NSURLSession *)session dataTask:(NSURLSessionDataTask *)dataTask didReceiveDictionary:(NSDictionary *)dictionary {
+- (void)SHOWebService2:(SHOWebService2 *)webService didReceiveDictionary:(NSDictionary *)dictionary {
   NSLog(@"dict: %@", dictionary);
 }
 
-- (void)URLSession:(NSURLSession *)session dataTask:(NSURLSessionDataTask *)dataTask didReceiveImage:(UIImage *)image {
+- (void)SHOWebService2:(SHOWebService2 *)webService didReceiveImage:(UIImage *)image {
   self.imageView2.image = image;
 }
 
-- (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task didCompleteWithError:(NSError *)error {
+- (void)SHOWebService2:(SHOWebService2 *)webService didCompleteWithError:(NSError *)error {
 }
 
 @end

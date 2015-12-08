@@ -35,9 +35,9 @@
     NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
 
     if (!error) {
-      [self.delegate URLSession:session dataTask:task didReceiveDictionary:dict];
+      [self.delegate SHOWebService2:self didReceiveDictionary:dict];
     } else {
-      [self.delegate URLSession:session task:task didCompleteWithError:error];
+      [self.delegate SHOWebService2:self didCompleteWithError:error];
     }
   }];
 
@@ -61,9 +61,9 @@
     NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
 
     if (!error) {
-      [self.delegate URLSession:session dataTask:task didReceiveDictionary:dict];
+      [self.delegate SHOWebService2:self didReceiveDictionary:dict];
     } else {
-      [self.delegate URLSession:session task:task didCompleteWithError:error];
+      [self.delegate SHOWebService2:self didCompleteWithError:error];
     }
   }];
 
@@ -80,9 +80,9 @@
   NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
     if (!error) {
       UIImage *image = [UIImage imageWithData:data];
-      [self.delegate URLSession:session dataTask:task didReceiveImage:image];
+      [self.delegate SHOWebService2:self didReceiveImage:image];
     } else {
-      [self.delegate URLSession:session task:task didCompleteWithError:error];
+      [self.delegate SHOWebService2:self didCompleteWithError:error];
     }
   }];
 
