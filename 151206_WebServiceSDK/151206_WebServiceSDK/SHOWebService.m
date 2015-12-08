@@ -14,6 +14,15 @@
 
 @implementation SHOWebService
 
++ (instancetype)sharedWebService {
+  static SHOWebService *webService = nil;
+  static dispatch_once_t onceToken;
+  dispatch_once(&onceToken, ^{
+    webService = [[SHOWebService alloc] init];
+  });
+  return webService;
+}
+
 - (void)fetchGetResponseWithCallback:(void (^)(NSDictionary *, NSError *))callback {
   NSURL *url = [NSURL URLWithString:URL_GET];
   NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:60.0];
