@@ -112,10 +112,10 @@
     return;
   }
 
-  // Binding parameters to prepared statement
+  // Bind parameters to prepared statement
   for (int i = 0; i < params.count; i++) {
-    BOOL isBingingOK = sqlite3_bind_text(compiledStatement, i + 1, [params[i] UTF8String], -1, SQLITE_TRANSIENT);
-    if (isBingingOK != SQLITE_OK) {
+    BOOL isBindingOK = sqlite3_bind_text(compiledStatement, i + 1, [params[i] UTF8String], -1, SQLITE_TRANSIENT);
+    if (isBindingOK != SQLITE_OK) {
       NSLog(@"Error: %@", [NSString stringWithUTF8String:sqlite3_errmsg(_sqlite3db)]);
       sqlite3_finalize(compiledStatement);
       sqlite3_close(_sqlite3db);
