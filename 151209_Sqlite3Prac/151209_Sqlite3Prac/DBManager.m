@@ -14,7 +14,7 @@
 }
 
 @property (strong, nonatomic) NSMutableArray *arrResults;
-@property (strong, nonatomic) NSMutableArray *arrColumnNames;
+//@property (strong, nonatomic) NSMutableArray *arrColumnNames;
 
 @end
 
@@ -52,7 +52,7 @@
       // Create tables if not exists
       char *errMsg;
       const char *sql_stmt;
-      sql_stmt = "CREATE TABLE IF NOT EXISTS USER (ID integer PRIMARY KEY AUTOINCREMENT, NO integer, NAME text, GENDER text, BIRTH integer, PHOTO_URL text, PHONE text)";
+      sql_stmt = "CREATE TABLE IF NOT EXISTS USER (ID integer PRIMARY KEY AUTOINCREMENT, NO integer, NAME text, GENDER text, BIRTH integer, PHOTO_URL text, PHONE text, EMAIL text)";
 
       if (sqlite3_exec(_sqlite3db, sql_stmt, NULL, NULL, &errMsg) != SQLITE_OK) {
         NSLog(@"Create Table USER failed.");
@@ -85,11 +85,11 @@
     [_arrResults removeAllObjects];
   }
   _arrResults = [[NSMutableArray alloc] init];
-
-  if (_arrColumnNames) {
-    [_arrColumnNames removeAllObjects];
-  }
-  _arrColumnNames = [[NSMutableArray alloc] init];
+//
+//  if (_arrColumnNames) {
+//    [_arrColumnNames removeAllObjects];
+//  }
+//  _arrColumnNames = [[NSMutableArray alloc] init];
 }
 
 - (void)p_runQuery:(const char *)query params:(NSArray *)params isSelectQuery:(BOOL)isSelectQuery {
@@ -125,33 +125,26 @@
 
   // Execute query
   if (isSelectQuery) {
-    NSMutableArray *arrDataRow;
+    NSMutableDictionary *dataRowDict = [[NSMutableDictionary alloc] init];
 
     while (sqlite3_step(compiledStatement) == SQLITE_ROW) {
-      // 一次取一列資料
-      arrDataRow = [[NSMutableArray alloc] init];
       int totalColumns = sqlite3_column_count(compiledStatement);
 
       for (int i = 0; i < totalColumns; i++) {
-        // 取得各欄位資料
-        char *dbDataAsChars = (char *)sqlite3_column_text(compiledStatement, i);
-        if (dbDataAsChars) {
-          [arrDataRow addObject:[NSString stringWithUTF8String:dbDataAsChars]];
-        }
-        // 取得各欄位名稱
-        if (self.arrColumnNames.count != totalColumns) {
-          dbDataAsChars = (char *)sqlite3_column_name(compiledStatement, i);
-          [self.arrColumnNames addObject:[NSString stringWithUTF8String:dbDataAsChars]];
+        NSString *dataStr = [NSString stringWithUTF8String:(char *)sqlite3_column_text(compiledStatement, i)];
+        NSString *columnNameStr = [NSString stringWithUTF8String:(char *)sqlite3_column_name(compiledStatement, i)];
+        if (dataStr.length != 0 && columnNameStr.length != 0) {
+          dataRowDict[columnNameStr] = dataStr;
         }
       }
-      // 將取得列寫入最後查詢結果
-      if (arrDataRow.count > 0) {
-        [self.arrResults addObject:arrDataRow];
+      if (dataRowDict.count > 0) {
+        [self.arrResults addObject:dataRowDict];
+        [dataRowDict removeAllObjects];
       }
     }
 
   } else {
-    // 非Select查詢
+    // Not select query
     if (sqlite3_step(compiledStatement) != SQLITE_DONE) {
       NSLog(@"Error: %@", [NSString stringWithUTF8String:sqlite3_errmsg(_sqlite3db)]);
     }
