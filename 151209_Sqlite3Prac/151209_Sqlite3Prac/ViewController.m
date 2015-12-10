@@ -24,9 +24,9 @@
   self.tableView.delegate = self;
 
   self.tableItems = [[NSMutableArray alloc] init];
-  [self.tableItems addObject:@"aaa"];
-  [self.tableItems addObject:@"bbb"];
-  [self.tableItems addObject:@"ccc"];
+//  [self.tableItems addObject:@"aaa"];
+//  [self.tableItems addObject:@"bbb"];
+//  [self.tableItems addObject:@"ccc"];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -57,7 +57,7 @@
     }
   }
 
-  cellView.nameLabel.text = @"abc";
+  cellView.nameLabel.text = self.tableItems[indexPath.row];
   cellView.birthLabel.text = @"2015/02/02";
   return cellView;
 }
