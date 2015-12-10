@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import "CustomTableViewCell.h"
 
 @interface ViewController ()
 
@@ -21,7 +22,11 @@
 
   self.tableView.dataSource = self;
   self.tableView.delegate = self;
+
   self.tableItems = [[NSMutableArray alloc] init];
+  [self.tableItems addObject:@"aaa"];
+  [self.tableItems addObject:@"bbb"];
+  [self.tableItems addObject:@"ccc"];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -40,14 +45,21 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-  static NSString *cellIdentifier = @"Cell";
-  UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-  if (!cell){
-    cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+  static NSString *cellIdentifier = @"CustomCell";
+  CustomTableViewCell *cellView = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+
+  if (!cellView) {
+    NSArray *views = [[NSBundle mainBundle] loadNibNamed:@"CustomTableViewCell" owner:nil options:nil];
+    for (UIView *view in views) {
+      if ([view isKindOfClass:[CustomTableViewCell class]]) {
+        cellView = (CustomTableViewCell *)view;
+      }
+    }
   }
 
-  cell.textLabel.text = [self.tableItems objectAtIndex:[indexPath row]];
-  return cell;
+  cellView.nameLabel.text = @"abc";
+  cellView.birthLabel.text = @"2015/02/02";
+  return cellView;
 }
 
 @end

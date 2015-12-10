@@ -16,6 +16,8 @@
 		EF65515A1C17D669007ED37B /* _51209_Sqlite3PracTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EF6551591C17D669007ED37B /* _51209_Sqlite3PracTests.m */; };
 		EFE923851C185EF60001DDD8 /* DBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = EFE923841C185EF60001DDD8 /* DBManager.m */; };
 		EFE923871C185F050001DDD8 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = EFE923861C185F050001DDD8 /* libsqlite3.dylib */; };
+		EFE9238B1C19AA2B0001DDD8 /* CustomTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EFE923891C19AA2B0001DDD8 /* CustomTableViewCell.m */; };
+		EFE9238C1C19AA2B0001DDD8 /* CustomTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EFE9238A1C19AA2B0001DDD8 /* CustomTableViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +47,9 @@
 		EFE923831C185EF60001DDD8 /* DBManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBManager.h; sourceTree = "<group>"; };
 		EFE923841C185EF60001DDD8 /* DBManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBManager.m; sourceTree = "<group>"; };
 		EFE923861C185F050001DDD8 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		EFE923881C19AA2B0001DDD8 /* CustomTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomTableViewCell.h; sourceTree = "<group>"; };
+		EFE923891C19AA2B0001DDD8 /* CustomTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomTableViewCell.m; sourceTree = "<group>"; };
+		EFE9238A1C19AA2B0001DDD8 /* CustomTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomTableViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,13 +93,16 @@
 		EF65513C1C17D669007ED37B /* 151209_Sqlite3Prac */ = {
 			isa = PBXGroup;
 			children = (
-				EFE923831C185EF60001DDD8 /* DBManager.h */,
-				EFE923841C185EF60001DDD8 /* DBManager.m */,
 				EF6551411C17D669007ED37B /* AppDelegate.h */,
 				EF6551421C17D669007ED37B /* AppDelegate.m */,
+				EFE923831C185EF60001DDD8 /* DBManager.h */,
+				EFE923841C185EF60001DDD8 /* DBManager.m */,
 				EF6551441C17D669007ED37B /* ViewController.h */,
 				EF6551451C17D669007ED37B /* ViewController.m */,
 				EF6551471C17D669007ED37B /* Main.storyboard */,
+				EFE923881C19AA2B0001DDD8 /* CustomTableViewCell.h */,
+				EFE923891C19AA2B0001DDD8 /* CustomTableViewCell.m */,
+				EFE9238A1C19AA2B0001DDD8 /* CustomTableViewCell.xib */,
 				EF65514A1C17D669007ED37B /* Images.xcassets */,
 				EF65514C1C17D669007ED37B /* LaunchScreen.xib */,
 				EF65513D1C17D669007ED37B /* Supporting Files */,
@@ -210,6 +218,7 @@
 			files = (
 				EF6551491C17D669007ED37B /* Main.storyboard in Resources */,
 				EF65514E1C17D669007ED37B /* LaunchScreen.xib in Resources */,
+				EFE9238C1C19AA2B0001DDD8 /* CustomTableViewCell.xib in Resources */,
 				EF65514B1C17D669007ED37B /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -231,6 +240,7 @@
 				EF6551461C17D669007ED37B /* ViewController.m in Sources */,
 				EF6551431C17D669007ED37B /* AppDelegate.m in Sources */,
 				EF6551401C17D669007ED37B /* main.m in Sources */,
+				EFE9238B1C19AA2B0001DDD8 /* CustomTableViewCell.m in Sources */,
 				EFE923851C185EF60001DDD8 /* DBManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
