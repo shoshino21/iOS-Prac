@@ -52,7 +52,7 @@
       // Create tables if not exists
       char *errMsg;
       const char *sql_stmt;
-      sql_stmt = "CREATE TABLE IF NOT EXISTS USER (ID integer PRIMARY KEY AUTOINCREMENT, NO integer, NAME text, GENDER text, BIRTH integer, PHOTO_URL text, PHONE text, EMAIL text)";
+      sql_stmt = "CREATE TABLE IF NOT EXISTS USER (ID integer PRIMARY KEY AUTOINCREMENT, NUMBER integer, NAME text, GENDER text, BIRTH integer, PHOTO_URL text, PHONE text, EMAIL text)";
 
       if (sqlite3_exec(_sqlite3db, sql_stmt, NULL, NULL, &errMsg) != SQLITE_OK) {
         NSLog(@"Create Table USER failed.");

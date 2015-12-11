@@ -24,14 +24,20 @@
   self.tableView.delegate = self;
 
   self.tableItems = [[NSMutableArray alloc] init];
-//  [self.tableItems addObject:@"aaa"];
-//  [self.tableItems addObject:@"bbb"];
-//  [self.tableItems addObject:@"ccc"];
+  for (int i=0; i<30; i++) {
+    [self.tableItems addObject:[NSString stringWithFormat:@"%d", i]];
+  }
 }
 
 - (void)didReceiveMemoryWarning {
   [super didReceiveMemoryWarning];
   // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - Actions
+
+- (IBAction)backWithUnwindSegue:(UIStoryboardSegue *)segue {
+  // for unwind segue
 }
 
 #pragma mark - UITableViewDataSource / Delegate
@@ -57,8 +63,10 @@
     }
   }
 
+  cellView.photoImageView.image = [UIImage imageNamed:@"f"];
   cellView.nameLabel.text = self.tableItems[indexPath.row];
   cellView.birthLabel.text = @"2015/02/02";
+  
   return cellView;
 }
 

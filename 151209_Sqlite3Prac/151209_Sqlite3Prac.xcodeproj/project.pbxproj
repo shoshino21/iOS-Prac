@@ -13,22 +13,14 @@
 		EF6551491C17D669007ED37B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EF6551471C17D669007ED37B /* Main.storyboard */; };
 		EF65514B1C17D669007ED37B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EF65514A1C17D669007ED37B /* Images.xcassets */; };
 		EF65514E1C17D669007ED37B /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = EF65514C1C17D669007ED37B /* LaunchScreen.xib */; };
-		EF65515A1C17D669007ED37B /* _51209_Sqlite3PracTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EF6551591C17D669007ED37B /* _51209_Sqlite3PracTests.m */; };
 		EFE61DDB1C19C1C3002A031D /* CustomTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EFE61DD91C19C1C3002A031D /* CustomTableViewCell.m */; };
 		EFE61DDC1C19C1C3002A031D /* CustomTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EFE61DDA1C19C1C3002A031D /* CustomTableViewCell.xib */; };
+		EFE61DDF1C19C7AE002A031D /* DataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = EFE61DDE1C19C7AE002A031D /* DataModel.m */; };
+		EFE61DE21C19D434002A031D /* SubViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EFE61DE11C19D434002A031D /* SubViewController.m */; };
+		EFE61DE51C1AA912002A031D /* PhotoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EFE61DE41C1AA912002A031D /* PhotoTableViewCell.m */; };
 		EFE923851C185EF60001DDD8 /* DBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = EFE923841C185EF60001DDD8 /* DBManager.m */; };
 		EFE923871C185F050001DDD8 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = EFE923861C185F050001DDD8 /* libsqlite3.dylib */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		EF6551541C17D669007ED37B /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = EF6551321C17D669007ED37B /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = EF6551391C17D669007ED37B;
-			remoteInfo = 151209_Sqlite3Prac;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		EF65513A1C17D669007ED37B /* Sqlite3Prac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sqlite3Prac.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -41,12 +33,17 @@
 		EF6551481C17D669007ED37B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		EF65514A1C17D669007ED37B /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		EF65514D1C17D669007ED37B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		EF6551531C17D669007ED37B /* 151209_Sqlite3PracTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = 151209_Sqlite3PracTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		EF6551581C17D669007ED37B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EF6551591C17D669007ED37B /* _51209_Sqlite3PracTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = _51209_Sqlite3PracTests.m; sourceTree = "<group>"; };
 		EFE61DD81C19C1C3002A031D /* CustomTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomTableViewCell.h; sourceTree = "<group>"; };
 		EFE61DD91C19C1C3002A031D /* CustomTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomTableViewCell.m; sourceTree = "<group>"; };
 		EFE61DDA1C19C1C3002A031D /* CustomTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomTableViewCell.xib; sourceTree = "<group>"; };
+		EFE61DDD1C19C7AE002A031D /* DataModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataModel.h; sourceTree = "<group>"; };
+		EFE61DDE1C19C7AE002A031D /* DataModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataModel.m; sourceTree = "<group>"; };
+		EFE61DE01C19D434002A031D /* SubViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubViewController.h; sourceTree = "<group>"; };
+		EFE61DE11C19D434002A031D /* SubViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubViewController.m; sourceTree = "<group>"; };
+		EFE61DE31C1AA912002A031D /* PhotoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoTableViewCell.h; sourceTree = "<group>"; };
+		EFE61DE41C1AA912002A031D /* PhotoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoTableViewCell.m; sourceTree = "<group>"; };
 		EFE923831C185EF60001DDD8 /* DBManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBManager.h; sourceTree = "<group>"; };
 		EFE923841C185EF60001DDD8 /* DBManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBManager.m; sourceTree = "<group>"; };
 		EFE923861C185F050001DDD8 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
@@ -58,13 +55,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				EFE923871C185F050001DDD8 /* libsqlite3.dylib in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		EF6551501C17D669007ED37B /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -85,7 +75,6 @@
 			isa = PBXGroup;
 			children = (
 				EF65513A1C17D669007ED37B /* Sqlite3Prac.app */,
-				EF6551531C17D669007ED37B /* 151209_Sqlite3PracTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -97,12 +86,18 @@
 				EF6551421C17D669007ED37B /* AppDelegate.m */,
 				EFE923831C185EF60001DDD8 /* DBManager.h */,
 				EFE923841C185EF60001DDD8 /* DBManager.m */,
-				EF6551441C17D669007ED37B /* ViewController.h */,
-				EF6551451C17D669007ED37B /* ViewController.m */,
-				EF6551471C17D669007ED37B /* Main.storyboard */,
 				EFE61DD81C19C1C3002A031D /* CustomTableViewCell.h */,
 				EFE61DD91C19C1C3002A031D /* CustomTableViewCell.m */,
 				EFE61DDA1C19C1C3002A031D /* CustomTableViewCell.xib */,
+				EFE61DE31C1AA912002A031D /* PhotoTableViewCell.h */,
+				EFE61DE41C1AA912002A031D /* PhotoTableViewCell.m */,
+				EFE61DDD1C19C7AE002A031D /* DataModel.h */,
+				EFE61DDE1C19C7AE002A031D /* DataModel.m */,
+				EF6551471C17D669007ED37B /* Main.storyboard */,
+				EF6551441C17D669007ED37B /* ViewController.h */,
+				EF6551451C17D669007ED37B /* ViewController.m */,
+				EFE61DE01C19D434002A031D /* SubViewController.h */,
+				EFE61DE11C19D434002A031D /* SubViewController.m */,
 				EF65514A1C17D669007ED37B /* Images.xcassets */,
 				EF65514C1C17D669007ED37B /* LaunchScreen.xib */,
 				EF65513D1C17D669007ED37B /* Supporting Files */,
@@ -156,24 +151,6 @@
 			productReference = EF65513A1C17D669007ED37B /* Sqlite3Prac.app */;
 			productType = "com.apple.product-type.application";
 		};
-		EF6551521C17D669007ED37B /* 151209_Sqlite3PracTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = EF6551601C17D669007ED37B /* Build configuration list for PBXNativeTarget "151209_Sqlite3PracTests" */;
-			buildPhases = (
-				EF65514F1C17D669007ED37B /* Sources */,
-				EF6551501C17D669007ED37B /* Frameworks */,
-				EF6551511C17D669007ED37B /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				EF6551551C17D669007ED37B /* PBXTargetDependency */,
-			);
-			name = 151209_Sqlite3PracTests;
-			productName = 151209_Sqlite3PracTests;
-			productReference = EF6551531C17D669007ED37B /* 151209_Sqlite3PracTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -185,10 +162,6 @@
 				TargetAttributes = {
 					EF6551391C17D669007ED37B = {
 						CreatedOnToolsVersion = 6.3.1;
-					};
-					EF6551521C17D669007ED37B = {
-						CreatedOnToolsVersion = 6.3.1;
-						TestTargetID = EF6551391C17D669007ED37B;
 					};
 				};
 			};
@@ -206,7 +179,6 @@
 			projectRoot = "";
 			targets = (
 				EF6551391C17D669007ED37B /* 151209_Sqlite3Prac */,
-				EF6551521C17D669007ED37B /* 151209_Sqlite3PracTests */,
 			);
 		};
 /* End PBXProject section */
@@ -223,13 +195,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		EF6551511C17D669007ED37B /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -241,27 +206,14 @@
 				EF6551431C17D669007ED37B /* AppDelegate.m in Sources */,
 				EF6551401C17D669007ED37B /* main.m in Sources */,
 				EFE61DDB1C19C1C3002A031D /* CustomTableViewCell.m in Sources */,
+				EFE61DE51C1AA912002A031D /* PhotoTableViewCell.m in Sources */,
+				EFE61DE21C19D434002A031D /* SubViewController.m in Sources */,
 				EFE923851C185EF60001DDD8 /* DBManager.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		EF65514F1C17D669007ED37B /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				EF65515A1C17D669007ED37B /* _51209_Sqlite3PracTests.m in Sources */,
+				EFE61DDF1C19C7AE002A031D /* DataModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		EF6551551C17D669007ED37B /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = EF6551391C17D669007ED37B /* 151209_Sqlite3Prac */;
-			targetProxy = EF6551541C17D669007ED37B /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		EF6551471C17D669007ED37B /* Main.storyboard */ = {
@@ -385,40 +337,6 @@
 			};
 			name = Release;
 		};
-		EF6551611C17D669007ED37B /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = 151209_Sqlite3PracTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/151209_Sqlite3Prac.app/151209_Sqlite3Prac";
-			};
-			name = Debug;
-		};
-		EF6551621C17D669007ED37B /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = 151209_Sqlite3PracTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/151209_Sqlite3Prac.app/151209_Sqlite3Prac";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -436,15 +354,6 @@
 			buildConfigurations = (
 				EF65515E1C17D669007ED37B /* Debug */,
 				EF65515F1C17D669007ED37B /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		EF6551601C17D669007ED37B /* Build configuration list for PBXNativeTarget "151209_Sqlite3PracTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				EF6551611C17D669007ED37B /* Debug */,
-				EF6551621C17D669007ED37B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
