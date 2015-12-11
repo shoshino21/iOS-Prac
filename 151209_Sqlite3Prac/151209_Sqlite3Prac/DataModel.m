@@ -10,26 +10,59 @@
 
 @implementation DataModel
 
-- (instancetype)initWithData:(NSDictionary *)data {
-  self = [super init];
-  if (self) {
-    self.NUMBER = [data[@"NUMBER"] integerValue] ?: 0;
-    self.NAME = data[@"NAME"] ?: @"";
+#pragma mark - Init (Singleton)
 
-    if ([data[@"GENDER"] isEqualToString:@"M"]) {
-      self.GENDER = DataModelGenderMale;
-    } else if ([data[@"GENDER"] isEqualToString:@"F"]) {
-      self.GENDER = DataModelGenderFemale;
-    } else {
-      self.GENDER = DataModelGenderUnknown;
-    }
-
-    self.BIRTH = [data[@"BIRTH"] integerValue] ?: 0;
-    self.PHOTO_URL = data[@"PHOTO_URL"] ?: @"";
-    self.PHONE = data[@"PHONE"] ?: @"";
-    self.EMAIL = data[@"EMAIL"] ?: @"";
-  }
-  return self;
++ (instancetype)sharedDataModel {
+  static DataModel *sharedDataModel = nil;
+  static dispatch_once_t onceToken;
+  dispatch_once(&onceToken, ^{
+    sharedDataModel = [[self alloc] init];
+  });
+  return sharedDataModel;
 }
+
+#pragma mark - Methods
+
+- (BOOL)getDataFromArray:(NSArray *)anArray {
+  if ([self.items isEqualToArray:anArray]) {
+    return NO;
+  }
+
+  self.items = [anArray mutableCopy];
+  return YES;
+}
+
+- (BOOL)addDataWithDictionary:(NSDictionary *)aDictionary {
+  NSUInteger aDictionaryID = [aDictionary[@"ID"] integerValue];
+  for (NSDictionary *item in self.items) {
+    if ([item[@"ID"] integerValue] == aDictionaryID) {
+      NSLog(@"addDataWithDictionary error: duplicate ID.");
+      return NO;
+    }
+  }
+
+  [self.items addObject:aDictionary];
+  return YES;
+}
+
+- (BOOL)removeDataWithID:(NSUInteger)anID {
+  NSInteger indexToRemove = -1;
+  for (NSUInteger i = 0; i < self.items.count; i++) {
+    if ([self.items[i][@"ID"] integerValue] == anID) {
+      indexToRemove = i;
+      break;
+    }
+  }
+
+  if (indexToRemove == -1) {
+    NSLog(@"removeDataWithID error: couldn't find ID %lu.", (unsigned long)anID);
+    return NO;
+  } else {
+    [self.items removeObjectAtIndex:indexToRemove];
+    return YES;
+  }
+}
+
+#warning TODO: sort method
 
 @end

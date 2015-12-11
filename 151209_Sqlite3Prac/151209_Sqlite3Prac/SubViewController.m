@@ -35,8 +35,8 @@
 }
 
 - (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+  [super didReceiveMemoryWarning];
+  // Dispose of any resources that can be recreated.
 }
 
 #pragma mark - Actions
@@ -62,7 +62,6 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
   static NSString *cellIdentifier;
   cellIdentifier = (indexPath.row == 0) ? @"photoCell" : @"dataCell";
-
   UITableViewCell *cellView = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
 
   if (!cellView) {
@@ -80,6 +79,7 @@
     cellView.textLabel.text = self.subTableItems[indexPath.row];
     cellView.detailTextLabel.text = self.subTableItems[indexPath.row];
   }
+
   return cellView;
 }
 

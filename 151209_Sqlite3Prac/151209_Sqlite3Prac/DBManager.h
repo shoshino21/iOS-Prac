@@ -16,4 +16,7 @@
 - (NSArray *)loadDataFromDB:(NSString *)query params:(NSArray *)params;
 - (void)executeQuery:(NSString *)query params:(NSArray *)params;
 
+// -1 : insert failed
+- (NSInteger)lastInsertID;
+
 @end

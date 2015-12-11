@@ -14,7 +14,6 @@
 }
 
 @property (strong, nonatomic) NSMutableArray *arrResults;
-//@property (strong, nonatomic) NSMutableArray *arrColumnNames;
 
 @end
 
@@ -52,7 +51,7 @@
       // Create tables if not exists
       char *errMsg;
       const char *sql_stmt;
-      sql_stmt = "CREATE TABLE IF NOT EXISTS USER (ID integer PRIMARY KEY AUTOINCREMENT, NUMBER integer, NAME text, GENDER text, BIRTH integer, PHOTO_URL text, PHONE text, EMAIL text)";
+      sql_stmt = "CREATE TABLE IF NOT EXISTS USER (ID integer PRIMARY KEY AUTOINCREMENT, NUMBER text, NAME text, GENDER text, BIRTH integer, PHOTO_URL text, PHONE text, EMAIL text)";
 
       if (sqlite3_exec(_sqlite3db, sql_stmt, NULL, NULL, &errMsg) != SQLITE_OK) {
         NSLog(@"Create Table USER failed.");
@@ -65,6 +64,12 @@
     sqlite3_close(_sqlite3db);
   }
   return self;
+}
+
+#pragma mark - Properties
+
+- (NSInteger)lastInsertID {
+  return sqlite3_last_insert_rowid(_sqlite3db);
 }
 
 #pragma mark - Methods
@@ -85,11 +90,6 @@
     [_arrResults removeAllObjects];
   }
   _arrResults = [[NSMutableArray alloc] init];
-//
-//  if (_arrColumnNames) {
-//    [_arrColumnNames removeAllObjects];
-//  }
-//  _arrColumnNames = [[NSMutableArray alloc] init];
 }
 
 - (void)p_runQuery:(const char *)query params:(NSArray *)params isSelectQuery:(BOOL)isSelectQuery {
@@ -137,14 +137,15 @@
           dataRowDict[columnNameStr] = dataStr;
         }
       }
+
       if (dataRowDict.count > 0) {
         [self.arrResults addObject:dataRowDict];
         [dataRowDict removeAllObjects];
       }
     }
-
-  } else {
-    // Not select query
+  }
+  else {
+    // Non-select query
     if (sqlite3_step(compiledStatement) != SQLITE_DONE) {
       NSLog(@"Error: %@", [NSString stringWithUTF8String:sqlite3_errmsg(_sqlite3db)]);
     }

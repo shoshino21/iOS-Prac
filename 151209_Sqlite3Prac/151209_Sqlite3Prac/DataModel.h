@@ -6,24 +6,16 @@
 //  Copyright (c) 2015 shoshino21. All rights reserved.
 //
 
-typedef enum {
-  DataModelGenderMale,
-  DataModelGenderFemale,
-  DataModelGenderUnknown
-} DataModelGender;
-
 #import <Foundation/Foundation.h>
 
 @interface DataModel : NSObject
 
-@property (assign, nonatomic) NSUInteger NUMBER;
-@property (strong, nonatomic) NSString *NAME;
-@property (assign, nonatomic) DataModelGender GENDER;
-@property (assign, nonatomic) NSUInteger BIRTH;
-@property (strong, nonatomic) NSString *PHOTO_URL;
-@property (strong, nonatomic) NSString *PHONE;
-@property (strong, nonatomic) NSString *EMAIL;
+@property (strong, nonatomic) NSMutableArray *items;
 
-- (instancetype)initWithData:(NSDictionary *)data;
++ (instancetype)sharedDataModel;
+
+- (BOOL)getDataFromArray:(NSArray *)anArray;
+- (BOOL)addDataWithDictionary:(NSDictionary *)aDictionary;
+- (BOOL)removeDataWithID:(NSUInteger)anID;
 
 @end

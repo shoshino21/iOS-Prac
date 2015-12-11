@@ -84,22 +84,11 @@
 			children = (
 				EF6551411C17D669007ED37B /* AppDelegate.h */,
 				EF6551421C17D669007ED37B /* AppDelegate.m */,
-				EFE923831C185EF60001DDD8 /* DBManager.h */,
-				EFE923841C185EF60001DDD8 /* DBManager.m */,
-				EFE61DD81C19C1C3002A031D /* CustomTableViewCell.h */,
-				EFE61DD91C19C1C3002A031D /* CustomTableViewCell.m */,
-				EFE61DDA1C19C1C3002A031D /* CustomTableViewCell.xib */,
-				EFE61DE31C1AA912002A031D /* PhotoTableViewCell.h */,
-				EFE61DE41C1AA912002A031D /* PhotoTableViewCell.m */,
-				EFE61DDD1C19C7AE002A031D /* DataModel.h */,
-				EFE61DDE1C19C7AE002A031D /* DataModel.m */,
-				EF6551471C17D669007ED37B /* Main.storyboard */,
-				EF6551441C17D669007ED37B /* ViewController.h */,
-				EF6551451C17D669007ED37B /* ViewController.m */,
-				EFE61DE01C19D434002A031D /* SubViewController.h */,
-				EFE61DE11C19D434002A031D /* SubViewController.m */,
+				EFE61DE71C1ABCA7002A031D /* Model */,
+				EFE61DE81C1ABCAB002A031D /* View */,
+				EFE61DEA1C1ABCBA002A031D /* Controller */,
+				EFE61DE61C1ABC8A002A031D /* CustomCell */,
 				EF65514A1C17D669007ED37B /* Images.xcassets */,
-				EF65514C1C17D669007ED37B /* LaunchScreen.xib */,
 				EF65513D1C17D669007ED37B /* Supporting Files */,
 			);
 			path = 151209_Sqlite3Prac;
@@ -129,6 +118,49 @@
 				EF6551581C17D669007ED37B /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		EFE61DE61C1ABC8A002A031D /* CustomCell */ = {
+			isa = PBXGroup;
+			children = (
+				EFE61DD81C19C1C3002A031D /* CustomTableViewCell.h */,
+				EFE61DD91C19C1C3002A031D /* CustomTableViewCell.m */,
+				EFE61DDA1C19C1C3002A031D /* CustomTableViewCell.xib */,
+				EFE61DE31C1AA912002A031D /* PhotoTableViewCell.h */,
+				EFE61DE41C1AA912002A031D /* PhotoTableViewCell.m */,
+			);
+			name = CustomCell;
+			sourceTree = "<group>";
+		};
+		EFE61DE71C1ABCA7002A031D /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				EFE923831C185EF60001DDD8 /* DBManager.h */,
+				EFE923841C185EF60001DDD8 /* DBManager.m */,
+				EFE61DDD1C19C7AE002A031D /* DataModel.h */,
+				EFE61DDE1C19C7AE002A031D /* DataModel.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		EFE61DE81C1ABCAB002A031D /* View */ = {
+			isa = PBXGroup;
+			children = (
+				EF6551471C17D669007ED37B /* Main.storyboard */,
+				EF65514C1C17D669007ED37B /* LaunchScreen.xib */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		EFE61DEA1C1ABCBA002A031D /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				EF6551441C17D669007ED37B /* ViewController.h */,
+				EF6551451C17D669007ED37B /* ViewController.m */,
+				EFE61DE01C19D434002A031D /* SubViewController.h */,
+				EFE61DE11C19D434002A031D /* SubViewController.m */,
+			);
+			name = Controller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
