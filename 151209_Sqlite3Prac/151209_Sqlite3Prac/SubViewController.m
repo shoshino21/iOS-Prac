@@ -15,7 +15,6 @@
 
 @property (strong, nonatomic) NSMutableArray *cellInputItems;
 @property (strong, nonatomic) NSArray *cellTitles;
-//@property (assign, nonatomic) SubViewCellType cellStyle;
 
 @end
 
@@ -30,13 +29,17 @@
   self.subTableView.delegate = self;
 
   self.cellTitles = @[@"照片", @"編號 *", @"名字 *", @"性別 *", @"生日 *", @"電話", @"E-mail", @"住址"];
-  self.cellInputItems = [[NSMutableArray alloc] initWithCapacity:self.cellTitles.count];
-  [self.cellInputItems addObjectsFromArray:@[@"", @"", @"", @"", @"", @"", @"", @""]];
+  self.cellInputItems = [[NSMutableArray alloc] initWithArray:@[@"", @"", @"", @"", @"", @"", @"", @""]];
 
 #warning test
   self.cellInputItems[SubViewCellTypeEmail] = @"E-mail";
+}
 
-  
+- (void)viewWillAppear:(BOOL)animated {
+  [super viewWillAppear:animated];
+  dispatch_async(dispatch_get_main_queue(), ^{
+    [self.subTableView reloadData];
+  });
 }
 
 - (void)didReceiveMemoryWarning {
@@ -51,7 +54,10 @@
 }
 
 - (IBAction)backToSubWithUnwindSegue:(UIStoryboardSegue *)segue {
+  InputViewController *ivc = segue.sourceViewController;
+  self.cellInputItems[ivc.cellType] = ivc.value;
 
+  [self.subTableView reloadData]; // Required for reload data immediately!
 }
 
 #pragma mark - Navigation
@@ -60,11 +66,11 @@
   if ([segue.identifier isEqualToString:@"toInputView"]) {
 #warning be careful with topViewController issue
     InputViewController *ivc = segue.destinationViewController;
-    NSIndexPath *indexPath = [self.subTableView indexPathForSelectedRow];
+    NSInteger indexPathRow = [self.subTableView indexPathForSelectedRow].row;
 
-    ivc.cellInputItems = self.cellInputItems;
-    ivc.cellType = (SubViewCellType)indexPath.row;
-    ivc.navigationItem.title = self.cellTitles[indexPath.row];
+    ivc.value = self.cellInputItems[indexPathRow];
+    ivc.cellType = (SubViewCellType)indexPathRow;
+    ivc.navigationItem.title = self.cellTitles[indexPathRow];
   }
 }
 

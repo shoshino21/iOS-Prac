@@ -11,7 +11,7 @@
 
 @interface InputViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
-@property (strong, nonatomic) id value;
+@property (strong, nonatomic) NSString *value;
 @property (strong, nonatomic) NSMutableArray *cellInputItems;
 @property (assign, nonatomic) SubViewCellType cellType;
 

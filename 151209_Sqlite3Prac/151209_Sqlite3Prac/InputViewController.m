@@ -33,13 +33,11 @@
       break;
 
     case SubViewCellTypeNumber:
-      self.textField.text = self.cellInputItems[self.cellType];
       self.textField.keyboardType = UIKeyboardTypeNamePhonePad;
       self.textField.placeholder = @"請輸入編號";
       break;
 
     case SubViewCellTypeName:
-      self.textField.text = self.cellInputItems[self.cellType];
       self.textField.placeholder = @"請輸入名字";
       break;
 
@@ -86,10 +84,11 @@
       break;
   }
 
-  // Show keyboard immediately
   if (self.textField.hidden == NO) {
-    [self.textField becomeFirstResponder];
+    self.textField.text = self.value;
+    [self.textField becomeFirstResponder];  // Show keyboard immediately
   } else if (self.addressTextView.hidden == NO) {
+    self.addressTextView.text = self.value;
     [self.addressTextView becomeFirstResponder];
   }
 }
@@ -102,26 +101,27 @@
 #pragma mark - Actions
 
 - (IBAction)submit:(UIButton *)sender {
-  switch (self.cellType) {
-    case SubViewCellTypePhoto:
-      break;
+//  switch (self.cellType) {
+//    case SubViewCellTypePhoto:
+//      break;
+//
+//    case SubViewCellTypeNumber:
+//    case SubViewCellTypeName:
+//    case SubViewCellTypePhone:
+//    case SubViewCellTypeEmail:
+////      self.cellInputItems[self.cellType] = self.textField.text;
+//      self.value = self.textField.text;
+//      break;
+//
+//    case SubViewCellTypeGender:
+//    case SubViewCellTypeBirth:
+//    case SubViewCellTypeAddress:
+//      break;
+//
+//    default:
+//      break;
+//  }
 
-    case SubViewCellTypeNumber:
-    case SubViewCellTypeName:
-    case SubViewCellTypePhone:
-    case SubViewCellTypeEmail:
-//      self.cellInputItems[self.cellType] = self.textField.text;
-      break;
-
-    case SubViewCellTypeGender:
-    case SubViewCellTypeBirth:
-    case SubViewCellTypeAddress:
-      break;
-
-    default:
-      break;
-  }
-  
 }
 
 #pragma mark - UITableViewDataSource / Delegate
@@ -164,32 +164,46 @@
 
 - (void)p_initializeForGender {
   self.genderTitles = @[@"男", @"女", @"不透露"];
-  self.genderInputs = [[NSMutableArray alloc] init];
 
-  NSString *currGender = self.cellInputItems[SubViewCellTypeGender];
-  if ([currGender isEqualToString:@"M"]) {
-    [self.genderInputs addObjectsFromArray:@[@YES, @NO, @NO]];
-  } else if ([currGender isEqualToString:@"F"]) {
-    [self.genderInputs addObjectsFromArray:@[@NO, @YES, @NO]];
+  NSArray *tmpArr;
+  if ([self.value isEqualToString:@"M"]) {
+    tmpArr = @[@YES, @NO, @NO];
+  } else if ([self.value isEqualToString:@"F"]) {
+    tmpArr = @[@NO, @YES, @NO];
   } else {
-    [self.genderInputs addObjectsFromArray:@[@NO, @NO, @YES]];
+    tmpArr = @[@NO, @NO, @YES];
   }
+  self.genderInputs = [[NSMutableArray alloc] initWithArray:tmpArr];
 }
 
 - (void)p_updateSubmitButtonFrameWithTargetFrame:(CGRect)tf {
   CGRect bf = self.submitButton.frame;
-  self.submitButton.frame = (CGRect){ bf.origin.x, tf.origin.y + tf.size.height + 20, bf.size };
+  self.submitButton.frame = (CGRect){ bf.origin.x, (tf.origin.y + tf.size.height + 20), bf.size };
 }
 
-/*
+
 #pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little
-preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+  switch (self.cellType) {
+    case SubViewCellTypePhoto:
+      break;
+
+    case SubViewCellTypeNumber:
+    case SubViewCellTypeName:
+    case SubViewCellTypePhone:
+    case SubViewCellTypeEmail:
+      self.value = self.textField.text;
+      break;
+
+    case SubViewCellTypeGender:
+    case SubViewCellTypeBirth:
+    case SubViewCellTypeAddress:
+      break;
+
+    default:
+      break;
+  }
 }
-*/
 
 @end
