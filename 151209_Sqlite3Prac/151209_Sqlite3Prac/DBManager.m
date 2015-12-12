@@ -19,7 +19,7 @@
 
 @implementation DBManager
 
-#pragma mark - Init
+#pragma mark - Initialize
 
 - (instancetype)initWithDatabaseFilename:(NSString *)dbFilename {
   self = [super init];

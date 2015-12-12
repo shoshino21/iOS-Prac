@@ -6,6 +6,17 @@
 //  Copyright (c) 2015 shoshino21. All rights reserved.
 //
 
+typedef enum {
+  SubViewCellTypePhoto = 0,
+  SubViewCellTypeNumber,
+  SubViewCellTypeName,
+  SubViewCellTypeGender,
+  SubViewCellTypeBirth,
+  SubViewCellTypePhone,
+  SubViewCellTypeEmail,
+  SubViewCellTypeAddress
+} SubViewCellType;
+
 #import <UIKit/UIKit.h>
 
 @interface SubViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>

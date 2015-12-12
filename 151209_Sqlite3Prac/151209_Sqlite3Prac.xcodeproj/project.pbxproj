@@ -18,6 +18,7 @@
 		EFE61DDF1C19C7AE002A031D /* DataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = EFE61DDE1C19C7AE002A031D /* DataModel.m */; };
 		EFE61DE21C19D434002A031D /* SubViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EFE61DE11C19D434002A031D /* SubViewController.m */; };
 		EFE61DE51C1AA912002A031D /* PhotoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EFE61DE41C1AA912002A031D /* PhotoTableViewCell.m */; };
+		EFE61E251C1AE0E9002A031D /* InputViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EFE61E241C1AE0E9002A031D /* InputViewController.m */; };
 		EFE923851C185EF60001DDD8 /* DBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = EFE923841C185EF60001DDD8 /* DBManager.m */; };
 		EFE923871C185F050001DDD8 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = EFE923861C185F050001DDD8 /* libsqlite3.dylib */; };
 /* End PBXBuildFile section */
@@ -44,6 +45,8 @@
 		EFE61DE11C19D434002A031D /* SubViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubViewController.m; sourceTree = "<group>"; };
 		EFE61DE31C1AA912002A031D /* PhotoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoTableViewCell.h; sourceTree = "<group>"; };
 		EFE61DE41C1AA912002A031D /* PhotoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoTableViewCell.m; sourceTree = "<group>"; };
+		EFE61E231C1AE0E9002A031D /* InputViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InputViewController.h; sourceTree = "<group>"; };
+		EFE61E241C1AE0E9002A031D /* InputViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InputViewController.m; sourceTree = "<group>"; };
 		EFE923831C185EF60001DDD8 /* DBManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBManager.h; sourceTree = "<group>"; };
 		EFE923841C185EF60001DDD8 /* DBManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBManager.m; sourceTree = "<group>"; };
 		EFE923861C185F050001DDD8 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
@@ -159,6 +162,8 @@
 				EF6551451C17D669007ED37B /* ViewController.m */,
 				EFE61DE01C19D434002A031D /* SubViewController.h */,
 				EFE61DE11C19D434002A031D /* SubViewController.m */,
+				EFE61E231C1AE0E9002A031D /* InputViewController.h */,
+				EFE61E241C1AE0E9002A031D /* InputViewController.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -241,6 +246,7 @@
 				EFE61DE51C1AA912002A031D /* PhotoTableViewCell.m in Sources */,
 				EFE61DE21C19D434002A031D /* SubViewController.m in Sources */,
 				EFE923851C185EF60001DDD8 /* DBManager.m in Sources */,
+				EFE61E251C1AE0E9002A031D /* InputViewController.m in Sources */,
 				EFE61DDF1C19C7AE002A031D /* DataModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

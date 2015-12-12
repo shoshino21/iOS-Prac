@@ -7,6 +7,8 @@
 //
 
 #import "ViewController.h"
+
+#import "SubViewController.h"
 #import "CustomTableViewCell.h"
 
 @interface ViewController ()
@@ -16,6 +18,8 @@
 @end
 
 @implementation ViewController
+
+#pragma mark - View
 
 - (void)viewDidLoad {
   [super viewDidLoad];
@@ -36,8 +40,18 @@
 
 #pragma mark - Actions
 
-- (IBAction)backWithUnwindSegue:(UIStoryboardSegue *)segue {
-  // for unwind segue
+- (IBAction)backToMainWithUnwindSegue:(UIStoryboardSegue *)segue {
+  
+}
+
+#pragma mark - Navigation
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+  if ([segue.identifier isEqualToString:@"addData"]) {
+#warning be careful with topViewController
+    SubViewController *svc = segue.destinationViewController;
+    svc.navigationItem.title = @"新增資料";
+  }
 }
 
 #pragma mark - UITableViewDataSource / Delegate
@@ -51,7 +65,7 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-  static NSString *cellIdentifier = @"CustomCell";
+  static NSString *cellIdentifier = @"customCell";
   CustomTableViewCell *cellView = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
 
   if (!cellView) {

@@ -10,7 +10,7 @@
 
 @implementation DataModel
 
-#pragma mark - Init (Singleton)
+#pragma mark - Initialize (Singleton)
 
 + (instancetype)sharedDataModel {
   static DataModel *sharedDataModel = nil;

@@ -7,31 +7,36 @@
 //
 
 #import "SubViewController.h"
+
+#import "InputViewController.h"
 #import "PhotoTableViewCell.h"
 
 @interface SubViewController ()
 
-@property (strong, nonatomic) NSMutableArray *subTableItems;
+@property (strong, nonatomic) NSMutableArray *cellInputItems;
+@property (strong, nonatomic) NSArray *cellTitles;
+//@property (assign, nonatomic) SubViewCellType cellStyle;
 
 @end
 
 @implementation SubViewController
+
+#pragma mark - View
 
 - (void)viewDidLoad {
   [super viewDidLoad];
 
   self.subTableView.dataSource = self;
   self.subTableView.delegate = self;
-  self.subTableItems = [[NSMutableArray alloc] init];
+
+  self.cellTitles = @[@"照片", @"編號 *", @"名字 *", @"性別 *", @"生日 *", @"電話", @"E-mail", @"住址"];
+  self.cellInputItems = [[NSMutableArray alloc] initWithCapacity:self.cellTitles.count];
+  [self.cellInputItems addObjectsFromArray:@[@"", @"", @"", @"", @"", @"", @"", @""]];
 
 #warning test
-  [self.subTableItems addObject:@"a"];
-  [self.subTableItems addObject:@"b"];
-  [self.subTableItems addObject:@"c"];
-  [self.subTableItems addObject:@"d"];
-  [self.subTableItems addObject:@"a"];
-  [self.subTableItems addObject:@"a"];
-  [self.subTableItems addObject:@"a"];
+  self.cellInputItems[SubViewCellTypeEmail] = @"E-mail";
+
+  
 }
 
 - (void)didReceiveMemoryWarning {
@@ -42,7 +47,25 @@
 #pragma mark - Actions
 
 - (IBAction)save:(UIBarButtonItem *)sender {
+#warning check for non-null fields here
+}
 
+- (IBAction)backToSubWithUnwindSegue:(UIStoryboardSegue *)segue {
+
+}
+
+#pragma mark - Navigation
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+  if ([segue.identifier isEqualToString:@"toInputView"]) {
+#warning be careful with topViewController issue
+    InputViewController *ivc = segue.destinationViewController;
+    NSIndexPath *indexPath = [self.subTableView indexPathForSelectedRow];
+
+    ivc.cellInputItems = self.cellInputItems;
+    ivc.cellType = (SubViewCellType)indexPath.row;
+    ivc.navigationItem.title = self.cellTitles[indexPath.row];
+  }
 }
 
 #pragma mark - UITableViewDataSource / Delegate
@@ -52,45 +75,35 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-  return 7;
+  return self.cellTitles.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-  return (indexPath.row == 0) ? 100.f : 44.f;
+  return (indexPath.row == SubViewCellTypePhoto) ? 100.f : 44.f;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
   static NSString *cellIdentifier;
-  cellIdentifier = (indexPath.row == 0) ? @"photoCell" : @"dataCell";
+  cellIdentifier = (indexPath.row == SubViewCellTypePhoto) ? @"photoCell" : @"dataCell";
   UITableViewCell *cellView = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
 
   if (!cellView) {
-    if (indexPath.row == 0) {
+    if (indexPath.row == SubViewCellTypePhoto) {
       cellView = [[PhotoTableViewCell alloc] init];
     } else {
-      cellView = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"dataCell"];
+      cellView = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellIdentifier];
     }
   }
 
-  if (indexPath.row == 0) {
+  if (indexPath.row == SubViewCellTypePhoto) {
     PhotoTableViewCell *photoCellView = (PhotoTableViewCell *)cellView;
     photoCellView.photoImageView.image = [UIImage imageNamed:@"f"];
   } else {
-    cellView.textLabel.text = self.subTableItems[indexPath.row];
-    cellView.detailTextLabel.text = self.subTableItems[indexPath.row];
+    cellView.textLabel.text = self.cellTitles[indexPath.row];
+    cellView.detailTextLabel.text = self.cellInputItems[indexPath.row];
   }
 
   return cellView;
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
