@@ -51,13 +51,15 @@
 
 - (IBAction)save:(UIBarButtonItem *)sender {
 #warning check for non-null fields here
+
+
 }
 
 - (IBAction)backToSubWithUnwindSegue:(UIStoryboardSegue *)segue {
   InputViewController *ivc = segue.sourceViewController;
   self.cellInputItems[ivc.cellType] = ivc.value;
 
-  [self.subTableView reloadData]; // Required for reload data immediately!
+  [self.subTableView reloadData]; // This is required for reload data immediately!
 }
 
 #pragma mark - Navigation
@@ -101,12 +103,67 @@
     }
   }
 
-  if (indexPath.row == SubViewCellTypePhoto) {
-    PhotoTableViewCell *photoCellView = (PhotoTableViewCell *)cellView;
-    photoCellView.photoImageView.image = [UIImage imageNamed:@"f"];
-  } else {
-    cellView.textLabel.text = self.cellTitles[indexPath.row];
-    cellView.detailTextLabel.text = self.cellInputItems[indexPath.row];
+  PhotoTableViewCell *photoCellView;
+
+  switch (indexPath.row) {
+    case SubViewCellTypePhoto:
+      photoCellView = (PhotoTableViewCell *)cellView;
+#warning TODO: different default icon for male and female (and unknown)
+      photoCellView.photoImageView.image = [UIImage imageNamed:@"f"];
+      break;
+
+    case SubViewCellTypeGender: {
+      cellView.textLabel.text = self.cellTitles[indexPath.row];
+      NSString *genderInput = self.cellInputItems[SubViewCellTypeGender];
+      if (genderInput.length == 0) {
+        cellView.detailTextLabel.text = @"";
+        break;
+      }
+
+      NSString *genderDisplay;
+      if ([self.cellInputItems[SubViewCellTypeGender] isEqualToString:@"M"]) {
+        genderDisplay = @"男";
+      } else if ([self.cellInputItems[SubViewCellTypeGender] isEqualToString:@"F"]) {
+        genderDisplay = @"女";
+      } else {
+        genderDisplay = @"不透露";
+      }
+
+      cellView.detailTextLabel.text = genderDisplay;
+      break;
+    }
+
+    case SubViewCellTypeBirth: {
+      cellView.textLabel.text = self.cellTitles[indexPath.row];
+
+      NSString *birthdateString = self.cellInputItems[SubViewCellTypeBirth];
+      if (birthdateString.length == 0) {
+        cellView.detailTextLabel.text = @"";
+        break;
+      }
+
+      NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+      [dateFormatter setDateFormat:@"YYYY/MM/dd"];
+
+      NSTimeInterval unixTimeStamp = [birthdateString doubleValue];
+      NSDate *birthDate = [NSDate dateWithTimeIntervalSince1970:unixTimeStamp];
+      birthdateString = [dateFormatter stringFromDate:birthDate];
+
+      cellView.detailTextLabel.text = birthdateString;
+      break;
+    }
+
+    case SubViewCellTypeNumber:
+    case SubViewCellTypeName:
+    case SubViewCellTypePhone:
+    case SubViewCellTypeEmail:
+    case SubViewCellTypeAddress:
+      cellView.textLabel.text = self.cellTitles[indexPath.row];
+      cellView.detailTextLabel.text = self.cellInputItems[indexPath.row];
+      break;
+
+    default:
+      break;
   }
 
   return cellView;

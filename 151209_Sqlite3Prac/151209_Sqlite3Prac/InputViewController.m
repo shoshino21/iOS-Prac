@@ -8,7 +8,9 @@
 
 #import "InputViewController.h"
 
-@interface InputViewController ()
+@interface InputViewController () {
+  UIDatePicker *_datePicker;
+}
 
 @property (strong, nonatomic) NSArray *genderTitles;
 @property (strong, nonatomic) NSMutableArray *genderInputs;
@@ -49,14 +51,20 @@
       break;
 
     case SubViewCellTypeBirth: {
-      UIDatePicker *dp = [[UIDatePicker alloc] initWithFrame:CGRectMake(0, 80, 320, 164)];
-      dp.datePickerMode = UIDatePickerModeDate;
-      dp.date = [NSDate date];
-      dp.maximumDate = [NSDate date];
-      [self.view addSubview:dp];
+      _datePicker = [[UIDatePicker alloc] initWithFrame:CGRectMake(0, 80, 320, 164)];
+      _datePicker.datePickerMode = UIDatePickerModeDate;
+      _datePicker.maximumDate = [NSDate date];
+
+      if (self.value.length == 0) {
+        _datePicker.date = [NSDate date];
+      } else {
+        _datePicker.date = [NSDate dateWithTimeIntervalSince1970:[self.value doubleValue]];
+      }
+
+      [self.view addSubview:_datePicker];
 
       self.textField.hidden = YES;
-      [self p_updateSubmitButtonFrameWithTargetFrame:dp.frame];
+      [self p_updateSubmitButtonFrameWithTargetFrame:_datePicker.frame];
       break;
     }
 
@@ -100,6 +108,7 @@
 
 #pragma mark - Actions
 
+#warning clean it if not needed
 - (IBAction)submit:(UIButton *)sender {
 //  switch (self.cellType) {
 //    case SubViewCellTypePhoto:
@@ -122,6 +131,51 @@
 //      break;
 //  }
 
+}
+
+#pragma mark - Navigation
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+  NSTimeInterval unixTimeStamp;
+
+  switch (self.cellType) {
+    case SubViewCellTypePhoto:
+      break;
+
+    case SubViewCellTypeNumber:
+    case SubViewCellTypeName:
+    case SubViewCellTypePhone:
+    case SubViewCellTypeEmail:
+      self.value = self.textField.text;
+      break;
+
+    case SubViewCellTypeGender:
+      if ([self.genderInputs[0] isEqual:@YES]) {
+        self.value = @"M";
+      } else if ([self.genderInputs[1] isEqual:@YES]) {
+        self.value = @"F";
+      } else {
+        self.value = @"U";
+      }
+      break;
+
+    case SubViewCellTypeBirth:
+      unixTimeStamp = [[_datePicker date] timeIntervalSince1970];
+      self.value = [NSString stringWithFormat:@"%f", unixTimeStamp];
+      break;
+
+    case SubViewCellTypeAddress:
+      self.value = self.addressTextView.text;
+      break;
+
+    default:
+      break;
+  }
+}
+
+- (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender {
+#warning TODO: confirm with regex (at private method) and return bool here
+  return YES;
 }
 
 #pragma mark - UITableViewDataSource / Delegate
@@ -179,31 +233,6 @@
 - (void)p_updateSubmitButtonFrameWithTargetFrame:(CGRect)tf {
   CGRect bf = self.submitButton.frame;
   self.submitButton.frame = (CGRect){ bf.origin.x, (tf.origin.y + tf.size.height + 20), bf.size };
-}
-
-
-#pragma mark - Navigation
-
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-  switch (self.cellType) {
-    case SubViewCellTypePhoto:
-      break;
-
-    case SubViewCellTypeNumber:
-    case SubViewCellTypeName:
-    case SubViewCellTypePhone:
-    case SubViewCellTypeEmail:
-      self.value = self.textField.text;
-      break;
-
-    case SubViewCellTypeGender:
-    case SubViewCellTypeBirth:
-    case SubViewCellTypeAddress:
-      break;
-
-    default:
-      break;
-  }
 }
 
 @end
