@@ -8,6 +8,12 @@
 
 #import "DataModel.h"
 
+@interface DataModel ()
+
+@property (strong, nonatomic) NSMutableArray *items;
+
+@end
+
 @implementation DataModel
 
 #pragma mark - Initialize (Singleton)
@@ -21,19 +27,36 @@
   return sharedDataModel;
 }
 
+- (instancetype)init {
+  self = [super init];
+  if (self) {
+    self.items = [[NSMutableArray alloc] init];
+  }
+  return self;
+}
+
 #pragma mark - Methods
 
-- (BOOL)getDataFromArray:(NSArray *)anArray {
+- (NSDictionary *)fetchDataWithID:(NSUInteger)anID {
+  for (NSUInteger i = 0; i < self.items.count; i++) {
+    if ([self.items[i][@"ID"] integerValue] == anID) {
+      return self.items[i];
+    }
+  }
+  return nil;
+}
+
+- (BOOL)copyDataFromArray:(NSArray *)anArray {
   if ([self.items isEqualToArray:anArray]) {
     return NO;
   }
-
   self.items = [anArray mutableCopy];
   return YES;
 }
 
 - (BOOL)addDataWithDictionary:(NSDictionary *)aDictionary {
   NSUInteger aDictionaryID = [aDictionary[@"ID"] integerValue];
+
   for (NSDictionary *item in self.items) {
     if ([item[@"ID"] integerValue] == aDictionaryID) {
       NSLog(@"addDataWithDictionary error: duplicate ID.");
@@ -47,6 +70,7 @@
 
 - (BOOL)removeDataWithID:(NSUInteger)anID {
   NSInteger indexToRemove = -1;
+
   for (NSUInteger i = 0; i < self.items.count; i++) {
     if ([self.items[i][@"ID"] integerValue] == anID) {
       indexToRemove = i;
@@ -61,6 +85,21 @@
     [self.items removeObjectAtIndex:indexToRemove];
     return YES;
   }
+}
+
+- (BOOL)updateDataWithDictionary:(NSDictionary *)aDictionary {
+  NSUInteger aDictionaryID = [aDictionary[@"ID"] integerValue];
+
+  for (NSDictionary *item in self.items) {
+    if ([item[@"ID"] integerValue] == aDictionaryID) {
+      BOOL removeSuccess = [self removeDataWithID:aDictionaryID];
+      BOOL addSuccess = [self addDataWithDictionary:aDictionary];
+      return (removeSuccess && addSuccess);
+    }
+  }
+
+  NSLog(@"updateDataWithDictionary error: couldn't find ID %lu", (unsigned long)aDictionaryID);
+  return NO;
 }
 
 #warning TODO: sort method

@@ -22,5 +22,6 @@ typedef enum {
 @interface SubViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *subTableView;
+@property (strong, nonatomic) NSMutableArray *cellInputItems;
 
 @end

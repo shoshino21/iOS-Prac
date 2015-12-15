@@ -10,12 +10,12 @@
 
 @interface DataModel : NSObject
 
-@property (strong, nonatomic) NSMutableArray *items;
-
 + (instancetype)sharedDataModel;
 
-- (BOOL)getDataFromArray:(NSArray *)anArray;
+- (NSDictionary *)fetchDataWithID:(NSUInteger)anID;
+- (BOOL)copyDataFromArray:(NSArray *)anArray;
 - (BOOL)addDataWithDictionary:(NSDictionary *)aDictionary;
 - (BOOL)removeDataWithID:(NSUInteger)anID;
+- (BOOL)updateDataWithDictionary:(NSDictionary *)aDictionary;
 
 @end

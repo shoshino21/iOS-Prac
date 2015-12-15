@@ -51,7 +51,7 @@
       // Create tables if not exists
       char *errMsg;
       const char *sql_stmt;
-      sql_stmt = "CREATE TABLE IF NOT EXISTS USER (ID integer PRIMARY KEY AUTOINCREMENT, NUMBER text, NAME text, GENDER text, BIRTH integer, PHOTO_URL text, PHONE text, EMAIL text)";
+      sql_stmt = "CREATE TABLE IF NOT EXISTS USER (ID integer PRIMARY KEY AUTOINCREMENT, NUMBER text, NAME text, GENDER text, BIRTH integer, PHOTO_URL text, PHONE text, EMAIL text, ADDRESS text)";
 
       if (sqlite3_exec(_sqlite3db, sql_stmt, NULL, NULL, &errMsg) != SQLITE_OK) {
         NSLog(@"Create Table USER failed.");
@@ -81,6 +81,43 @@
 
 - (void)executeQuery:(NSString *)query params:(NSArray *)params {
   [self p_runQuery:[query UTF8String] params:params isSelectQuery:NO];
+}
+
+//- (BOOL)saveDataToDB:(NSArray *)dataRows {
+//  if (dataRows == nil || dataRows.count == 0) {
+//    NSLog(@"data is null!");
+//    return NO;
+//  }
+//
+//  for (NSDictionary *row in dataRows) {
+//    NSMutableArray *params = [[NSMutableArray alloc] init];
+//    [params addObject:row[@"NUMBER"]];
+//    [params addObject:row[@"NAME"]];
+//    [params addObject:row[@"GENDER"]];
+//    [params addObject:row[@"BIRTH"]];
+//    [params addObject:row[@"PHOTO_URL"]];
+//    [params addObject:row[@"PHONE"]];
+//    [params addObject:row[@"EMAIL"]];
+//    [params addObject:row[@"ADDRESS"]];
+//
+//    BOOL theIDisExist = [self isDataExistsWhereID:row[@"ID"]];
+//    if (theIDisExist) {
+//      [params addObject:row[@"ID"]];
+//      [self executeQuery:@"UPDATE USER SET NUMBER=?, NAME=?, GENDER=?, BIRTH=?, PHOTO_URL=?, PHONE=?, EMAIL=?, ADDRESS=? WHERE ID=?" params:params];
+//      return YES;
+//    }
+//    else {
+//      [self executeQuery:@"INSERT INTO USER (NUMBER, NAME, GENDER, BIRTH, PHOTO_URL, PHONE, EMAIL, ADDRESS) VALUES (?,?,?,?,?,?,?,?)" params:params];
+//      return (self.lastInsertID != -1); // -1: insert failed
+//    }
+//  }
+//  return NO;
+//}
+
+- (BOOL)isDataExistsWhereID:(NSString *)aID {
+  NSArray *resultArr = [self loadDataFromDB:@"SELECT COUNT(ID) FROM USER WHERE ID = ?" params:@[aID]];
+  int count = [resultArr[0][@"COUNT(ID)"] intValue];
+  return (count > 0);
 }
 
 #pragma mark - Private
@@ -139,7 +176,7 @@
       }
 
       if (dataRowDict.count > 0) {
-        [self.arrResults addObject:dataRowDict];
+        [self.arrResults addObject:[dataRowDict copy]];
         [dataRowDict removeAllObjects];
       }
     }

@@ -13,7 +13,6 @@
 
 @interface SubViewController ()
 
-@property (strong, nonatomic) NSMutableArray *cellInputItems;
 @property (strong, nonatomic) NSArray *cellTitles;
 
 @end
@@ -30,9 +29,6 @@
 
   self.cellTitles = @[@"照片", @"編號 *", @"名字 *", @"性別 *", @"生日 *", @"電話", @"E-mail", @"住址"];
   self.cellInputItems = [[NSMutableArray alloc] initWithArray:@[@"", @"", @"", @"", @"", @"", @"", @""]];
-
-#warning test
-  self.cellInputItems[SubViewCellTypeEmail] = @"E-mail";
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -51,6 +47,7 @@
 
 - (IBAction)save:(UIBarButtonItem *)sender {
 #warning check for non-null fields here
+  
 
 
 }

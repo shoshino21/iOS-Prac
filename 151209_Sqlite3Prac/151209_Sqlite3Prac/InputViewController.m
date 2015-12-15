@@ -174,7 +174,26 @@
 }
 
 - (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender {
-#warning TODO: confirm with regex (at private method) and return bool here
+  if ([identifier isEqualToString:@"fromInputViewSubmit"]) {
+    NSString *alertMessage;
+    if (self.cellType == SubViewCellTypePhone) {
+      alertMessage = @"電話號碼格式錯誤";
+    } else if (self.cellType == SubViewCellTypeEmail) {
+      alertMessage = @"E-mail格式錯誤";
+    } else {
+      return YES;
+    }
+
+    BOOL isValid = [self p_checkWithRegexForType:self.cellType string:self.textField.text];
+    if (isValid) {
+      return YES;
+    } else {
+      UIAlertView *av = [[UIAlertView alloc] initWithTitle:alertMessage message:nil delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+      [av show];
+      return NO;
+    }
+  }
+
   return YES;
 }
 
@@ -233,6 +252,19 @@
 - (void)p_updateSubmitButtonFrameWithTargetFrame:(CGRect)tf {
   CGRect bf = self.submitButton.frame;
   self.submitButton.frame = (CGRect){ bf.origin.x, (tf.origin.y + tf.size.height + 20), bf.size };
+}
+
+- (BOOL)p_checkWithRegexForType:(SubViewCellType)inType string:(NSString *)aString {
+  NSString *regexPattern;
+  if (inType == SubViewCellTypePhone) {
+    regexPattern = @"^[0-9]*$";
+  } else if (inType == SubViewCellTypeEmail) {
+    regexPattern = @"[A-Z0-9a-z]+([._%+-]{1}[A-Z0-9a-z]+)*@[A-Z0-9a-z]+([.-]{1}[A-Z0-9a-z]+)*(\\.[A-Za-z]{2," @"4}){0,1}";
+  }
+
+  NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regexPattern];
+  BOOL isValid = [predicate evaluateWithObject:aString];
+  return isValid;
 }
 
 @end

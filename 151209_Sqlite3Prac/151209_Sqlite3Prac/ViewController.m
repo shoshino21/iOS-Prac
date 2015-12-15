@@ -8,12 +8,16 @@
 
 #import "ViewController.h"
 
+#import "DBManager.h"
+#import "DataModel.h"
 #import "SubViewController.h"
 #import "CustomTableViewCell.h"
 
 @interface ViewController ()
 
 @property (strong, nonatomic) NSMutableArray *tableItems;
+@property (strong, nonatomic) DBManager *dbManager;
+@property (strong, nonatomic) DataModel *dataModel;
 
 @end
 
@@ -31,6 +35,9 @@
   for (int i=0; i<30; i++) {
     [self.tableItems addObject:[NSString stringWithFormat:@"%d", i]];
   }
+
+  self.dbManager = [[DBManager alloc] initWithDatabaseFilename:@"userdb.sql"];
+  self.dataModel = [DataModel sharedDataModel];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -41,7 +48,11 @@
 #pragma mark - Actions
 
 - (IBAction)backToMainWithUnwindSegue:(UIStoryboardSegue *)segue {
-  
+  SubViewController *svc = segue.sourceViewController;
+
+  if ([segue.identifier isEqualToString:@"fromAddDataSave"]) {
+    [self p_insertIntoDatabaseAndModel:svc.cellInputItems];
+  }
 }
 
 #pragma mark - Navigation
@@ -82,6 +93,40 @@
   cellView.birthLabel.text = @"2015/02/02";
   
   return cellView;
+}
+
+#pragma mark - Private
+
+- (void)p_insertIntoDatabaseAndModel:(NSArray *)inArray {
+  NSMutableArray *params = [[NSMutableArray alloc] init];
+  [params addObject:inArray[SubViewCellTypeNumber]];
+  [params addObject:inArray[SubViewCellTypeName]];
+  [params addObject:inArray[SubViewCellTypeGender]];
+  [params addObject:inArray[SubViewCellTypeBirth]];
+  [params addObject:inArray[SubViewCellTypePhoto]];
+  [params addObject:inArray[SubViewCellTypePhone]];
+  [params addObject:inArray[SubViewCellTypeEmail]];
+  [params addObject:inArray[SubViewCellTypeAddress]];
+
+  [self.dbManager executeQuery:@"INSERT INTO USER (NUMBER, NAME, GENDER, BIRTH, PHOTO_URL, PHONE, EMAIL, ADDRESS) VALUES (?,?,?,?,?,?,?,?)" params:params];
+
+  if (self.dbManager.lastInsertID == -1) {
+    NSLog(@"Insert data failed");
+    return;
+  }
+
+  NSMutableDictionary *paramDict = [[NSMutableDictionary alloc] init];
+  paramDict[@"ID"] = [NSString stringWithFormat:@"%ld", (long)self.dbManager.lastInsertID];
+  paramDict[@"NUMBER"] = inArray[SubViewCellTypeNumber];
+  paramDict[@"NAME"] = inArray[SubViewCellTypeName];
+  paramDict[@"GENDER"] = inArray[SubViewCellTypeGender];
+  paramDict[@"BIRTH"] = inArray[SubViewCellTypeBirth];
+  paramDict[@"PHOTO_URL"] = inArray[SubViewCellTypePhoto];
+  paramDict[@"PHONE"] = inArray[SubViewCellTypePhone];
+  paramDict[@"EMAIL"] = inArray[SubViewCellTypeEmail];
+  paramDict[@"ADDRESS"] = inArray[SubViewCellTypeAddress];
+
+  [self.dataModel addDataWithDictionary:paramDict];
 }
 
 @end
