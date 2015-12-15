@@ -15,9 +15,8 @@
 
 @interface ViewController ()
 
-@property (strong, nonatomic) NSMutableArray *tableItems;
+//@property (strong, nonatomic) NSMutableArray *tableItems;
 @property (strong, nonatomic) DBManager *dbManager;
-@property (strong, nonatomic) DataModel *dataModel;
 
 @end
 
@@ -31,14 +30,17 @@
   self.tableView.dataSource = self;
   self.tableView.delegate = self;
 
-  self.tableItems = [[NSMutableArray alloc] init];
-  for (int i=0; i<30; i++) {
-    [self.tableItems addObject:[NSString stringWithFormat:@"%d", i]];
-  }
-
   self.dbManager = [[DBManager alloc] initWithDatabaseFilename:@"userdb.sql"];
-  self.dataModel = [DataModel sharedDataModel];
+  NSArray *dataFromDB = [self.dbManager loadDataFromDB:@"SELECT * FROM USER" params:nil];
+  [[DataModel sharedDataModel] copyDataFromArray:dataFromDB];
 }
+
+//- (void)viewWillAppear:(BOOL)animated {
+//  [super viewWillAppear:animated];
+//  dispatch_async(dispatch_get_main_queue(), ^{
+//    [self.tableView reloadData];
+//  });
+//}
 
 - (void)didReceiveMemoryWarning {
   [super didReceiveMemoryWarning];
@@ -53,6 +55,10 @@
   if ([segue.identifier isEqualToString:@"fromAddDataSave"]) {
     [self p_insertIntoDatabaseAndModel:svc.cellInputItems];
   }
+
+  dispatch_async(dispatch_get_main_queue(), ^{
+    [self.tableView reloadData];
+  });
 }
 
 #pragma mark - Navigation
@@ -72,7 +78,8 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-  return self.tableItems.count;
+//  return self.tableItems.count;
+  return [DataModel sharedDataModel].count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -89,13 +96,24 @@
   }
 
   cellView.photoImageView.image = [UIImage imageNamed:@"f"];
-  cellView.nameLabel.text = self.tableItems[indexPath.row];
-  cellView.birthLabel.text = @"2015/02/02";
-  
+  cellView.nameLabel.text = [DataModel sharedDataModel].items[indexPath.row][@"NAME"];
+  cellView.birthLabel.text = [self p_prettifyDate:[DataModel sharedDataModel].items[indexPath.row][@"BIRTH"]];
+
   return cellView;
 }
 
 #pragma mark - Private
+
+- (NSString *)p_prettifyDate:(NSString *)anUnixTimeStampString {
+  NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+  [dateFormatter setDateFormat:@"YYYY/MM/dd"];
+
+  NSTimeInterval unixTimeStamp = [anUnixTimeStampString doubleValue];
+  NSDate *date = [NSDate dateWithTimeIntervalSince1970:unixTimeStamp];
+  NSString *dateString = [dateFormatter stringFromDate:date];
+
+  return dateString;
+}
 
 - (void)p_insertIntoDatabaseAndModel:(NSArray *)inArray {
   NSMutableArray *params = [[NSMutableArray alloc] init];
@@ -110,13 +128,14 @@
 
   [self.dbManager executeQuery:@"INSERT INTO USER (NUMBER, NAME, GENDER, BIRTH, PHOTO_URL, PHONE, EMAIL, ADDRESS) VALUES (?,?,?,?,?,?,?,?)" params:params];
 
-  if (self.dbManager.lastInsertID == -1) {
+  NSUInteger lastInsertID = self.dbManager.lastInsertID;
+  if (lastInsertID == -1) {
     NSLog(@"Insert data failed");
     return;
   }
 
   NSMutableDictionary *paramDict = [[NSMutableDictionary alloc] init];
-  paramDict[@"ID"] = [NSString stringWithFormat:@"%ld", (long)self.dbManager.lastInsertID];
+  paramDict[@"ID"] = [NSString stringWithFormat:@"%ld", (long)lastInsertID];
   paramDict[@"NUMBER"] = inArray[SubViewCellTypeNumber];
   paramDict[@"NAME"] = inArray[SubViewCellTypeName];
   paramDict[@"GENDER"] = inArray[SubViewCellTypeGender];
@@ -126,7 +145,7 @@
   paramDict[@"EMAIL"] = inArray[SubViewCellTypeEmail];
   paramDict[@"ADDRESS"] = inArray[SubViewCellTypeAddress];
 
-  [self.dataModel addDataWithDictionary:paramDict];
+  [[DataModel sharedDataModel] addDataWithDictionary:paramDict];
 }
 
 @end

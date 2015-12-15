@@ -157,7 +157,7 @@
 
   [dm updateDataWithDictionary:paramDict];
 
-  NSDictionary *resultDict = [dm fetchDataWithID:dbm.lastInsertID];
+  NSDictionary *resultDict = [dm fetchDataWithID:idToUpdate];
   XCTAssertEqualObjects(resultDict[@"NUMBER"], @"999");
 }
 

@@ -8,12 +8,6 @@
 
 #import "DataModel.h"
 
-@interface DataModel ()
-
-@property (strong, nonatomic) NSMutableArray *items;
-
-@end
-
 @implementation DataModel
 
 #pragma mark - Initialize (Singleton)
@@ -33,6 +27,12 @@
     self.items = [[NSMutableArray alloc] init];
   }
   return self;
+}
+
+#pragma mark - Properties
+
+- (NSUInteger)count {
+  return self.items.count;
 }
 
 #pragma mark - Methods
