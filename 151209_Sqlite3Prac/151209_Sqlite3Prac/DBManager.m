@@ -100,7 +100,7 @@
 //    [params addObject:row[@"EMAIL"]];
 //    [params addObject:row[@"ADDRESS"]];
 //
-//    BOOL theIDisExist = [self isDataExistsWhereID:row[@"ID"]];
+//    BOOL theIDisExist = [self p_isDataExistsWhereID:row[@"ID"]];
 //    if (theIDisExist) {
 //      [params addObject:row[@"ID"]];
 //      [self executeQuery:@"UPDATE USER SET NUMBER=?, NAME=?, GENDER=?, BIRTH=?, PHOTO_URL=?, PHONE=?, EMAIL=?, ADDRESS=? WHERE ID=?" params:params];
@@ -113,12 +113,6 @@
 //  }
 //  return NO;
 //}
-
-- (BOOL)isDataExistsWhereID:(NSString *)aID {
-  NSArray *resultArr = [self loadDataFromDB:@"SELECT COUNT(ID) FROM USER WHERE ID = ?" params:@[aID]];
-  int count = [resultArr[0][@"COUNT(ID)"] intValue];
-  return (count > 0);
-}
 
 #pragma mark - Private
 
@@ -189,6 +183,12 @@
   }
   sqlite3_finalize(compiledStatement);
   sqlite3_close(_sqlite3db);
+}
+
+- (BOOL)p_isDataExistsWhereID:(NSString *)aID {
+  NSArray *resultArr = [self loadDataFromDB:@"SELECT COUNT(ID) FROM USER WHERE ID = ?" params:@[aID]];
+  int count = [resultArr[0][@"COUNT(ID)"] intValue];
+  return (count > 0);
 }
 
 @end

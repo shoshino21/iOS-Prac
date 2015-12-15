@@ -15,8 +15,7 @@
 - (instancetype)initWithDatabaseFilename:(NSString *)dbFilename;
 - (NSArray *)loadDataFromDB:(NSString *)query params:(NSArray *)params;
 - (void)executeQuery:(NSString *)query params:(NSArray *)params;
-//- (BOOL)saveDataToDB:(NSArray *)dataRows;
-- (BOOL)isDataExistsWhereID:(NSString *)aID;
+//- (BOOL)saveDataToDB:(NSArray *)dataRows;;
 
 // -1 : insert failed
 - (NSInteger)lastInsertID;

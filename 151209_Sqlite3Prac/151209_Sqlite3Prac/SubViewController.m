@@ -8,6 +8,7 @@
 
 #import "SubViewController.h"
 
+#import "DataModel.h"
 #import "InputViewController.h"
 #import "PhotoTableViewCell.h"
 
@@ -28,7 +29,24 @@
   self.subTableView.delegate = self;
 
   self.cellTitles = @[@"照片", @"編號 *", @"名字 *", @"性別 *", @"生日 *", @"電話", @"E-mail", @"住址"];
-  self.cellInputItems = [[NSMutableArray alloc] initWithArray:@[@"", @"", @"", @"", @"", @"", @"", @""]];
+
+  if ([self.currSegueIdentifier isEqualToString:@"addData"]) {
+    self.cellInputItems = [[NSMutableArray alloc] initWithArray:@[@"", @"", @"", @"", @"", @"", @"", @""]];
+  }
+  else if ([self.currSegueIdentifier isEqualToString:@"editData"]) {
+    NSDictionary *dict = [DataModel sharedDataModel].items[self.currIndexPathRow];
+
+    self.cellInputItems = [[NSMutableArray alloc] initWithArray:@[
+      dict[@"PHOTO_URL"] ?: @"",
+      dict[@"NUMBER"] ?: @"",
+      dict[@"NAME"] ?: @"",
+      dict[@"GENDER"] ?: @"",
+      dict[@"BIRTH"] ?: @"",
+      dict[@"PHONE"] ?: @"",
+      dict[@"EMAIL"] ?: @"",
+      dict[@"ADDRESS"] ?: @""
+    ]];
+  }
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -52,13 +70,6 @@
 
 }
 
-- (IBAction)backToSubWithUnwindSegue:(UIStoryboardSegue *)segue {
-  InputViewController *ivc = segue.sourceViewController;
-  self.cellInputItems[ivc.cellType] = ivc.value;
-
-  [self.subTableView reloadData]; // This is required for reload data immediately!
-}
-
 #pragma mark - Navigation
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -71,6 +82,13 @@
     ivc.cellType = (SubViewCellType)indexPathRow;
     ivc.navigationItem.title = self.cellTitles[indexPathRow];
   }
+}
+
+- (IBAction)backToSubWithUnwindSegue:(UIStoryboardSegue *)segue {
+  InputViewController *ivc = segue.sourceViewController;
+  self.cellInputItems[ivc.cellType] = ivc.value;
+
+  [self.subTableView reloadData]; // This is required for reload data immediately!
 }
 
 #pragma mark - UITableViewDataSource / Delegate

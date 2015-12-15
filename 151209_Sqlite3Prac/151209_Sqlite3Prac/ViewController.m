@@ -47,28 +47,36 @@
   // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - Actions
+#pragma mark - Navigation
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+#warning be careful with topViewController
+  SubViewController *svc = segue.destinationViewController;
+  svc.currSegueIdentifier = segue.identifier;
+
+  if ([segue.identifier isEqualToString:@"addData"]) {
+    svc.navigationItem.title = @"新增資料";
+  } else if ([segue.identifier isEqualToString:@"editData"]) {
+    svc.navigationItem.title = @"編輯資料";
+
+    NSInteger indexPathRow = [self.tableView indexPathForSelectedRow].row;
+    svc.currDataID = [DataModel sharedDataModel].items[indexPathRow][@"ID"];
+    svc.currIndexPathRow = indexPathRow;
+  }
+}
 
 - (IBAction)backToMainWithUnwindSegue:(UIStoryboardSegue *)segue {
   SubViewController *svc = segue.sourceViewController;
 
-  if ([segue.identifier isEqualToString:@"fromAddDataSave"]) {
+  if ([svc.currSegueIdentifier isEqualToString:@"addData"]) {
     [self p_insertIntoDatabaseAndModel:svc.cellInputItems];
+  } else if ([svc.currSegueIdentifier isEqualToString:@"editData"]) {
+    [self p_updateDatabaseAndModel:svc.cellInputItems whereID:svc.currDataID];
   }
 
   dispatch_async(dispatch_get_main_queue(), ^{
     [self.tableView reloadData];
   });
-}
-
-#pragma mark - Navigation
-
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-  if ([segue.identifier isEqualToString:@"addData"]) {
-#warning be careful with topViewController
-    SubViewController *svc = segue.destinationViewController;
-    svc.navigationItem.title = @"新增資料";
-  }
 }
 
 #pragma mark - UITableViewDataSource / Delegate
@@ -78,7 +86,6 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-//  return self.tableItems.count;
   return [DataModel sharedDataModel].count;
 }
 
@@ -102,6 +109,10 @@
   return cellView;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+  [self performSegueWithIdentifier:@"editData" sender:self];
+}
+
 #pragma mark - Private
 
 - (NSString *)p_prettifyDate:(NSString *)anUnixTimeStampString {
@@ -115,7 +126,7 @@
   return dateString;
 }
 
-- (void)p_insertIntoDatabaseAndModel:(NSArray *)inArray {
+- (BOOL)p_insertIntoDatabaseAndModel:(NSArray *)inArray {
   NSMutableArray *params = [[NSMutableArray alloc] init];
   [params addObject:inArray[SubViewCellTypeNumber]];
   [params addObject:inArray[SubViewCellTypeName]];
@@ -131,7 +142,7 @@
   NSUInteger lastInsertID = self.dbManager.lastInsertID;
   if (lastInsertID == -1) {
     NSLog(@"Insert data failed");
-    return;
+    return NO;
   }
 
   NSMutableDictionary *paramDict = [[NSMutableDictionary alloc] init];
@@ -145,7 +156,37 @@
   paramDict[@"EMAIL"] = inArray[SubViewCellTypeEmail];
   paramDict[@"ADDRESS"] = inArray[SubViewCellTypeAddress];
 
-  [[DataModel sharedDataModel] addDataWithDictionary:paramDict];
+  BOOL success = [[DataModel sharedDataModel] addDataWithDictionary:paramDict];
+  return success;
+}
+
+- (BOOL)p_updateDatabaseAndModel:(NSArray *)inArray whereID:(NSString *)anID {
+  NSMutableArray *params = [[NSMutableArray alloc] init];
+  [params addObject:inArray[SubViewCellTypeNumber]];
+  [params addObject:inArray[SubViewCellTypeName]];
+  [params addObject:inArray[SubViewCellTypeGender]];
+  [params addObject:inArray[SubViewCellTypeBirth]];
+  [params addObject:inArray[SubViewCellTypePhoto]];
+  [params addObject:inArray[SubViewCellTypePhone]];
+  [params addObject:inArray[SubViewCellTypeEmail]];
+  [params addObject:inArray[SubViewCellTypeAddress]];
+  [params addObject:anID];
+
+  [self.dbManager executeQuery:@"UPDATE USER SET NUMBER=?, NAME=?, GENDER=?, BIRTH=?, PHOTO_URL=?, PHONE=?, EMAIL=?, ADDRESS=? WHERE ID=?" params:params];
+
+  NSMutableDictionary *paramDict = [[NSMutableDictionary alloc] init];
+  paramDict[@"ID"] = anID;
+  paramDict[@"NUMBER"] = inArray[SubViewCellTypeNumber];
+  paramDict[@"NAME"] = inArray[SubViewCellTypeName];
+  paramDict[@"GENDER"] = inArray[SubViewCellTypeGender];
+  paramDict[@"BIRTH"] = inArray[SubViewCellTypeBirth];
+  paramDict[@"PHOTO_URL"] = inArray[SubViewCellTypePhoto];
+  paramDict[@"PHONE"] = inArray[SubViewCellTypePhone];
+  paramDict[@"EMAIL"] = inArray[SubViewCellTypeEmail];
+  paramDict[@"ADDRESS"] = inArray[SubViewCellTypeAddress];
+
+  BOOL success = [[DataModel sharedDataModel] updateDataWithDictionary:paramDict];
+  return success;
 }
 
 @end
