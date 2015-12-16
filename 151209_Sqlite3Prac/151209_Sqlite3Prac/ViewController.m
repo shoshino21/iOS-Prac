@@ -47,18 +47,17 @@
 
 - (IBAction)sortFieldChanged:(UISegmentedControl *)sender {
   _sortFieldIndex = sender.selectedSegmentIndex;
-  [self p_sort];
+  [self p_sortAndReload];
 }
 
 - (IBAction)sortOrderChanged:(UISegmentedControl *)sender {
   _sortOrderIndex = sender.selectedSegmentIndex;
-  [self p_sort];
+  [self p_sortAndReload];
 }
 
 #pragma mark - Navigation
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-#warning be careful with topViewController
   SubViewController *svc = segue.destinationViewController;
   svc.lastSegueIdentifier = segue.identifier;
 
@@ -82,7 +81,7 @@
     [self p_updateDatabaseAndModel:svc.cellInputItems withID:svc.currDataID];
   }
 
-  [self p_reloadTableViewInMainThread];
+  [self p_sortAndReload];
 }
 
 #pragma mark - UITableViewDataSource / Delegate
@@ -123,7 +122,7 @@
   if (editingStyle == UITableViewCellEditingStyleDelete) {
     NSString *idToDelete = [DataModel sharedDataModel].items[indexPath.row][@"ID"];
     [self p_deleteDatabaseAndModelWithID:idToDelete];
-    [self p_reloadTableViewInMainThread];
+    [self p_sortAndReload];
   }
 }
 
@@ -209,7 +208,7 @@
   return success;
 }
 
-- (void)p_sort {
+- (void)p_sortAndReload {
   NSString *key = (_sortFieldIndex == 0) ? @"NAME" : @"BIRTH";
   BOOL ascending = (_sortOrderIndex == 0);
 

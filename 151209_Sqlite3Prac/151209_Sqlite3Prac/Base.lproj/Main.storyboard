@@ -136,8 +136,7 @@
                     <navigationItem key="navigationItem" id="j6b-ef-405">
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="A5T-1Q-Eju">
                             <connections>
-                                <action selector="save:" destination="YlA-N9-XUP" id="PKl-w2-tVd"/>
-                                <segue destination="Ufw-M3-aJQ" kind="unwind" unwindAction="backToMainWithUnwindSegue:" id="Ukx-5U-95f"/>
+                                <segue destination="Ufw-M3-aJQ" kind="unwind" identifier="fromSubView" unwindAction="backToMainWithUnwindSegue:" id="Ukx-5U-95f"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -174,7 +173,6 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="submit:" destination="oAW-z8-MFG" eventType="touchUpInside" id="ztN-KS-KML"/>
                                     <segue destination="isd-am-pc5" kind="unwind" identifier="fromInputViewSubmit" unwindAction="backToSubWithUnwindSegue:" id="xci-Be-QBO"/>
                                 </connections>
                             </button>

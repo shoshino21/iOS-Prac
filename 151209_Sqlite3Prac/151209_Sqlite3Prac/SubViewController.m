@@ -61,20 +61,10 @@
   // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - Actions
-
-- (IBAction)save:(UIBarButtonItem *)sender {
-#warning check for non-null fields here
-  
-
-
-}
-
 #pragma mark - Navigation
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
   if ([segue.identifier isEqualToString:@"toInputView"]) {
-#warning be careful with topViewController issue
     InputViewController *ivc = segue.destinationViewController;
     NSInteger indexPathRow = [self.subTableView indexPathForSelectedRow].row;
 
@@ -89,6 +79,36 @@
   self.cellInputItems[ivc.cellType] = ivc.value;
 
   [self.subTableView reloadData]; // This is required for reload data immediately!
+}
+
+- (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender {
+  if ([identifier isEqualToString:@"fromSubView"]) {
+    BOOL isNull1 = ( [self.cellInputItems[SubViewCellTypeNumber] length] == 0 );
+    BOOL isNull2 = ( [self.cellInputItems[SubViewCellTypeName] length] == 0 );
+    BOOL isNull3 = ( [self.cellInputItems[SubViewCellTypeGender] length] == 0 );
+    BOOL isNull4 = ( [self.cellInputItems[SubViewCellTypeBirth] length] == 0 );
+
+    NSString *alertMessage;
+    if (isNull1) {
+      alertMessage = @"請輸入編號";
+    } else if (isNull2) {
+      alertMessage = @"請輸入名字";
+    } else if (isNull3) {
+      alertMessage = @"請輸入性別";
+    } else if (isNull4) {
+      alertMessage = @"請輸入生日";
+    }
+
+    if (isNull1 || isNull2 || isNull3 || isNull4) {
+      UIAlertView *av = [[UIAlertView alloc] initWithTitle:alertMessage message:nil delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+      [av show];
+      return NO;
+    } else {
+      return YES;
+    }
+  }
+
+  return YES;
 }
 
 #pragma mark - UITableViewDataSource / Delegate

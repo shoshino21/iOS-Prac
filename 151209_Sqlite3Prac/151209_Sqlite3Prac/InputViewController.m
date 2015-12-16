@@ -106,33 +106,6 @@
   // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - Actions
-
-#warning clean it if not needed
-- (IBAction)submit:(UIButton *)sender {
-//  switch (self.cellType) {
-//    case SubViewCellTypePhoto:
-//      break;
-//
-//    case SubViewCellTypeNumber:
-//    case SubViewCellTypeName:
-//    case SubViewCellTypePhone:
-//    case SubViewCellTypeEmail:
-////      self.cellInputItems[self.cellType] = self.textField.text;
-//      self.value = self.textField.text;
-//      break;
-//
-//    case SubViewCellTypeGender:
-//    case SubViewCellTypeBirth:
-//    case SubViewCellTypeAddress:
-//      break;
-//
-//    default:
-//      break;
-//  }
-
-}
-
 #pragma mark - Navigation
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {

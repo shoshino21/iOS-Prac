@@ -179,10 +179,24 @@
     self.items = [sortedArray mutableCopy];
   }
   else if ([key isEqualToString:@"BIRTH"]) {
-    for (NSDictionary *item in self.items) {
-      item[@"BIRTH"] = [item[@"BIRTH"] integerValue];
+    NSMutableArray *arrayForSort = [[NSMutableArray alloc] init];
 
+    // Transfer to integer for sort
+    for (NSDictionary *item in self.items) {
+      NSMutableDictionary *itemForSort = [item mutableCopy];
+      itemForSort[@"BIRTH"] = [NSNumber numberWithInteger:[itemForSort[@"BIRTH"] integerValue]];
+      [arrayForSort addObject:itemForSort];
     }
+
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"BIRTH" ascending:ascending selector:@selector(compare:)];
+    NSArray *sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
+    NSMutableArray *sortedArray = [[arrayForSort sortedArrayUsingDescriptors:sortDescriptors] mutableCopy];
+
+    for (NSMutableDictionary *item in sortedArray) {
+      item[@"BIRTH"] = [NSString stringWithFormat:@"%@", item[@"BIRTH"]];
+    }
+
+    self.items = [sortedArray mutableCopy];
   }
 }
 
