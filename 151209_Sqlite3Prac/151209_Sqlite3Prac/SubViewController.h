@@ -24,7 +24,7 @@ typedef enum {
 @property (weak, nonatomic) IBOutlet UITableView *subTableView;
 @property (strong, nonatomic) NSMutableArray *cellInputItems;
 @property (strong, nonatomic) NSString *currDataID;
-@property (strong, nonatomic) NSString *currSegueIdentifier;
+@property (strong, nonatomic) NSString *lastSegueIdentifier;
 @property (assign, nonatomic) NSInteger currIndexPathRow;
 
 @end

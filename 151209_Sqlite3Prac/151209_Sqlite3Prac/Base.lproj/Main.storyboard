@@ -20,6 +20,9 @@
                                     <segment title="名字"/>
                                     <segment title="生日"/>
                                 </segments>
+                                <connections>
+                                    <action selector="sortFieldChanged:" destination="vXZ-lx-hvc" eventType="valueChanged" id="GuH-0t-dij"/>
+                                </connections>
                             </segmentedControl>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" id="NZU-oA-Ixh">
                                 <rect key="frame" x="169" y="75" width="135" height="29"/>
@@ -28,17 +31,20 @@
                                     <segment title="升序"/>
                                     <segment title="降序"/>
                                 </segments>
+                                <connections>
+                                    <action selector="sortOrderChanged:" destination="vXZ-lx-hvc" eventType="valueChanged" id="vTm-bd-c95"/>
+                                </connections>
                             </segmentedControl>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="46" sectionHeaderHeight="22" sectionFooterHeight="22" id="3AB-fh-Iza">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="3AB-fh-Iza">
                                 <rect key="frame" x="0.0" y="111" width="320" height="457"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="K4h-m0-rMa">
-                                        <rect key="frame" x="0.0" y="86" width="320" height="46"/>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="K4h-m0-rMa">
+                                        <rect key="frame" x="0.0" y="86" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="K4h-m0-rMa" id="KcE-eF-zFq">
-                                            <rect key="frame" x="0.0" y="0.0" width="287" height="45"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                         <connections>

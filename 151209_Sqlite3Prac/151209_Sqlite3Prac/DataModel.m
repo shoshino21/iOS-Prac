@@ -7,6 +7,7 @@
 //
 
 #import "DataModel.h"
+#import "pinyin.h"
 
 @implementation DataModel
 
@@ -102,6 +103,87 @@
   return NO;
 }
 
-#warning TODO: sort method
+- (void)sortWithKey:(NSString *)key isAscending:(BOOL)ascending {
+  if (self.items.count <= 1) { return; }
+  if ( ![self.items[0] objectForKey:key] ) { return; }
+
+  NSMutableArray *newDataArr = [NSMutableArray array];
+
+  if ([key isEqualToString:@"NAME"]) {
+    // 漢字排序
+    unichar aChar;
+    unichar pinyinChar;
+
+    for (NSUInteger i = 0; i < [self.items count]; i++) {
+      NSString *chineseString = [[NSString alloc] init];
+      NSMutableDictionary *item = [[self.items objectAtIndex:i] mutableCopy];
+
+      if ([item objectForKey:key]) {
+        chineseString = item[key];
+        aChar = [chineseString characterAtIndex:0];
+
+        // 判斷首字母是否為英文
+        if ((aChar >= 'A' && aChar <= 'Z') || (aChar >= 'a' && aChar <= 'z')) {
+          NSString *englishResult = @"";
+
+          char *chars = malloc(chineseString.length * sizeof(char));
+          if (![chineseString isEqualToString:@""]) {
+            for (NSUInteger j = 0; j < chineseString.length; j++) {
+              aChar = [chineseString characterAtIndex:j];
+
+              // 將英文大小寫視為同等，同時避免大寫英文和數字順序混亂
+              if (aChar >= 'A' && aChar <= 'Z') { aChar += 32; }
+              // 將英文字元向前位移，使排序時英文排在中文的前面
+              chars[j] = aChar - 26;
+            }
+            englishResult = [[NSString alloc] initWithBytes:chars length:chineseString.length encoding:NSUTF8StringEncoding];
+            NSLog(@"aChar:%c, englishResult:%@", aChar, englishResult);
+          } else {
+            NSLog(@"it's null");
+          }
+          NSLog(@"englishString:%@, englishResult:%@", chineseString, englishResult);
+          [item setObject:englishResult forKey:@"sortcolumn"];
+        }
+        // 判斷首字母是否為漢字
+        else if (isFirstLetterHANZI(aChar)) {
+          NSString *pinYinResult = @"";
+
+          char *chars = malloc(chineseString.length * sizeof(char));
+          if (![chineseString isEqualToString:@""]) {
+            for (NSUInteger j = 0; j < chineseString.length; j++) {
+              aChar = [chineseString characterAtIndex:j];
+              pinyinChar = pinyinFirstLetter(aChar);
+              chars[j] = pinyinChar;
+            }
+            pinYinResult = [[NSString alloc] initWithBytes:chars length:chineseString.length encoding:NSUTF8StringEncoding];
+            NSLog(@"aChar:%c, pinYinResult:%@", aChar, pinYinResult);
+          } else {
+            NSLog(@"it's null");
+          }
+          NSLog(@"chineseString:%@, pinYinResult:%@", chineseString, pinYinResult);
+          [item setObject:pinYinResult forKey:@"sortcolumn"];
+        }
+        // 非字母或漢字
+        else {
+          [item setObject:chineseString forKey:@"sortcolumn"];
+        }
+
+        [newDataArr addObject:item];
+      }
+    }
+
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"sortcolumn" ascending:ascending];
+    NSArray *sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
+    NSArray *sortedArray = [newDataArr sortedArrayUsingDescriptors:sortDescriptors];
+
+    self.items = [sortedArray mutableCopy];
+  }
+  else if ([key isEqualToString:@"BIRTH"]) {
+    for (NSDictionary *item in self.items) {
+      item[@"BIRTH"] = [item[@"BIRTH"] integerValue];
+
+    }
+  }
+}
 
 @end

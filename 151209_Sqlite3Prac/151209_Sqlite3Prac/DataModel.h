@@ -22,4 +22,6 @@
 - (BOOL)removeDataWithID:(NSUInteger)anID;
 - (BOOL)updateDataWithDictionary:(NSDictionary *)aDictionary;
 
+- (void)sortWithKey:(NSString *)inKey isAscending:(BOOL)ascending;
+
 @end

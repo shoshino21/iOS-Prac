@@ -39,9 +39,9 @@
   [dbm executeQuery:@"INSERT INTO USER (NUMBER, NAME, GENDER, BIRTH, PHOTO_URL, PHONE, EMAIL, ADDRESS) VALUES (?,?,?,?,?,?,?,?)" params:params];
 
   NSInteger lastInsertID = dbm.lastInsertID;
-  NSLog(@"lastInsertID: %lu", lastInsertID);
+  NSLog(@"lastInsertID: %lu", (long)lastInsertID);
 
-  NSString *lID = [NSString stringWithFormat:@"%lu", lastInsertID];
+  NSString *lID = [NSString stringWithFormat:@"%lu", (long)lastInsertID];
   NSArray *resultArr = [dbm loadDataFromDB:@"SELECT * FROM USER WHERE ID=?" params:@[lID]];
 
   XCTAssertEqualObjects(resultArr[0][@"NUMBER"], @"1");

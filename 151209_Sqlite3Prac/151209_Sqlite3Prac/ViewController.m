@@ -13,7 +13,10 @@
 #import "SubViewController.h"
 #import "CustomTableViewCell.h"
 
-@interface ViewController ()
+@interface ViewController () {
+  NSInteger _sortFieldIndex;
+  NSInteger _sortOrderIndex;
+}
 
 //@property (strong, nonatomic) NSMutableArray *tableItems;
 @property (strong, nonatomic) DBManager *dbManager;
@@ -35,16 +38,21 @@
   [[DataModel sharedDataModel] copyDataFromArray:dataFromDB];
 }
 
-//- (void)viewWillAppear:(BOOL)animated {
-//  [super viewWillAppear:animated];
-//  dispatch_async(dispatch_get_main_queue(), ^{
-//    [self.tableView reloadData];
-//  });
-//}
-
 - (void)didReceiveMemoryWarning {
   [super didReceiveMemoryWarning];
   // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - Actions
+
+- (IBAction)sortFieldChanged:(UISegmentedControl *)sender {
+  _sortFieldIndex = sender.selectedSegmentIndex;
+  [self p_sort];
+}
+
+- (IBAction)sortOrderChanged:(UISegmentedControl *)sender {
+  _sortOrderIndex = sender.selectedSegmentIndex;
+  [self p_sort];
 }
 
 #pragma mark - Navigation
@@ -52,7 +60,7 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
 #warning be careful with topViewController
   SubViewController *svc = segue.destinationViewController;
-  svc.currSegueIdentifier = segue.identifier;
+  svc.lastSegueIdentifier = segue.identifier;
 
   if ([segue.identifier isEqualToString:@"addData"]) {
     svc.navigationItem.title = @"新增資料";
@@ -68,15 +76,13 @@
 - (IBAction)backToMainWithUnwindSegue:(UIStoryboardSegue *)segue {
   SubViewController *svc = segue.sourceViewController;
 
-  if ([svc.currSegueIdentifier isEqualToString:@"addData"]) {
+  if ([svc.lastSegueIdentifier isEqualToString:@"addData"]) {
     [self p_insertIntoDatabaseAndModel:svc.cellInputItems];
-  } else if ([svc.currSegueIdentifier isEqualToString:@"editData"]) {
-    [self p_updateDatabaseAndModel:svc.cellInputItems whereID:svc.currDataID];
+  } else if ([svc.lastSegueIdentifier isEqualToString:@"editData"]) {
+    [self p_updateDatabaseAndModel:svc.cellInputItems withID:svc.currDataID];
   }
 
-  dispatch_async(dispatch_get_main_queue(), ^{
-    [self.tableView reloadData];
-  });
+  [self p_reloadTableViewInMainThread];
 }
 
 #pragma mark - UITableViewDataSource / Delegate
@@ -111,6 +117,14 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
   [self performSegueWithIdentifier:@"editData" sender:self];
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+  if (editingStyle == UITableViewCellEditingStyleDelete) {
+    NSString *idToDelete = [DataModel sharedDataModel].items[indexPath.row][@"ID"];
+    [self p_deleteDatabaseAndModelWithID:idToDelete];
+    [self p_reloadTableViewInMainThread];
+  }
 }
 
 #pragma mark - Private
@@ -160,7 +174,7 @@
   return success;
 }
 
-- (BOOL)p_updateDatabaseAndModel:(NSArray *)inArray whereID:(NSString *)anID {
+- (BOOL)p_updateDatabaseAndModel:(NSArray *)inArray withID:(NSString *)anID {
   NSMutableArray *params = [[NSMutableArray alloc] init];
   [params addObject:inArray[SubViewCellTypeNumber]];
   [params addObject:inArray[SubViewCellTypeName]];
@@ -187,6 +201,27 @@
 
   BOOL success = [[DataModel sharedDataModel] updateDataWithDictionary:paramDict];
   return success;
+}
+
+- (BOOL)p_deleteDatabaseAndModelWithID:(NSString *)anID {
+  [self.dbManager executeQuery:@"DELETE FROM USER WHERE ID=?" params:@[anID]];
+  BOOL success = [[DataModel sharedDataModel] removeDataWithID:[anID integerValue]];
+  return success;
+}
+
+- (void)p_sort {
+  NSString *key = (_sortFieldIndex == 0) ? @"NAME" : @"BIRTH";
+  BOOL ascending = (_sortOrderIndex == 0);
+
+  NSLog(@"Sort with field:%@ ascending:%d", key, ascending);
+  [[DataModel sharedDataModel] sortWithKey:key isAscending:ascending];
+  [self p_reloadTableViewInMainThread];
+}
+
+- (void)p_reloadTableViewInMainThread {
+  dispatch_async(dispatch_get_main_queue(), ^{
+    [self.tableView reloadData];
+  });
 }
 
 @end

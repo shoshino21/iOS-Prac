@@ -30,10 +30,10 @@
 
   self.cellTitles = @[@"照片", @"編號 *", @"名字 *", @"性別 *", @"生日 *", @"電話", @"E-mail", @"住址"];
 
-  if ([self.currSegueIdentifier isEqualToString:@"addData"]) {
+  if ([self.lastSegueIdentifier isEqualToString:@"addData"]) {
     self.cellInputItems = [[NSMutableArray alloc] initWithArray:@[@"", @"", @"", @"", @"", @"", @"", @""]];
   }
-  else if ([self.currSegueIdentifier isEqualToString:@"editData"]) {
+  else if ([self.lastSegueIdentifier isEqualToString:@"editData"]) {
     NSDictionary *dict = [DataModel sharedDataModel].items[self.currIndexPathRow];
 
     self.cellInputItems = [[NSMutableArray alloc] initWithArray:@[

@@ -20,6 +20,7 @@
 		EFE61DE51C1AA912002A031D /* PhotoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EFE61DE41C1AA912002A031D /* PhotoTableViewCell.m */; };
 		EFE61E251C1AE0E9002A031D /* InputViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EFE61E241C1AE0E9002A031D /* InputViewController.m */; };
 		EFE61E3E1C1FFA28002A031D /* _51209_Sqlite3Prac_Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = EFE61E3D1C1FFA28002A031D /* _51209_Sqlite3Prac_Tests.m */; };
+		EFE61E461C207E46002A031D /* pinyin.c in Sources */ = {isa = PBXBuildFile; fileRef = EFE61E441C207E46002A031D /* pinyin.c */; };
 		EFE923851C185EF60001DDD8 /* DBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = EFE923841C185EF60001DDD8 /* DBManager.m */; };
 		EFE923871C185F050001DDD8 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = EFE923861C185F050001DDD8 /* libsqlite3.dylib */; };
 /* End PBXBuildFile section */
@@ -59,6 +60,8 @@
 		EFE61E391C1FFA28002A031D /* 151209_Sqlite3Prac Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "151209_Sqlite3Prac Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EFE61E3C1C1FFA28002A031D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EFE61E3D1C1FFA28002A031D /* _51209_Sqlite3Prac_Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = _51209_Sqlite3Prac_Tests.m; sourceTree = "<group>"; };
+		EFE61E441C207E46002A031D /* pinyin.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pinyin.c; sourceTree = "<group>"; };
+		EFE61E451C207E46002A031D /* pinyin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pinyin.h; sourceTree = "<group>"; };
 		EFE923831C185EF60001DDD8 /* DBManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBManager.h; sourceTree = "<group>"; };
 		EFE923841C185EF60001DDD8 /* DBManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBManager.m; sourceTree = "<group>"; };
 		EFE923861C185F050001DDD8 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
@@ -87,6 +90,7 @@
 			isa = PBXGroup;
 			children = (
 				EFE923861C185F050001DDD8 /* libsqlite3.dylib */,
+				EFE61E471C207E64002A031D /* pinyin */,
 				EF65513C1C17D669007ED37B /* 151209_Sqlite3Prac */,
 				EFE61E3A1C1FFA28002A031D /* 151209_Sqlite3Prac Tests */,
 				EF65513B1C17D669007ED37B /* Products */,
@@ -186,6 +190,16 @@
 				EFE61E3C1C1FFA28002A031D /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		EFE61E471C207E64002A031D /* pinyin */ = {
+			isa = PBXGroup;
+			children = (
+				EFE61E451C207E46002A031D /* pinyin.h */,
+				EFE61E441C207E46002A031D /* pinyin.c */,
+			);
+			name = pinyin;
+			path = 151209_Sqlite3Prac;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -289,6 +303,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EFE61E461C207E46002A031D /* pinyin.c in Sources */,
 				EF6551461C17D669007ED37B /* ViewController.m in Sources */,
 				EF6551431C17D669007ED37B /* AppDelegate.m in Sources */,
 				EF6551401C17D669007ED37B /* main.m in Sources */,
