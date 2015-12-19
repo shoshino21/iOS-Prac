@@ -18,7 +18,6 @@
   NSInteger _sortOrderIndex;
 }
 
-//@property (strong, nonatomic) NSMutableArray *tableItems;
 @property (strong, nonatomic) DBManager *dbManager;
 
 @end
@@ -107,9 +106,18 @@
     }
   }
 
-  cellView.photoImageView.image = [UIImage imageNamed:@"f"];
-  cellView.nameLabel.text = [DataModel sharedDataModel].items[indexPath.row][@"NAME"];
-  cellView.birthLabel.text = [self p_prettifyDate:[DataModel sharedDataModel].items[indexPath.row][@"BIRTH"]];
+  NSDictionary *currRow = [DataModel sharedDataModel].items[indexPath.row];
+
+  NSString *imageName;
+  if ([currRow[@"PHOTO_URL"] length] != 0) {
+    imageName = currRow[@"PHOTO_URL"];
+  } else {
+    imageName = currRow[@"GENDER"] ?: @"U";
+  }
+
+  cellView.photoImageView.image = [UIImage imageNamed:imageName];
+  cellView.nameLabel.text = currRow[@"NAME"];
+  cellView.birthLabel.text = [self p_prettifyDate:currRow[@"BIRTH"]];
 
   return cellView;
 }

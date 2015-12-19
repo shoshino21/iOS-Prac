@@ -107,12 +107,12 @@
   if (self.items.count <= 1) { return; }
   if ( ![self.items[0] objectForKey:key] ) { return; }
 
-  NSMutableArray *newDataArr = [NSMutableArray array];
 
   if ([key isEqualToString:@"NAME"]) {
     // 漢字排序
     unichar aChar;
     unichar pinyinChar;
+    NSMutableArray *newDataArr = [NSMutableArray array];
 
     for (NSUInteger i = 0; i < [self.items count]; i++) {
       NSString *chineseString = [[NSString alloc] init];
@@ -181,7 +181,7 @@
   else if ([key isEqualToString:@"BIRTH"]) {
     NSMutableArray *arrayForSort = [[NSMutableArray alloc] init];
 
-    // Transfer to integer for sort
+    // Transfer to integer for sorting
     for (NSDictionary *item in self.items) {
       NSMutableDictionary *itemForSort = [item mutableCopy];
       itemForSort[@"BIRTH"] = [NSNumber numberWithInteger:[itemForSort[@"BIRTH"] integerValue]];

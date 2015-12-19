@@ -15,6 +15,7 @@
 @interface SubViewController ()
 
 @property (strong, nonatomic) NSArray *cellTitles;
+@property (strong, nonatomic) PhotoTableViewCell *photoCellView;
 
 @end
 
@@ -138,14 +139,20 @@
     }
   }
 
-  PhotoTableViewCell *photoCellView;
-
   switch (indexPath.row) {
-    case SubViewCellTypePhoto:
-      photoCellView = (PhotoTableViewCell *)cellView;
-#warning TODO: different default icon for male and female (and unknown)
-      photoCellView.photoImageView.image = [UIImage imageNamed:@"f"];
+    case SubViewCellTypePhoto: {
+      self.photoCellView = (PhotoTableViewCell *)cellView;
+
+      NSString *imageName;
+      if ([self.cellInputItems[SubViewCellTypePhoto] length] != 0) {
+        imageName = self.cellInputItems[SubViewCellTypePhoto];
+      } else {
+        imageName = self.cellInputItems[SubViewCellTypeGender] ?: @"U";
+      }
+
+      self.photoCellView.photoImageView.image = [UIImage imageNamed:imageName];
       break;
+    }
 
     case SubViewCellTypeGender: {
       cellView.textLabel.text = self.cellTitles[indexPath.row];
