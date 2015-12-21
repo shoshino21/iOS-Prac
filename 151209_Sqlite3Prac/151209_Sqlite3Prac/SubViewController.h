@@ -26,5 +26,7 @@ typedef enum {
 @property (strong, nonatomic) NSString *currDataID;
 @property (strong, nonatomic) NSString *lastSegueIdentifier;
 @property (assign, nonatomic) NSInteger currIndexPathRow;
+@property (strong, nonatomic) UIImage *resizedPhotoImage;
+@property (assign, nonatomic) BOOL isCustomPhotoPicked;
 
 @end

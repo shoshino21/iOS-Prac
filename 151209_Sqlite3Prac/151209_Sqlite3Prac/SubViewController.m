@@ -12,7 +12,7 @@
 #import "InputViewController.h"
 #import "PhotoTableViewCell.h"
 
-@interface SubViewController ()
+@interface SubViewController () <UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 
 @property (strong, nonatomic) NSArray *cellTitles;
 @property (strong, nonatomic) PhotoTableViewCell *photoCellView;
@@ -28,7 +28,6 @@
 
   self.subTableView.dataSource = self;
   self.subTableView.delegate = self;
-
   self.cellTitles = @[@"照片", @"編號 *", @"名字 *", @"性別 *", @"生日 *", @"電話", @"E-mail", @"住址"];
 
   if ([self.lastSegueIdentifier isEqualToString:@"addData"]) {
@@ -52,9 +51,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
   [super viewWillAppear:animated];
-  dispatch_async(dispatch_get_main_queue(), ^{
-    [self.subTableView reloadData];
-  });
+  [self p_reloadTableViewInMainThread];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -83,36 +80,34 @@
 }
 
 - (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender {
-  if ([identifier isEqualToString:@"fromSubView"]) {
-    BOOL isNull1 = ( [self.cellInputItems[SubViewCellTypeNumber] length] == 0 );
-    BOOL isNull2 = ( [self.cellInputItems[SubViewCellTypeName] length] == 0 );
-    BOOL isNull3 = ( [self.cellInputItems[SubViewCellTypeGender] length] == 0 );
-    BOOL isNull4 = ( [self.cellInputItems[SubViewCellTypeBirth] length] == 0 );
+  if (![identifier isEqualToString:@"fromSubView"]) { return YES; }
 
-    NSString *alertMessage;
-    if (isNull1) {
-      alertMessage = @"請輸入編號";
-    } else if (isNull2) {
-      alertMessage = @"請輸入名字";
-    } else if (isNull3) {
-      alertMessage = @"請輸入性別";
-    } else if (isNull4) {
-      alertMessage = @"請輸入生日";
-    }
+  BOOL isNull1 = ( [self.cellInputItems[SubViewCellTypeNumber] length] == 0 );
+  BOOL isNull2 = ( [self.cellInputItems[SubViewCellTypeName] length] == 0 );
+  BOOL isNull3 = ( [self.cellInputItems[SubViewCellTypeGender] length] == 0 );
+  BOOL isNull4 = ( [self.cellInputItems[SubViewCellTypeBirth] length] == 0 );
 
-    if (isNull1 || isNull2 || isNull3 || isNull4) {
-      UIAlertView *av = [[UIAlertView alloc] initWithTitle:alertMessage message:nil delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-      [av show];
-      return NO;
-    } else {
-      return YES;
-    }
+  NSString *alertMessage;
+  if (isNull1) {
+    alertMessage = @"請輸入編號";
+  } else if (isNull2) {
+    alertMessage = @"請輸入名字";
+  } else if (isNull3) {
+    alertMessage = @"請輸入性別";
+  } else if (isNull4) {
+    alertMessage = @"請輸入生日";
   }
 
-  return YES;
+  if (isNull1 || isNull2 || isNull3 || isNull4) {
+    UIAlertView *av = [[UIAlertView alloc] initWithTitle:alertMessage message:nil delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    [av show];
+    return NO;
+  } else {
+    return YES;
+  }
 }
 
-#pragma mark - UITableViewDataSource / Delegate
+#pragma mark - Delegate (UITableViewDataSource / Delegate)
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
   return 1;
@@ -143,11 +138,16 @@
     case SubViewCellTypePhoto: {
       self.photoCellView = (PhotoTableViewCell *)cellView;
 
+      // A photo picked but have not saved yet.
+      if (self.isCustomPhotoPicked) { break; }
+
       NSString *imageName;
       if ([self.cellInputItems[SubViewCellTypePhoto] length] != 0) {
         imageName = self.cellInputItems[SubViewCellTypePhoto];
       } else {
-        imageName = self.cellInputItems[SubViewCellTypeGender] ?: @"U";
+        // default image
+        imageName = self.cellInputItems[SubViewCellTypeGender];
+        if (imageName.length == 0) { imageName = @"U"; }
       }
 
       self.photoCellView.photoImageView.image = [UIImage imageNamed:imageName];
@@ -209,6 +209,98 @@
   }
 
   return cellView;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+  if (indexPath.row != SubViewCellTypePhoto) { return; }
+
+  // iOS8~ //
+  UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil
+                                                                           message:nil
+                                                                    preferredStyle:UIAlertControllerStyleActionSheet];
+
+  UIAlertAction *cameraAction = [UIAlertAction actionWithTitle:@"拍照"
+                                                         style:UIAlertActionStyleDefault
+                                                       handler:^(UIAlertAction *action) {
+    UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
+    imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+    imagePicker.delegate = self;
+    [self presentViewController:imagePicker animated:YES completion:nil];
+  }];
+
+  // Check if camera enabled
+  cameraAction.enabled = [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera];
+
+  UIAlertAction *libraryAction = [UIAlertAction actionWithTitle:@"開啟相簿"
+                                                          style:UIAlertActionStyleDefault
+                                                        handler:^(UIAlertAction *action) {
+    UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
+    imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    imagePicker.delegate = self;
+    imagePicker.modalPresentationStyle = UIModalPresentationPopover;
+
+    UIPopoverPresentationController *popover = imagePicker.popoverPresentationController;
+    popover.permittedArrowDirections = UIPopoverArrowDirectionAny;
+    [self presentViewController:imagePicker animated:YES completion:nil];
+  }];
+
+  UIAlertAction *removeAction = [UIAlertAction actionWithTitle:@"移除照片"
+                                                         style:UIAlertActionStyleDefault
+                                                       handler:^(UIAlertAction *action) {
+    self.cellInputItems[SubViewCellTypePhoto] = @"";
+    self.resizedPhotoImage = nil;
+    self.isCustomPhotoPicked = NO;
+    [self p_reloadTableViewInMainThread];
+  }];
+
+  UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消"
+                                                         style:UIAlertActionStyleCancel
+                                                       handler:nil];
+
+  [alertController addAction:cameraAction];
+  [alertController addAction:libraryAction];
+  [alertController addAction:removeAction];
+  [alertController addAction:cancelAction];
+  [self presentViewController:alertController animated:YES completion:nil];
+}
+
+#pragma mark - Delegate (UIImagePickerControllerDelegate)
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+  UIImage *image = [info valueForKey:UIImagePickerControllerOriginalImage];
+  self.resizedPhotoImage = [self p_imageWithImage:image scaledToSize:CGSizeMake(80.f, 80.f)];
+  self.photoCellView.photoImageView.image = self.resizedPhotoImage;
+  self.isCustomPhotoPicked = YES;
+
+  [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
+  [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+#pragma mark - Private
+
+- (void)p_reloadTableViewInMainThread {
+  dispatch_async(dispatch_get_main_queue(), ^{
+    [self.subTableView reloadData];
+  });
+}
+
+- (UIImage *)p_imageWithImage:(UIImage *)image scaledToSize:(CGSize)newSize {
+  UIGraphicsBeginImageContext(newSize);
+  [image drawInRect:CGRectMake(0, 0, newSize.width, newSize.height)];
+  UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+  UIGraphicsEndImageContext();
+
+  return newImage;
+}
+
+- (UIImage *)p_imageFromSandboxWithFileName:(NSString *)theFileName {
+  NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+  NSString *documentsDirectory = paths[0];
+  NSString *fileNameWithPaths = [NSString stringWithFormat:@"%@/%@", documentsDirectory, theFileName];
+  return [UIImage imageWithContentsOfFile:fileNameWithPaths];
 }
 
 @end

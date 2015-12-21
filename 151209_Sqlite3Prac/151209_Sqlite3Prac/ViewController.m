@@ -68,6 +68,9 @@
     NSInteger indexPathRow = [self.tableView indexPathForSelectedRow].row;
     svc.currDataID = [DataModel sharedDataModel].items[indexPathRow][@"ID"];
     svc.currIndexPathRow = indexPathRow;
+
+    NSString *thePhotoUrl = [DataModel sharedDataModel].items[indexPathRow][@"PHOTO_URL"];
+    svc.isCustomPhotoPicked = (thePhotoUrl.length != 0);
   }
 }
 
@@ -75,15 +78,29 @@
   SubViewController *svc = segue.sourceViewController;
 
   if ([svc.lastSegueIdentifier isEqualToString:@"addData"]) {
-    [self p_insertIntoDatabaseAndModel:svc.cellInputItems];
-  } else if ([svc.lastSegueIdentifier isEqualToString:@"editData"]) {
-    [self p_updateDatabaseAndModel:svc.cellInputItems withID:svc.currDataID];
+    BOOL success = [self p_insertIntoDatabaseAndModel:svc.cellInputItems
+                                  isCustomPhotoPicked:svc.isCustomPhotoPicked];
+
+    if (success && svc.isCustomPhotoPicked) {
+      [self p_saveResizedPhotoImage:svc.resizedPhotoImage
+                       withFileName:[NSString stringWithFormat:@"%ld", (long)self.dbManager.lastInsertID]];
+    }
+  }
+
+  else if ([svc.lastSegueIdentifier isEqualToString:@"editData"]) {
+    BOOL success = [self p_updateDatabaseAndModel:svc.cellInputItems withID:svc.currDataID
+                              isCustomPhotoPicked:svc.isCustomPhotoPicked];
+
+    if (success && svc.isCustomPhotoPicked) {
+      [self p_saveResizedPhotoImage:svc.resizedPhotoImage
+                       withFileName:svc.currDataID];
+    }
   }
 
   [self p_sortAndReload];
 }
 
-#pragma mark - UITableViewDataSource / Delegate
+#pragma mark - Delegate (UITableViewDataSource / Delegate)
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
   return 1;
@@ -110,12 +127,12 @@
 
   NSString *imageName;
   if ([currRow[@"PHOTO_URL"] length] != 0) {
-    imageName = currRow[@"PHOTO_URL"];
+    cellView.photoImageView.image = [self p_imageFromSandboxWithFileName:currRow[@"PHOTO_URL"]];
   } else {
     imageName = currRow[@"GENDER"] ?: @"U";
+    cellView.photoImageView.image = [UIImage imageNamed:imageName];
   }
 
-  cellView.photoImageView.image = [UIImage imageNamed:imageName];
   cellView.nameLabel.text = currRow[@"NAME"];
   cellView.birthLabel.text = [self p_prettifyDate:currRow[@"BIRTH"]];
 
@@ -147,7 +164,7 @@
   return dateString;
 }
 
-- (BOOL)p_insertIntoDatabaseAndModel:(NSArray *)inArray {
+- (BOOL)p_insertIntoDatabaseAndModel:(NSArray *)inArray isCustomPhotoPicked:(BOOL)isCustomPhotoPicked {
   NSMutableArray *params = [[NSMutableArray alloc] init];
   [params addObject:inArray[SubViewCellTypeNumber]];
   [params addObject:inArray[SubViewCellTypeName]];
@@ -166,13 +183,18 @@
     return NO;
   }
 
+  NSString *lastInsertIDString = [NSString stringWithFormat:@"%ld", (long)lastInsertID];
+  if (isCustomPhotoPicked) {
+    [self.dbManager executeQuery:@"UPDATE USER SET PHOTO_URL=? WHERE ID=?" params:@[lastInsertIDString, lastInsertIDString]];
+  }
+
   NSMutableDictionary *paramDict = [[NSMutableDictionary alloc] init];
-  paramDict[@"ID"] = [NSString stringWithFormat:@"%ld", (long)lastInsertID];
+  paramDict[@"ID"] = lastInsertIDString;
   paramDict[@"NUMBER"] = inArray[SubViewCellTypeNumber];
   paramDict[@"NAME"] = inArray[SubViewCellTypeName];
   paramDict[@"GENDER"] = inArray[SubViewCellTypeGender];
   paramDict[@"BIRTH"] = inArray[SubViewCellTypeBirth];
-  paramDict[@"PHOTO_URL"] = inArray[SubViewCellTypePhoto];
+  paramDict[@"PHOTO_URL"] = (isCustomPhotoPicked) ? lastInsertIDString : @"";
   paramDict[@"PHONE"] = inArray[SubViewCellTypePhone];
   paramDict[@"EMAIL"] = inArray[SubViewCellTypeEmail];
   paramDict[@"ADDRESS"] = inArray[SubViewCellTypeAddress];
@@ -181,13 +203,13 @@
   return success;
 }
 
-- (BOOL)p_updateDatabaseAndModel:(NSArray *)inArray withID:(NSString *)anID {
+- (BOOL)p_updateDatabaseAndModel:(NSArray *)inArray withID:(NSString *)anID isCustomPhotoPicked:(BOOL)isCustomPhotoPicked {
   NSMutableArray *params = [[NSMutableArray alloc] init];
   [params addObject:inArray[SubViewCellTypeNumber]];
   [params addObject:inArray[SubViewCellTypeName]];
   [params addObject:inArray[SubViewCellTypeGender]];
   [params addObject:inArray[SubViewCellTypeBirth]];
-  [params addObject:inArray[SubViewCellTypePhoto]];
+  [params addObject:(isCustomPhotoPicked) ? anID : @""];
   [params addObject:inArray[SubViewCellTypePhone]];
   [params addObject:inArray[SubViewCellTypeEmail]];
   [params addObject:inArray[SubViewCellTypeAddress]];
@@ -201,7 +223,7 @@
   paramDict[@"NAME"] = inArray[SubViewCellTypeName];
   paramDict[@"GENDER"] = inArray[SubViewCellTypeGender];
   paramDict[@"BIRTH"] = inArray[SubViewCellTypeBirth];
-  paramDict[@"PHOTO_URL"] = inArray[SubViewCellTypePhoto];
+  paramDict[@"PHOTO_URL"] = (isCustomPhotoPicked) ? anID : @"";
   paramDict[@"PHONE"] = inArray[SubViewCellTypePhone];
   paramDict[@"EMAIL"] = inArray[SubViewCellTypeEmail];
   paramDict[@"ADDRESS"] = inArray[SubViewCellTypeAddress];
@@ -214,6 +236,24 @@
   [self.dbManager executeQuery:@"DELETE FROM USER WHERE ID=?" params:@[anID]];
   BOOL success = [[DataModel sharedDataModel] removeDataWithID:[anID integerValue]];
   return success;
+
+#warning delete image method
+}
+
+- (BOOL)p_saveResizedPhotoImage:(UIImage *)anImage withFileName:(NSString *)theFileName {
+  NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+  NSString *documentsDirectory = paths[0];
+  NSString *fileNameWithPaths = [NSString stringWithFormat:@"%@/%@", documentsDirectory, theFileName];
+
+  BOOL success = [UIImageJPEGRepresentation(anImage, 0.8) writeToFile:fileNameWithPaths atomically:YES];
+  return success;
+}
+
+- (UIImage *)p_imageFromSandboxWithFileName:(NSString *)theFileName {
+  NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+  NSString *documentsDirectory = paths[0];
+  NSString *fileNameWithPaths = [NSString stringWithFormat:@"%@/%@", documentsDirectory, theFileName];
+  return [UIImage imageWithContentsOfFile:fileNameWithPaths];
 }
 
 - (void)p_sortAndReload {

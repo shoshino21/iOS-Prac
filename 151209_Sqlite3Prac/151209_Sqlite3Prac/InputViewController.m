@@ -31,9 +31,6 @@
   self.submitButton.layer.cornerRadius = 8.f;
 
   switch (self.cellType) {
-    case SubViewCellTypePhoto:
-      break;
-
     case SubViewCellTypeNumber:
       self.textField.keyboardType = UIKeyboardTypeNamePhonePad;
       self.textField.placeholder = @"請輸入編號";
@@ -88,6 +85,7 @@
       [self p_updateSubmitButtonFrameWithTargetFrame:self.addressTextView.frame];
       break;
 
+    case SubViewCellTypePhoto:
     default:
       break;
   }
@@ -112,9 +110,6 @@
   NSTimeInterval unixTimeStamp;
 
   switch (self.cellType) {
-    case SubViewCellTypePhoto:
-      break;
-
     case SubViewCellTypeNumber:
     case SubViewCellTypeName:
     case SubViewCellTypePhone:
@@ -141,36 +136,35 @@
       self.value = self.addressTextView.text;
       break;
 
+    case SubViewCellTypePhoto:
     default:
       break;
   }
 }
 
 - (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender {
-  if ([identifier isEqualToString:@"fromInputViewSubmit"]) {
-    NSString *alertMessage;
-    if (self.cellType == SubViewCellTypePhone) {
-      alertMessage = @"電話號碼格式錯誤";
-    } else if (self.cellType == SubViewCellTypeEmail) {
-      alertMessage = @"E-mail格式錯誤";
-    } else {
-      return YES;
-    }
-
-    BOOL isValid = [self p_checkWithRegexForType:self.cellType string:self.textField.text];
-    if (isValid) {
-      return YES;
-    } else {
-      UIAlertView *av = [[UIAlertView alloc] initWithTitle:alertMessage message:nil delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-      [av show];
-      return NO;
-    }
+  if (![identifier isEqualToString:@"fromInputViewSubmit"]) { return YES; }
+  
+  NSString *alertMessage;
+  if (self.cellType == SubViewCellTypePhone) {
+    alertMessage = @"電話號碼格式錯誤";
+  } else if (self.cellType == SubViewCellTypeEmail) {
+    alertMessage = @"E-mail格式錯誤";
+  } else {
+    return YES;
   }
 
-  return YES;
+  BOOL isValid = [self p_checkWithRegexForType:self.cellType string:self.textField.text];
+  if (isValid) {
+    return YES;
+  } else {
+    UIAlertView *av = [[UIAlertView alloc] initWithTitle:alertMessage message:nil delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    [av show];
+    return NO;
+  }
 }
 
-#pragma mark - UITableViewDataSource / Delegate
+#pragma mark - Delegate (UITableViewDataSource / Delegate)
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
   return 1;
@@ -200,6 +194,8 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+  if (self.cellType != SubViewCellTypeGender) { return; }
+
   for (NSInteger i = 0; i < self.genderTitles.count; i++) {
     self.genderInputs[i] = (i == indexPath.row) ? @YES : @NO;
   }
