@@ -67,9 +67,6 @@
 
     BOOL isCustomPhotoPicked = [[DataModel sharedDataModel].items[indexPathRow][@"PHOTO_URL"] isEqualToString:@"Y"];
     svc.resizedPhotoImage = (isCustomPhotoPicked) ? [self p_imageFromSandboxWithFileName:currRowID] : nil;
-//
-//    NSString *thePhotoUrl = [DataModel sharedDataModel].items[indexPathRow][@"PHOTO_URL"];
-//    svc.isCustomPhotoPicked = (thePhotoUrl.length != 0);
   }
 }
 
@@ -119,9 +116,7 @@
 
   NSDictionary *currRow = [DataModel sharedDataModel].items[indexPath.row];
 
-//  NSString *imageName;
   if ([currRow[@"PHOTO_URL"] isEqualToString:@"Y"]) {
-//    if ([currRow[@"PHOTO_URL"] length] != 0) {
     cellView.photoImageView.image = [self p_imageFromSandboxWithFileName:currRow[@"ID"]];
   } else {
     NSString *imageName = currRow[@"GENDER"] ?: @"U";
@@ -183,11 +178,6 @@
     NSLog(@"Insert data failed");
     return NO;
   }
-//
-//  NSString *lastInsertIDString = [NSString stringWithFormat:@"%ld", (long)lastInsertID];
-//  if (isCustomPhotoPicked) {
-//    [self.dbManager executeQuery:@"UPDATE USER SET PHOTO_URL=? WHERE ID=?" params:@[lastInsertIDString, lastInsertIDString]];
-//  }
 
   NSMutableDictionary *paramDict = [[NSMutableDictionary alloc] init];
   paramDict[@"ID"] = [NSString stringWithFormat:@"%ld", lastInsertID];

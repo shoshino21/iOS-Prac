@@ -107,7 +107,6 @@
   if (self.items.count <= 1) { return; }
   if ( ![self.items[0] objectForKey:key] ) { return; }
 
-
   if ([key isEqualToString:@"NAME"]) {
     // 漢字排序
     unichar aChar;
@@ -178,6 +177,7 @@
 
     self.items = [sortedArray mutableCopy];
   }
+
   else if ([key isEqualToString:@"BIRTH"]) {
     NSMutableArray *arrayForSort = [[NSMutableArray alloc] init];
 

@@ -133,9 +133,6 @@
     case SubViewCellTypePhoto: {
       self.photoCellView = (PhotoTableViewCell *)cellView;
 
-      // A photo picked but have not saved yet.
-//      if (self.isCustomPhotoPicked) { break; }
-
       if (self.resizedPhotoImage) {
         self.photoCellView.photoImageView.image = self.resizedPhotoImage;
       } else {
@@ -146,18 +143,6 @@
       }
 
       break;
-//
-//      NSString *imageName;
-//      if ([self.cellInputItems[SubViewCellTypePhoto] length] != 0) {
-//        imageName = self.cellInputItems[SubViewCellTypePhoto];
-//      } else {
-//        // default image
-//        imageName = self.cellInputItems[SubViewCellTypeGender];
-//        if (imageName.length == 0) { imageName = @"U"; }
-//      }
-//
-//      self.photoCellView.photoImageView.image = [UIImage imageNamed:imageName];
-
     }
 
     case SubViewCellTypeGender: {
@@ -254,10 +239,7 @@
                                                          style:UIAlertActionStyleDefault
                                                        handler:^(UIAlertAction *action) {
     self.resizedPhotoImage = nil;
-//    self.isCustomPhotoPicked = NO;
     self.cellInputItems[SubViewCellTypePhoto] = @"N";
-#warning test
-                                                         NSLog(@"photo: N");
     [self p_reloadTableViewInMainThread];
   }];
 
@@ -278,10 +260,7 @@
   UIImage *image = [info valueForKey:UIImagePickerControllerOriginalImage];
   self.resizedPhotoImage = [self p_imageWithImage:image scaledToSize:CGSizeMake(80.f, 80.f)];
   self.photoCellView.photoImageView.image = self.resizedPhotoImage;
-#warning test
-  NSLog(@"photo: Y");
   self.cellInputItems[SubViewCellTypePhoto] = @"Y";
-//  self.isCustomPhotoPicked = YES;
 
   [self dismissViewControllerAnimated:YES completion:nil];
 }
@@ -306,12 +285,5 @@
 
   return newImage;
 }
-//
-//- (UIImage *)p_imageFromSandboxWithFileName:(NSString *)theFileName {
-//  NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-//  NSString *documentsDirectory = paths[0];
-//  NSString *fileNameWithPaths = [NSString stringWithFormat:@"%@/%@", documentsDirectory, theFileName];
-//  return [UIImage imageWithContentsOfFile:fileNameWithPaths];
-//}
-//
+
 @end
