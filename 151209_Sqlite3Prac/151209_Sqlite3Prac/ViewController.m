@@ -19,6 +19,7 @@
 }
 
 @property (strong, nonatomic) DBManager *dbManager;
+@property (strong, nonatomic) NSCache *cachedPhotos;
 
 @end
 
@@ -35,6 +36,8 @@
   self.dbManager = [[DBManager alloc] initWithDatabaseFilename:@"userdb.sql"];
   NSArray *allDataFromDB = [self.dbManager loadDataFromDB:@"SELECT * FROM USER" params:nil];
   [[DataModel sharedDataModel] copyDataFromArray:allDataFromDB];
+
+  self.cachedPhotos = [[NSCache alloc] init];
 }
 
 #pragma mark - Actions
@@ -117,8 +120,27 @@
   NSDictionary *currRow = [DataModel sharedDataModel].items[indexPath.row];
 
   if ([currRow[@"PHOTO_URL"] isEqualToString:@"Y"]) {
-    cellView.photoImageView.image = [self p_imageFromSandboxWithFileName:currRow[@"ID"]];
-  } else {
+    // Image caching
+    NSString *currID = currRow[@"ID"];
+    if ([self.cachedPhotos objectForKey:currID]) {
+      cellView.photoImageView.image = [self.cachedPhotos objectForKey:currID];
+    }
+    else {
+      dispatch_queue_t queue = dispatch_queue_create([currID UTF8String], 0);
+      dispatch_async(queue, ^{
+        UIImage *image = [self p_imageFromSandboxWithFileName:currID];
+
+        if (image) {
+          dispatch_async(dispatch_get_main_queue(), ^{
+            cellView.photoImageView.image = image;
+            [self.cachedPhotos setObject:image forKey:currID];
+          });
+        }
+      });
+    }
+  }
+  // Default image
+  else {
     NSString *imageName = currRow[@"GENDER"] ?: @"U";
     cellView.photoImageView.image = [UIImage imageNamed:imageName];
   }
