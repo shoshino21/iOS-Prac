@@ -31,13 +31,13 @@
   self.cellTitles = @[@"照片", @"編號 *", @"名字 *", @"性別 *", @"生日 *", @"電話", @"E-mail", @"住址"];
 
   if ([self.lastSegueIdentifier isEqualToString:@"addData"]) {
-    self.cellInputItems = [[NSMutableArray alloc] initWithArray:@[@"", @"", @"", @"", @"", @"", @"", @""]];
+    self.cellInputItems = [[NSMutableArray alloc] initWithArray:@[@"N", @"", @"", @"", @"", @"", @"", @""]];
   }
   else if ([self.lastSegueIdentifier isEqualToString:@"editData"]) {
     NSDictionary *dict = [DataModel sharedDataModel].items[self.currIndexPathRow];
 
     self.cellInputItems = [[NSMutableArray alloc] initWithArray:@[
-      dict[@"PHOTO_URL"] ?: @"",
+      dict[@"PHOTO_URL"] ?: @"N",
       dict[@"NUMBER"] ?: @"",
       dict[@"NAME"] ?: @"",
       dict[@"GENDER"] ?: @"",
@@ -52,11 +52,6 @@
 - (void)viewWillAppear:(BOOL)animated {
   [super viewWillAppear:animated];
   [self p_reloadTableViewInMainThread];
-}
-
-- (void)didReceiveMemoryWarning {
-  [super didReceiveMemoryWarning];
-  // Dispose of any resources that can be recreated.
 }
 
 #pragma mark - Navigation
@@ -139,19 +134,30 @@
       self.photoCellView = (PhotoTableViewCell *)cellView;
 
       // A photo picked but have not saved yet.
-      if (self.isCustomPhotoPicked) { break; }
+//      if (self.isCustomPhotoPicked) { break; }
 
-      NSString *imageName;
-      if ([self.cellInputItems[SubViewCellTypePhoto] length] != 0) {
-        imageName = self.cellInputItems[SubViewCellTypePhoto];
+      if (self.resizedPhotoImage) {
+        self.photoCellView.photoImageView.image = self.resizedPhotoImage;
       } else {
         // default image
-        imageName = self.cellInputItems[SubViewCellTypeGender];
+        NSString *imageName = self.cellInputItems[SubViewCellTypeGender];
         if (imageName.length == 0) { imageName = @"U"; }
+        self.photoCellView.photoImageView.image = [UIImage imageNamed:imageName];
       }
 
-      self.photoCellView.photoImageView.image = [UIImage imageNamed:imageName];
       break;
+//
+//      NSString *imageName;
+//      if ([self.cellInputItems[SubViewCellTypePhoto] length] != 0) {
+//        imageName = self.cellInputItems[SubViewCellTypePhoto];
+//      } else {
+//        // default image
+//        imageName = self.cellInputItems[SubViewCellTypeGender];
+//        if (imageName.length == 0) { imageName = @"U"; }
+//      }
+//
+//      self.photoCellView.photoImageView.image = [UIImage imageNamed:imageName];
+
     }
 
     case SubViewCellTypeGender: {
@@ -228,7 +234,7 @@
     [self presentViewController:imagePicker animated:YES completion:nil];
   }];
 
-  // Check if camera enabled
+  // Check if camera available
   cameraAction.enabled = [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera];
 
   UIAlertAction *libraryAction = [UIAlertAction actionWithTitle:@"開啟相簿"
@@ -247,9 +253,11 @@
   UIAlertAction *removeAction = [UIAlertAction actionWithTitle:@"移除照片"
                                                          style:UIAlertActionStyleDefault
                                                        handler:^(UIAlertAction *action) {
-    self.cellInputItems[SubViewCellTypePhoto] = @"";
     self.resizedPhotoImage = nil;
-    self.isCustomPhotoPicked = NO;
+//    self.isCustomPhotoPicked = NO;
+    self.cellInputItems[SubViewCellTypePhoto] = @"N";
+#warning test
+                                                         NSLog(@"photo: N");
     [self p_reloadTableViewInMainThread];
   }];
 
@@ -270,7 +278,10 @@
   UIImage *image = [info valueForKey:UIImagePickerControllerOriginalImage];
   self.resizedPhotoImage = [self p_imageWithImage:image scaledToSize:CGSizeMake(80.f, 80.f)];
   self.photoCellView.photoImageView.image = self.resizedPhotoImage;
-  self.isCustomPhotoPicked = YES;
+#warning test
+  NSLog(@"photo: Y");
+  self.cellInputItems[SubViewCellTypePhoto] = @"Y";
+//  self.isCustomPhotoPicked = YES;
 
   [self dismissViewControllerAnimated:YES completion:nil];
 }
@@ -295,12 +306,12 @@
 
   return newImage;
 }
-
-- (UIImage *)p_imageFromSandboxWithFileName:(NSString *)theFileName {
-  NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-  NSString *documentsDirectory = paths[0];
-  NSString *fileNameWithPaths = [NSString stringWithFormat:@"%@/%@", documentsDirectory, theFileName];
-  return [UIImage imageWithContentsOfFile:fileNameWithPaths];
-}
-
+//
+//- (UIImage *)p_imageFromSandboxWithFileName:(NSString *)theFileName {
+//  NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+//  NSString *documentsDirectory = paths[0];
+//  NSString *fileNameWithPaths = [NSString stringWithFormat:@"%@/%@", documentsDirectory, theFileName];
+//  return [UIImage imageWithContentsOfFile:fileNameWithPaths];
+//}
+//
 @end

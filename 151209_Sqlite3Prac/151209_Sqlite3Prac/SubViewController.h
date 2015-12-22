@@ -23,10 +23,10 @@ typedef enum {
 
 @property (weak, nonatomic) IBOutlet UITableView *subTableView;
 @property (strong, nonatomic) NSMutableArray *cellInputItems;
-@property (strong, nonatomic) NSString *currDataID;
+@property (strong, nonatomic) NSString *currRowID;
 @property (strong, nonatomic) NSString *lastSegueIdentifier;
 @property (assign, nonatomic) NSInteger currIndexPathRow;
 @property (strong, nonatomic) UIImage *resizedPhotoImage;
-@property (assign, nonatomic) BOOL isCustomPhotoPicked;
+//@property (assign, nonatomic) BOOL isCustomPhotoPicked;
 
 @end
