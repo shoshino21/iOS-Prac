@@ -19,13 +19,14 @@ typedef enum {
 
 #import <UIKit/UIKit.h>
 
-@interface SubViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+@interface SubViewController
+    : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
-@property (weak, nonatomic) IBOutlet UITableView *subTableView;
-@property (strong, nonatomic) NSMutableArray *cellInputItems;
-@property (strong, nonatomic) NSString *currRowID;
-@property (strong, nonatomic) NSString *lastSegueIdentifier;
-@property (assign, nonatomic) NSInteger currIndexPathRow;
-@property (strong, nonatomic) UIImage *resizedPhotoImage;
+@property(weak, nonatomic) IBOutlet UITableView *subTableView;
+@property(strong, nonatomic) NSMutableArray *cellInputItems;
+@property(strong, nonatomic) NSString *currRowID;
+@property(strong, nonatomic) NSString *lastSegueIdentifier;
+@property(assign, nonatomic) NSInteger currIndexPathRow;
+@property(strong, nonatomic) UIImage *resizedPhotoImage;
 
 @end

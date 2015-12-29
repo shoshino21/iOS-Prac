@@ -8,18 +8,18 @@
 
 #import "ViewController.h"
 
+#import "CustomTableViewCell.h"
 #import "DBManager.h"
 #import "DataModel.h"
 #import "SubViewController.h"
-#import "CustomTableViewCell.h"
 
 @interface ViewController () {
   NSInteger _sortFieldIndex;
   NSInteger _sortOrderIndex;
 }
 
-@property (strong, nonatomic) DBManager *dbManager;
-@property (strong, nonatomic) NSCache *cachedPhotos;
+@property(strong, nonatomic) DBManager *dbManager;
+@property(strong, nonatomic) NSCache *cachedPhotos;
 
 @end
 
@@ -34,7 +34,8 @@
   self.tableView.delegate = self;
 
   self.dbManager = [[DBManager alloc] initWithDatabaseFilename:@"userdb.sql"];
-  NSArray *allDataFromDB = [self.dbManager loadDataFromDB:@"SELECT * FROM USER" params:nil];
+  NSArray *allDataFromDB =
+      [self.dbManager loadDataFromDB:@"SELECT * FROM USER" params:nil];
   [[DataModel sharedDataModel] copyDataFromArray:allDataFromDB];
 
   self.cachedPhotos = [[NSCache alloc] init];
@@ -65,27 +66,35 @@
 
     NSInteger indexPathRow = [self.tableView indexPathForSelectedRow].row;
     svc.currIndexPathRow = indexPathRow;
-    NSString *currRowID = [DataModel sharedDataModel].items[indexPathRow][@"ID"];
+    NSString *currRowID =
+        [DataModel sharedDataModel].items[indexPathRow][@"ID"];
     svc.currRowID = currRowID;
 
-    BOOL isCustomPhotoPicked = [[DataModel sharedDataModel].items[indexPathRow][@"PHOTO_URL"] isEqualToString:@"Y"];
-    svc.resizedPhotoImage = (isCustomPhotoPicked) ? [self p_imageFromSandboxWithFileName:currRowID] : nil;
+    BOOL isCustomPhotoPicked =
+        [[DataModel sharedDataModel]
+                .items[indexPathRow][@"PHOTO_URL"] isEqualToString:@"Y"];
+    svc.resizedPhotoImage =
+        (isCustomPhotoPicked) ? [self p_imageFromSandboxWithFileName:currRowID]
+                              : nil;
   }
 }
 
 - (IBAction)backToMainWithUnwindSegue:(UIStoryboardSegue *)segue {
   SubViewController *svc = segue.sourceViewController;
-  BOOL isCustomPhotoPicked = [svc.cellInputItems[SubViewCellTypePhoto] isEqualToString:@"Y"];
+  BOOL isCustomPhotoPicked =
+      [svc.cellInputItems[SubViewCellTypePhoto] isEqualToString:@"Y"];
 
   if ([svc.lastSegueIdentifier isEqualToString:@"addData"]) {
     BOOL success = [self p_insertIntoDatabaseAndModel:svc.cellInputItems];
     if (success && isCustomPhotoPicked) {
       [self p_savePhotoImage:svc.resizedPhotoImage
-                withFileName:[NSString stringWithFormat:@"%ld", (long)self.dbManager.lastInsertID]];
+                withFileName:[NSString
+                                 stringWithFormat:@"%ld", (long)self.dbManager
+                                                              .lastInsertID]];
     }
-  }
-  else if ([svc.lastSegueIdentifier isEqualToString:@"editData"]) {
-    BOOL success = [self p_updateDatabaseAndModel:svc.cellInputItems withID:svc.currRowID];
+  } else if ([svc.lastSegueIdentifier isEqualToString:@"editData"]) {
+    BOOL success =
+        [self p_updateDatabaseAndModel:svc.cellInputItems withID:svc.currRowID];
     if (success && isCustomPhotoPicked) {
       [self p_savePhotoImage:svc.resizedPhotoImage withFileName:svc.currRowID];
     }
@@ -100,16 +109,21 @@
   return 1;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+- (NSInteger)tableView:(UITableView *)tableView
+ numberOfRowsInSection:(NSInteger)section {
   return [DataModel sharedDataModel].count;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (UITableViewCell *)tableView:(UITableView *)tableView
+         cellForRowAtIndexPath:(NSIndexPath *)indexPath {
   static NSString *cellIdentifier = @"customCell";
-  CustomTableViewCell *cellView = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+  CustomTableViewCell *cellView =
+      [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
 
   if (!cellView) {
-    NSArray *views = [[NSBundle mainBundle] loadNibNamed:@"CustomTableViewCell" owner:nil options:nil];
+    NSArray *views = [[NSBundle mainBundle] loadNibNamed:@"CustomTableViewCell"
+                                                   owner:nil
+                                                 options:nil];
     for (UIView *view in views) {
       if ([view isKindOfClass:[CustomTableViewCell class]]) {
         cellView = (CustomTableViewCell *)view;
@@ -124,8 +138,7 @@
     NSString *currID = currRow[@"ID"];
     if ([self.cachedPhotos objectForKey:currID]) {
       cellView.photoImageView.image = [self.cachedPhotos objectForKey:currID];
-    }
-    else {
+    } else {
       dispatch_queue_t queue = dispatch_queue_create([currID UTF8String], 0);
       dispatch_async(queue, ^{
         UIImage *image = [self p_imageFromSandboxWithFileName:currID];
@@ -151,14 +164,20 @@
   return cellView;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+- (void)tableView:(UITableView *)tableView
+    didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
   [self performSegueWithIdentifier:@"editData" sender:self];
 }
 
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+- (void)tableView:(UITableView *)tableView
+    commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
+     forRowAtIndexPath:(NSIndexPath *)indexPath {
   if (editingStyle == UITableViewCellEditingStyleDelete) {
-    NSString *idToDelete = [DataModel sharedDataModel].items[indexPath.row][@"ID"];
-    BOOL isCustomPhotoPicked = [[DataModel sharedDataModel].items[indexPath.row][@"PHOTO_URL"] isEqualToString:@"Y"];
+    NSString *idToDelete =
+        [DataModel sharedDataModel].items[indexPath.row][@"ID"];
+    BOOL isCustomPhotoPicked =
+        [[DataModel sharedDataModel]
+                .items[indexPath.row][@"PHOTO_URL"] isEqualToString:@"Y"];
 
     BOOL success = [self p_deleteDatabaseAndModelWithID:idToDelete];
     if (success && isCustomPhotoPicked) {
@@ -193,7 +212,10 @@
   [params addObject:inArray[SubViewCellTypeEmail]];
   [params addObject:inArray[SubViewCellTypeAddress]];
 
-  [self.dbManager executeQuery:@"INSERT INTO USER (NUMBER, NAME, GENDER, BIRTH, PHOTO_URL, PHONE, EMAIL, ADDRESS) VALUES (?,?,?,?,?,?,?,?)" params:params];
+  [self.dbManager
+      executeQuery:@"INSERT INTO USER (NUMBER, NAME, GENDER, BIRTH, PHOTO_URL, "
+                   @"PHONE, EMAIL, ADDRESS) VALUES (?,?,?,?,?,?,?,?)"
+            params:params];
 
   NSUInteger lastInsertID = self.dbManager.lastInsertID;
   if (lastInsertID == -1) {
@@ -228,7 +250,10 @@
   [params addObject:inArray[SubViewCellTypeAddress]];
   [params addObject:anID];
 
-  [self.dbManager executeQuery:@"UPDATE USER SET NUMBER=?, NAME=?, GENDER=?, BIRTH=?, PHOTO_URL=?, PHONE=?, EMAIL=?, ADDRESS=? WHERE ID=?" params:params];
+  [self.dbManager
+      executeQuery:@"UPDATE USER SET NUMBER=?, NAME=?, GENDER=?, BIRTH=?, "
+                   @"PHOTO_URL=?, PHONE=?, EMAIL=?, ADDRESS=? WHERE ID=?"
+            params:params];
 
   NSMutableDictionary *paramDict = [[NSMutableDictionary alloc] init];
   paramDict[@"ID"] = anID;
@@ -241,39 +266,52 @@
   paramDict[@"EMAIL"] = inArray[SubViewCellTypeEmail];
   paramDict[@"ADDRESS"] = inArray[SubViewCellTypeAddress];
 
-  BOOL success = [[DataModel sharedDataModel] updateDataWithDictionary:paramDict];
+  BOOL success =
+      [[DataModel sharedDataModel] updateDataWithDictionary:paramDict];
   return success;
 }
 
 - (BOOL)p_deleteDatabaseAndModelWithID:(NSString *)anID {
-  [self.dbManager executeQuery:@"DELETE FROM USER WHERE ID=?" params:@[anID]];
-  BOOL success = [[DataModel sharedDataModel] removeDataWithID:[anID integerValue]];
+  [self.dbManager executeQuery:@"DELETE FROM USER WHERE ID=?" params:@[ anID ]];
+  BOOL success =
+      [[DataModel sharedDataModel] removeDataWithID:[anID integerValue]];
   return success;
 }
 
 - (UIImage *)p_imageFromSandboxWithFileName:(NSString *)theFileName {
-  NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+  NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,
+                                                       NSUserDomainMask, YES);
   NSString *documentsDirectory = paths[0];
-  NSString *fileNameWithPaths = [NSString stringWithFormat:@"%@/%@", documentsDirectory, theFileName];
+  NSString *fileNameWithPaths =
+      [NSString stringWithFormat:@"%@/%@", documentsDirectory, theFileName];
   return [UIImage imageWithContentsOfFile:fileNameWithPaths];
 }
 
-- (BOOL)p_savePhotoImage:(UIImage *)anImage withFileName:(NSString *)theFileName {
-  NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+- (BOOL)p_savePhotoImage:(UIImage *)anImage
+            withFileName:(NSString *)theFileName {
+  NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,
+                                                       NSUserDomainMask, YES);
   NSString *documentsDirectory = paths[0];
-  NSString *fileNameWithPaths = [NSString stringWithFormat:@"%@/%@", documentsDirectory, theFileName];
+  NSString *fileNameWithPaths =
+      [NSString stringWithFormat:@"%@/%@", documentsDirectory, theFileName];
 
-  BOOL success = [UIImageJPEGRepresentation(anImage, 0.8) writeToFile:fileNameWithPaths atomically:YES];
+  BOOL success =
+      [UIImageJPEGRepresentation(anImage, 0.8) writeToFile:fileNameWithPaths
+                                                atomically:YES];
   return success;
 }
 
 - (BOOL)p_deletePhotoImageWithFileName:(NSString *)theFileName {
-  NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+  NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,
+                                                       NSUserDomainMask, YES);
   NSString *documentsDirectory = paths[0];
-  NSString *fileNameWithPaths = [NSString stringWithFormat:@"%@/%@", documentsDirectory, theFileName];
+  NSString *fileNameWithPaths =
+      [NSString stringWithFormat:@"%@/%@", documentsDirectory, theFileName];
 
   NSError *error;
-  BOOL success = [[NSFileManager defaultManager] removeItemAtPath:fileNameWithPaths error:&error];
+  BOOL success =
+      [[NSFileManager defaultManager] removeItemAtPath:fileNameWithPaths
+                                                 error:&error];
   if (success) {
     return YES;
   } else {

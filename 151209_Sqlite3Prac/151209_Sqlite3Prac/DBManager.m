@@ -13,7 +13,7 @@
   sqlite3 *_sqlite3db;
 }
 
-@property (strong, nonatomic) NSMutableArray *arrResults;
+@property(strong, nonatomic) NSMutableArray *arrResults;
 
 @end
 
@@ -26,15 +26,20 @@
   if (self) {
     [self p_initializeProperties];
 
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,
+                                                         NSUserDomainMask, YES);
     NSString *documentsDirectory = paths[0];
     _dbPath = [documentsDirectory stringByAppendingPathComponent:dbFilename];
 
     if (![[NSFileManager defaultManager] fileExistsAtPath:_dbPath]) {
-      // The database file does not exist in the documents directory, so copy it from the main bundle now.
-      NSString *sourcePath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:dbFilename];
+      // The database file does not exist in the documents directory, so copy it
+      // from the main bundle now.
+      NSString *sourcePath = [[[NSBundle mainBundle] resourcePath]
+          stringByAppendingPathComponent:dbFilename];
       NSError *error;
-      [[NSFileManager defaultManager] copyItemAtPath:sourcePath toPath:_dbPath error:&error];
+      [[NSFileManager defaultManager] copyItemAtPath:sourcePath
+                                              toPath:_dbPath
+                                               error:&error];
 
       if (error) {
         NSLog(@"DB copy failed: %@", error.localizedDescription);
@@ -44,16 +49,20 @@
     // Open or Create DB
     BOOL isOpenDbOK = sqlite3_open([_dbPath UTF8String], &_sqlite3db);
     if (isOpenDbOK != SQLITE_OK) {
-      NSLog(@"Open DB Error: %@", [NSString stringWithUTF8String:sqlite3_errmsg(_sqlite3db)]);
+      NSLog(@"Open DB Error: %@",
+            [NSString stringWithUTF8String:sqlite3_errmsg(_sqlite3db)]);
       sqlite3_close(_sqlite3db);
-    }
-    else {
+    } else {
       // Create tables if not exists
       char *errMsg;
       const char *sql_stmt;
-      sql_stmt = "CREATE TABLE IF NOT EXISTS USER (ID integer PRIMARY KEY AUTOINCREMENT, NUMBER text, NAME text, GENDER text, BIRTH integer, PHOTO_URL text, PHONE text, EMAIL text, ADDRESS text)";
+      sql_stmt = "CREATE TABLE IF NOT EXISTS USER (ID integer PRIMARY KEY "
+                 "AUTOINCREMENT, NUMBER text, NAME text, GENDER text, BIRTH "
+                 "integer, PHOTO_URL text, PHONE text, EMAIL text, ADDRESS "
+                 "text)";
 
-      if (sqlite3_exec(_sqlite3db, sql_stmt, NULL, NULL, &errMsg) != SQLITE_OK) {
+      if (sqlite3_exec(_sqlite3db, sql_stmt, NULL, NULL, &errMsg) !=
+          SQLITE_OK) {
         NSLog(@"Create Table USER failed.");
         if (errMsg) {
           NSLog(@"Error: %@", [NSString stringWithUTF8String:errMsg]);
@@ -103,11 +112,15 @@
 //    BOOL theIDisExist = [self p_isDataExistsWhereID:row[@"ID"]];
 //    if (theIDisExist) {
 //      [params addObject:row[@"ID"]];
-//      [self executeQuery:@"UPDATE USER SET NUMBER=?, NAME=?, GENDER=?, BIRTH=?, PHOTO_URL=?, PHONE=?, EMAIL=?, ADDRESS=? WHERE ID=?" params:params];
+//      [self executeQuery:@"UPDATE USER SET NUMBER=?, NAME=?, GENDER=?,
+//      BIRTH=?, PHOTO_URL=?, PHONE=?, EMAIL=?, ADDRESS=? WHERE ID=?"
+//      params:params];
 //      return YES;
 //    }
 //    else {
-//      [self executeQuery:@"INSERT INTO USER (NUMBER, NAME, GENDER, BIRTH, PHOTO_URL, PHONE, EMAIL, ADDRESS) VALUES (?,?,?,?,?,?,?,?)" params:params];
+//      [self executeQuery:@"INSERT INTO USER (NUMBER, NAME, GENDER, BIRTH,
+//      PHOTO_URL, PHONE, EMAIL, ADDRESS) VALUES (?,?,?,?,?,?,?,?)"
+//      params:params];
 //      return (self.lastInsertID != -1); // -1: insert failed
 //    }
 //  }
@@ -123,21 +136,26 @@
   _arrResults = [[NSMutableArray alloc] init];
 }
 
-- (void)p_runQuery:(const char *)query params:(NSArray *)params isSelectQuery:(BOOL)isSelectQuery {
+- (void)p_runQuery:(const char *)query
+            params:(NSArray *)params
+     isSelectQuery:(BOOL)isSelectQuery {
   [self p_initializeProperties];
 
   // Open DB
   BOOL isOpenDbOK = sqlite3_open([self.dbPath UTF8String], &_sqlite3db);
   if (isOpenDbOK != SQLITE_OK) {
-    NSLog(@"Error: %@", [NSString stringWithUTF8String:sqlite3_errmsg(_sqlite3db)]);
+    NSLog(@"Error: %@",
+          [NSString stringWithUTF8String:sqlite3_errmsg(_sqlite3db)]);
     sqlite3_close(_sqlite3db);
   }
 
   // Prepare statement
   sqlite3_stmt *compiledStatement;
-  BOOL isPrepareStatementOK = sqlite3_prepare_v2(_sqlite3db, query, -1, &compiledStatement, NULL);
+  BOOL isPrepareStatementOK =
+      sqlite3_prepare_v2(_sqlite3db, query, -1, &compiledStatement, NULL);
   if (isPrepareStatementOK != SQLITE_OK) {
-    NSLog(@"Error: %@", [NSString stringWithUTF8String:sqlite3_errmsg(_sqlite3db)]);
+    NSLog(@"Error: %@",
+          [NSString stringWithUTF8String:sqlite3_errmsg(_sqlite3db)]);
     sqlite3_finalize(compiledStatement);
     sqlite3_close(_sqlite3db);
     return;
@@ -145,9 +163,11 @@
 
   // Bind parameters to prepared statement
   for (int i = 0; i < params.count; i++) {
-    BOOL isBindingOK = sqlite3_bind_text(compiledStatement, i + 1, [params[i] UTF8String], -1, SQLITE_TRANSIENT);
+    BOOL isBindingOK = sqlite3_bind_text(
+        compiledStatement, i + 1, [params[i] UTF8String], -1, SQLITE_TRANSIENT);
     if (isBindingOK != SQLITE_OK) {
-      NSLog(@"Error: %@", [NSString stringWithUTF8String:sqlite3_errmsg(_sqlite3db)]);
+      NSLog(@"Error: %@",
+            [NSString stringWithUTF8String:sqlite3_errmsg(_sqlite3db)]);
       sqlite3_finalize(compiledStatement);
       sqlite3_close(_sqlite3db);
       return;
@@ -162,8 +182,12 @@
       int totalColumns = sqlite3_column_count(compiledStatement);
 
       for (int i = 0; i < totalColumns; i++) {
-        NSString *dataStr = [NSString stringWithUTF8String:(char *)sqlite3_column_text(compiledStatement, i)];
-        NSString *columnNameStr = [NSString stringWithUTF8String:(char *)sqlite3_column_name(compiledStatement, i)];
+        NSString *dataStr = [NSString
+            stringWithUTF8String:(char *)sqlite3_column_text(compiledStatement,
+                                                             i)];
+        NSString *columnNameStr = [NSString
+            stringWithUTF8String:(char *)sqlite3_column_name(compiledStatement,
+                                                             i)];
         if (dataStr.length != 0 && columnNameStr.length != 0) {
           dataRowDict[columnNameStr] = dataStr;
         }
@@ -174,11 +198,11 @@
         [dataRowDict removeAllObjects];
       }
     }
-  }
-  else {
+  } else {
     // Non-select query
     if (sqlite3_step(compiledStatement) != SQLITE_DONE) {
-      NSLog(@"Error: %@", [NSString stringWithUTF8String:sqlite3_errmsg(_sqlite3db)]);
+      NSLog(@"Error: %@",
+            [NSString stringWithUTF8String:sqlite3_errmsg(_sqlite3db)]);
     }
   }
   sqlite3_finalize(compiledStatement);
@@ -186,7 +210,9 @@
 }
 
 - (BOOL)p_isDataExistsWhereID:(NSString *)aID {
-  NSArray *resultArr = [self loadDataFromDB:@"SELECT COUNT(ID) FROM USER WHERE ID = ?" params:@[aID]];
+  NSArray *resultArr =
+      [self loadDataFromDB:@"SELECT COUNT(ID) FROM USER WHERE ID = ?"
+                    params:@[ aID ]];
   int count = [resultArr[0][@"COUNT(ID)"] intValue];
   return (count > 0);
 }

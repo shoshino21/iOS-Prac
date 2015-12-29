@@ -80,7 +80,8 @@
   }
 
   if (indexToRemove == -1) {
-    NSLog(@"removeDataWithID error: couldn't find ID %lu.", (unsigned long)anID);
+    NSLog(@"removeDataWithID error: couldn't find ID %lu.",
+          (unsigned long)anID);
     return NO;
   } else {
     [self.items removeObjectAtIndex:indexToRemove];
@@ -99,13 +100,18 @@
     }
   }
 
-  NSLog(@"updateDataWithDictionary error: couldn't find ID %lu", (unsigned long)aDictionaryID);
+  NSLog(@"updateDataWithDictionary error: couldn't find ID %lu",
+        (unsigned long)aDictionaryID);
   return NO;
 }
 
 - (void)sortWithKey:(NSString *)key isAscending:(BOOL)ascending {
-  if (self.items.count <= 1) { return; }
-  if ( ![self.items[0] objectForKey:key] ) { return; }
+  if (self.items.count <= 1) {
+    return;
+  }
+  if (![self.items[0] objectForKey:key]) {
+    return;
+  }
 
   if ([key isEqualToString:@"NAME"]) {
     // 漢字排序
@@ -131,16 +137,22 @@
               aChar = [chineseString characterAtIndex:j];
 
               // 將英文大小寫視為同等，同時避免大寫英文和數字順序混亂
-              if (aChar >= 'A' && aChar <= 'Z') { aChar += 32; }
+              if (aChar >= 'A' && aChar <= 'Z') {
+                aChar += 32;
+              }
               // 將英文字元向前位移，使排序時英文排在中文的前面
               chars[j] = aChar - 26;
             }
-            englishResult = [[NSString alloc] initWithBytes:chars length:chineseString.length encoding:NSUTF8StringEncoding];
+            englishResult =
+                [[NSString alloc] initWithBytes:chars
+                                         length:chineseString.length
+                                       encoding:NSUTF8StringEncoding];
             NSLog(@"aChar:%c, englishResult:%@", aChar, englishResult);
           } else {
             NSLog(@"it's null");
           }
-          NSLog(@"englishString:%@, englishResult:%@", chineseString, englishResult);
+          NSLog(@"englishString:%@, englishResult:%@", chineseString,
+                englishResult);
           [item setObject:englishResult forKey:@"sortcolumn"];
         }
         // 判斷首字母是否為漢字
@@ -154,12 +166,16 @@
               pinyinChar = pinyinFirstLetter(aChar);
               chars[j] = pinyinChar;
             }
-            pinYinResult = [[NSString alloc] initWithBytes:chars length:chineseString.length encoding:NSUTF8StringEncoding];
+            pinYinResult =
+                [[NSString alloc] initWithBytes:chars
+                                         length:chineseString.length
+                                       encoding:NSUTF8StringEncoding];
             NSLog(@"aChar:%c, pinYinResult:%@", aChar, pinYinResult);
           } else {
             NSLog(@"it's null");
           }
-          NSLog(@"chineseString:%@, pinYinResult:%@", chineseString, pinYinResult);
+          NSLog(@"chineseString:%@, pinYinResult:%@", chineseString,
+                pinYinResult);
           [item setObject:pinYinResult forKey:@"sortcolumn"];
         }
         // 非字母或漢字
@@ -171,9 +187,12 @@
       }
     }
 
-    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"sortcolumn" ascending:ascending];
+    NSSortDescriptor *sortDescriptor =
+        [[NSSortDescriptor alloc] initWithKey:@"sortcolumn"
+                                    ascending:ascending];
     NSArray *sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
-    NSArray *sortedArray = [newDataArr sortedArrayUsingDescriptors:sortDescriptors];
+    NSArray *sortedArray =
+        [newDataArr sortedArrayUsingDescriptors:sortDescriptors];
 
     self.items = [sortedArray mutableCopy];
   }
@@ -184,13 +203,18 @@
     // Transfer to integer for sorting
     for (NSDictionary *item in self.items) {
       NSMutableDictionary *itemForSort = [item mutableCopy];
-      itemForSort[@"BIRTH"] = [NSNumber numberWithInteger:[itemForSort[@"BIRTH"] integerValue]];
+      itemForSort[@"BIRTH"] =
+          [NSNumber numberWithInteger:[itemForSort[@"BIRTH"] integerValue]];
       [arrayForSort addObject:itemForSort];
     }
 
-    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"BIRTH" ascending:ascending selector:@selector(compare:)];
+    NSSortDescriptor *sortDescriptor =
+        [[NSSortDescriptor alloc] initWithKey:@"BIRTH"
+                                    ascending:ascending
+                                     selector:@selector(compare:)];
     NSArray *sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
-    NSMutableArray *sortedArray = [[arrayForSort sortedArrayUsingDescriptors:sortDescriptors] mutableCopy];
+    NSMutableArray *sortedArray = [
+        [arrayForSort sortedArrayUsingDescriptors:sortDescriptors] mutableCopy];
 
     for (NSMutableDictionary *item in sortedArray) {
       item[@"BIRTH"] = [NSString stringWithFormat:@"%@", item[@"BIRTH"]];

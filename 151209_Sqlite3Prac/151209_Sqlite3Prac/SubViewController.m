@@ -12,10 +12,11 @@
 #import "InputViewController.h"
 #import "PhotoTableViewCell.h"
 
-@interface SubViewController () <UINavigationControllerDelegate, UIImagePickerControllerDelegate>
+@interface SubViewController () <UINavigationControllerDelegate,
+                                 UIImagePickerControllerDelegate>
 
-@property (strong, nonatomic) NSArray *cellTitles;
-@property (strong, nonatomic) PhotoTableViewCell *photoCellView;
+@property(strong, nonatomic) NSArray *cellTitles;
+@property(strong, nonatomic) PhotoTableViewCell *photoCellView;
 
 @end
 
@@ -28,13 +29,23 @@
 
   self.subTableView.dataSource = self;
   self.subTableView.delegate = self;
-  self.cellTitles = @[@"照片", @"編號 *", @"名字 *", @"性別 *", @"生日 *", @"電話", @"E-mail", @"住址"];
+  self.cellTitles = @[
+    @"照片",
+    @"編號 *",
+    @"名字 *",
+    @"性別 *",
+    @"生日 *",
+    @"電話",
+    @"E-mail",
+    @"住址"
+  ];
 
   if ([self.lastSegueIdentifier isEqualToString:@"addData"]) {
-    self.cellInputItems = [[NSMutableArray alloc] initWithArray:@[@"N", @"", @"", @"", @"", @"", @"", @""]];
-  }
-  else if ([self.lastSegueIdentifier isEqualToString:@"editData"]) {
-    NSDictionary *dict = [DataModel sharedDataModel].items[self.currIndexPathRow];
+    self.cellInputItems = [[NSMutableArray alloc]
+        initWithArray:@[ @"N", @"", @"", @"", @"", @"", @"", @"" ]];
+  } else if ([self.lastSegueIdentifier isEqualToString:@"editData"]) {
+    NSDictionary *dict =
+        [DataModel sharedDataModel].items[self.currIndexPathRow];
 
     self.cellInputItems = [[NSMutableArray alloc] initWithArray:@[
       dict[@"PHOTO_URL"] ?: @"N",
@@ -71,16 +82,20 @@
   InputViewController *ivc = segue.sourceViewController;
   self.cellInputItems[ivc.cellType] = ivc.value;
 
-  [self.subTableView reloadData]; // This is required for reload data immediately!
+  [self.subTableView
+          reloadData]; // This is required for reload data immediately!
 }
 
-- (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender {
-  if (![identifier isEqualToString:@"fromSubView"]) { return YES; }
+- (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier
+                                  sender:(id)sender {
+  if (![identifier isEqualToString:@"fromSubView"]) {
+    return YES;
+  }
 
-  BOOL isNull1 = ( [self.cellInputItems[SubViewCellTypeNumber] length] == 0 );
-  BOOL isNull2 = ( [self.cellInputItems[SubViewCellTypeName] length] == 0 );
-  BOOL isNull3 = ( [self.cellInputItems[SubViewCellTypeGender] length] == 0 );
-  BOOL isNull4 = ( [self.cellInputItems[SubViewCellTypeBirth] length] == 0 );
+  BOOL isNull1 = ([self.cellInputItems[SubViewCellTypeNumber] length] == 0);
+  BOOL isNull2 = ([self.cellInputItems[SubViewCellTypeName] length] == 0);
+  BOOL isNull3 = ([self.cellInputItems[SubViewCellTypeGender] length] == 0);
+  BOOL isNull4 = ([self.cellInputItems[SubViewCellTypeBirth] length] == 0);
 
   NSString *alertMessage;
   if (isNull1) {
@@ -94,7 +109,11 @@
   }
 
   if (isNull1 || isNull2 || isNull3 || isNull4) {
-    UIAlertView *av = [[UIAlertView alloc] initWithTitle:alertMessage message:nil delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    UIAlertView *av = [[UIAlertView alloc] initWithTitle:alertMessage
+                                                 message:nil
+                                                delegate:nil
+                                       cancelButtonTitle:@"OK"
+                                       otherButtonTitles:nil];
     [av show];
     return NO;
   } else {
@@ -108,144 +127,172 @@
   return 1;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+- (NSInteger)tableView:(UITableView *)tableView
+ numberOfRowsInSection:(NSInteger)section {
   return self.cellTitles.count;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (CGFloat)tableView:(UITableView *)tableView
+    heightForRowAtIndexPath:(NSIndexPath *)indexPath {
   return (indexPath.row == SubViewCellTypePhoto) ? 100.f : 44.f;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (UITableViewCell *)tableView:(UITableView *)tableView
+         cellForRowAtIndexPath:(NSIndexPath *)indexPath {
   static NSString *cellIdentifier;
-  cellIdentifier = (indexPath.row == SubViewCellTypePhoto) ? @"photoCell" : @"dataCell";
-  UITableViewCell *cellView = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+  cellIdentifier =
+      (indexPath.row == SubViewCellTypePhoto) ? @"photoCell" : @"dataCell";
+  UITableViewCell *cellView =
+      [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
 
   if (!cellView) {
     if (indexPath.row == SubViewCellTypePhoto) {
       cellView = [[PhotoTableViewCell alloc] init];
     } else {
-      cellView = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellIdentifier];
+      cellView =
+          [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1
+                                 reuseIdentifier:cellIdentifier];
     }
   }
 
   switch (indexPath.row) {
-    case SubViewCellTypePhoto: {
-      self.photoCellView = (PhotoTableViewCell *)cellView;
+  case SubViewCellTypePhoto: {
+    self.photoCellView = (PhotoTableViewCell *)cellView;
 
-      if (self.resizedPhotoImage) {
-        self.photoCellView.photoImageView.image = self.resizedPhotoImage;
-      } else {
-        // default image
-        NSString *imageName = self.cellInputItems[SubViewCellTypeGender];
-        if (imageName.length == 0) { imageName = @"U"; }
-        self.photoCellView.photoImageView.image = [UIImage imageNamed:imageName];
+    if (self.resizedPhotoImage) {
+      self.photoCellView.photoImageView.image = self.resizedPhotoImage;
+    } else {
+      // default image
+      NSString *imageName = self.cellInputItems[SubViewCellTypeGender];
+      if (imageName.length == 0) {
+        imageName = @"U";
       }
+      self.photoCellView.photoImageView.image = [UIImage imageNamed:imageName];
+    }
 
+    break;
+  }
+
+  case SubViewCellTypeGender: {
+    cellView.textLabel.text = self.cellTitles[indexPath.row];
+    NSString *genderInput = self.cellInputItems[SubViewCellTypeGender];
+    if (genderInput.length == 0) {
+      cellView.detailTextLabel.text = @"";
       break;
     }
 
-    case SubViewCellTypeGender: {
-      cellView.textLabel.text = self.cellTitles[indexPath.row];
-      NSString *genderInput = self.cellInputItems[SubViewCellTypeGender];
-      if (genderInput.length == 0) {
-        cellView.detailTextLabel.text = @"";
-        break;
-      }
+    NSString *genderDisplay;
+    if ([self.cellInputItems[SubViewCellTypeGender] isEqualToString:@"M"]) {
+      genderDisplay = @"男";
+    } else if ([self.cellInputItems[SubViewCellTypeGender]
+                   isEqualToString:@"F"]) {
+      genderDisplay = @"女";
+    } else {
+      genderDisplay = @"不透露";
+    }
 
-      NSString *genderDisplay;
-      if ([self.cellInputItems[SubViewCellTypeGender] isEqualToString:@"M"]) {
-        genderDisplay = @"男";
-      } else if ([self.cellInputItems[SubViewCellTypeGender] isEqualToString:@"F"]) {
-        genderDisplay = @"女";
-      } else {
-        genderDisplay = @"不透露";
-      }
+    cellView.detailTextLabel.text = genderDisplay;
+    break;
+  }
 
-      cellView.detailTextLabel.text = genderDisplay;
+  case SubViewCellTypeBirth: {
+    cellView.textLabel.text = self.cellTitles[indexPath.row];
+
+    NSString *birthdateString = self.cellInputItems[SubViewCellTypeBirth];
+    if (birthdateString.length == 0) {
+      cellView.detailTextLabel.text = @"";
       break;
     }
 
-    case SubViewCellTypeBirth: {
-      cellView.textLabel.text = self.cellTitles[indexPath.row];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"YYYY/MM/dd"];
 
-      NSString *birthdateString = self.cellInputItems[SubViewCellTypeBirth];
-      if (birthdateString.length == 0) {
-        cellView.detailTextLabel.text = @"";
-        break;
-      }
+    NSTimeInterval unixTimeStamp = [birthdateString doubleValue];
+    NSDate *birthDate = [NSDate dateWithTimeIntervalSince1970:unixTimeStamp];
+    birthdateString = [dateFormatter stringFromDate:birthDate];
 
-      NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-      [dateFormatter setDateFormat:@"YYYY/MM/dd"];
+    cellView.detailTextLabel.text = birthdateString;
+    break;
+  }
 
-      NSTimeInterval unixTimeStamp = [birthdateString doubleValue];
-      NSDate *birthDate = [NSDate dateWithTimeIntervalSince1970:unixTimeStamp];
-      birthdateString = [dateFormatter stringFromDate:birthDate];
+  case SubViewCellTypeNumber:
+  case SubViewCellTypeName:
+  case SubViewCellTypePhone:
+  case SubViewCellTypeEmail:
+  case SubViewCellTypeAddress:
+    cellView.textLabel.text = self.cellTitles[indexPath.row];
+    cellView.detailTextLabel.text = self.cellInputItems[indexPath.row];
+    break;
 
-      cellView.detailTextLabel.text = birthdateString;
-      break;
-    }
-
-    case SubViewCellTypeNumber:
-    case SubViewCellTypeName:
-    case SubViewCellTypePhone:
-    case SubViewCellTypeEmail:
-    case SubViewCellTypeAddress:
-      cellView.textLabel.text = self.cellTitles[indexPath.row];
-      cellView.detailTextLabel.text = self.cellInputItems[indexPath.row];
-      break;
-
-    default:
-      break;
+  default:
+    break;
   }
 
   return cellView;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-  if (indexPath.row != SubViewCellTypePhoto) { return; }
+- (void)tableView:(UITableView *)tableView
+    didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+  if (indexPath.row != SubViewCellTypePhoto) {
+    return;
+  }
 
   // iOS8~ //
-  UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil
-                                                                           message:nil
-                                                                    preferredStyle:UIAlertControllerStyleActionSheet];
+  UIAlertController *alertController = [UIAlertController
+      alertControllerWithTitle:nil
+                       message:nil
+                preferredStyle:UIAlertControllerStyleActionSheet];
 
-  UIAlertAction *cameraAction = [UIAlertAction actionWithTitle:@"拍照"
-                                                         style:UIAlertActionStyleDefault
-                                                       handler:^(UIAlertAction *action) {
-    UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
-    imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
-    imagePicker.delegate = self;
-    [self presentViewController:imagePicker animated:YES completion:nil];
-  }];
+  UIAlertAction *cameraAction =
+      [UIAlertAction actionWithTitle:@"拍照"
+                               style:UIAlertActionStyleDefault
+                             handler:^(UIAlertAction *action) {
+                               UIImagePickerController *imagePicker =
+                                   [[UIImagePickerController alloc] init];
+                               imagePicker.sourceType =
+                                   UIImagePickerControllerSourceTypeCamera;
+                               imagePicker.delegate = self;
+                               [self presentViewController:imagePicker
+                                                  animated:YES
+                                                completion:nil];
+                             }];
 
   // Check if camera available
-  cameraAction.enabled = [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera];
+  cameraAction.enabled = [UIImagePickerController
+      isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera];
 
-  UIAlertAction *libraryAction = [UIAlertAction actionWithTitle:@"開啟相簿"
-                                                          style:UIAlertActionStyleDefault
-                                                        handler:^(UIAlertAction *action) {
-    UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
-    imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-    imagePicker.delegate = self;
-    imagePicker.modalPresentationStyle = UIModalPresentationPopover;
+  UIAlertAction *libraryAction = [UIAlertAction
+      actionWithTitle:@"開啟相簿"
+                style:UIAlertActionStyleDefault
+              handler:^(UIAlertAction *action) {
+                UIImagePickerController *imagePicker =
+                    [[UIImagePickerController alloc] init];
+                imagePicker.sourceType =
+                    UIImagePickerControllerSourceTypePhotoLibrary;
+                imagePicker.delegate = self;
+                imagePicker.modalPresentationStyle = UIModalPresentationPopover;
 
-    UIPopoverPresentationController *popover = imagePicker.popoverPresentationController;
-    popover.permittedArrowDirections = UIPopoverArrowDirectionAny;
-    [self presentViewController:imagePicker animated:YES completion:nil];
-  }];
+                UIPopoverPresentationController *popover =
+                    imagePicker.popoverPresentationController;
+                popover.permittedArrowDirections = UIPopoverArrowDirectionAny;
+                [self presentViewController:imagePicker
+                                   animated:YES
+                                 completion:nil];
+              }];
 
-  UIAlertAction *removeAction = [UIAlertAction actionWithTitle:@"移除照片"
-                                                         style:UIAlertActionStyleDefault
-                                                       handler:^(UIAlertAction *action) {
-    self.resizedPhotoImage = nil;
-    self.cellInputItems[SubViewCellTypePhoto] = @"N";
-    [self p_reloadTableViewInMainThread];
-  }];
+  UIAlertAction *removeAction =
+      [UIAlertAction actionWithTitle:@"移除照片"
+                               style:UIAlertActionStyleDefault
+                             handler:^(UIAlertAction *action) {
+                               self.resizedPhotoImage = nil;
+                               self.cellInputItems[SubViewCellTypePhoto] = @"N";
+                               [self p_reloadTableViewInMainThread];
+                             }];
 
-  UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消"
-                                                         style:UIAlertActionStyleCancel
-                                                       handler:nil];
+  UIAlertAction *cancelAction =
+      [UIAlertAction actionWithTitle:@"取消"
+                               style:UIAlertActionStyleCancel
+                             handler:nil];
 
   [alertController addAction:cameraAction];
   [alertController addAction:libraryAction];
@@ -256,9 +303,11 @@
 
 #pragma mark - Delegate (UIImagePickerControllerDelegate)
 
-- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+- (void)imagePickerController:(UIImagePickerController *)picker
+didFinishPickingMediaWithInfo:(NSDictionary *)info {
   UIImage *image = [info valueForKey:UIImagePickerControllerOriginalImage];
-  self.resizedPhotoImage = [self p_imageWithImage:image scaledToSize:CGSizeMake(80.f, 80.f)];
+  self.resizedPhotoImage =
+      [self p_imageWithImage:image scaledToSize:CGSizeMake(80.f, 80.f)];
   self.photoCellView.photoImageView.image = self.resizedPhotoImage;
   self.cellInputItems[SubViewCellTypePhoto] = @"Y";
 

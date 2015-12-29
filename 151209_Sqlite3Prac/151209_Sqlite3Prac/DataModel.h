@@ -10,7 +10,7 @@
 
 @interface DataModel : NSObject
 
-@property (strong, nonatomic) NSMutableArray *items;
+@property(strong, nonatomic) NSMutableArray *items;
 
 + (instancetype)sharedDataModel;
 

@@ -6,10 +6,10 @@
 //  Copyright (c) 2015 shoshino21. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
-#import <XCTest/XCTest.h>
 #import "DBManager.h"
 #import "DataModel.h"
+#import <UIKit/UIKit.h>
+#import <XCTest/XCTest.h>
 
 @interface _51209_Sqlite3Prac_Tests : XCTestCase {
   DBManager *dbm;
@@ -35,14 +35,18 @@
 }
 
 - (void)testInsert {
-  NSArray *params = @[@"1",@"2",@"3",@"4",@"5",@"6",@"7",@"8"];
-  [dbm executeQuery:@"INSERT INTO USER (NUMBER, NAME, GENDER, BIRTH, PHOTO_URL, PHONE, EMAIL, ADDRESS) VALUES (?,?,?,?,?,?,?,?)" params:params];
+  NSArray *params = @[ @"1", @"2", @"3", @"4", @"5", @"6", @"7", @"8" ];
+  [dbm
+      executeQuery:@"INSERT INTO USER (NUMBER, NAME, GENDER, BIRTH, PHOTO_URL, "
+                   @"PHONE, EMAIL, ADDRESS) VALUES (?,?,?,?,?,?,?,?)"
+            params:params];
 
   NSInteger lastInsertID = dbm.lastInsertID;
   NSLog(@"lastInsertID: %lu", (long)lastInsertID);
 
   NSString *lID = [NSString stringWithFormat:@"%lu", (long)lastInsertID];
-  NSArray *resultArr = [dbm loadDataFromDB:@"SELECT * FROM USER WHERE ID=?" params:@[lID]];
+  NSArray *resultArr =
+      [dbm loadDataFromDB:@"SELECT * FROM USER WHERE ID=?" params:@[ lID ]];
 
   XCTAssertEqualObjects(resultArr[0][@"NUMBER"], @"1");
   XCTAssertEqualObjects(resultArr[0][@"NAME"], @"2");
@@ -55,10 +59,11 @@
 }
 
 - (void)testUpdate {
-  NSArray *params = @[@"999",@"3"];
+  NSArray *params = @[ @"999", @"3" ];
   [dbm executeQuery:@"UPDATE USER SET NUMBER = ? WHERE ID = ?" params:params];
 
-  NSArray *resultArr = [dbm loadDataFromDB:@"SELECT * FROM USER WHERE ID=?" params:@[params[1]]];
+  NSArray *resultArr = [dbm loadDataFromDB:@"SELECT * FROM USER WHERE ID=?"
+                                    params:@[ params[1] ]];
   XCTAssertEqualObjects(resultArr[0][@"NUMBER"], @"999");
   XCTAssertEqualObjects(resultArr[0][@"NAME"], @"2");
   XCTAssertEqualObjects(resultArr[0][@"GENDER"], @"3");
@@ -85,7 +90,8 @@
 //  NSArray *params = [NSArray arrayWithObject:param];
 ////  [dbm :params];
 //
-//  NSArray *resultArr = [dbm loadDataFromDB:@"SELECT * FROM USER WHERE ID=?" params:@[@"5"]];
+//  NSArray *resultArr = [dbm loadDataFromDB:@"SELECT * FROM USER WHERE ID=?"
+//  params:@[@"5"]];
 //  XCTAssertEqualObjects(resultArr[0][@"NUMBER"], @"123");
 //  XCTAssertEqualObjects(resultArr[0][@"NAME"], @"123");
 //  XCTAssertEqualObjects(resultArr[0][@"GENDER"], @"123");
@@ -97,9 +103,12 @@
 //}
 
 - (void)testModelAdd {
-  NSArray *params = @[@"1",@"2",@"3",@"4",@"5",@"6",@"7",@"8"];
+  NSArray *params = @[ @"1", @"2", @"3", @"4", @"5", @"6", @"7", @"8" ];
 
-  [dbm executeQuery:@"INSERT INTO USER (NUMBER, NAME, GENDER, BIRTH, PHOTO_URL, PHONE, EMAIL, ADDRESS) VALUES (?,?,?,?,?,?,?,?)" params:params];
+  [dbm
+      executeQuery:@"INSERT INTO USER (NUMBER, NAME, GENDER, BIRTH, PHOTO_URL, "
+                   @"PHONE, EMAIL, ADDRESS) VALUES (?,?,?,?,?,?,?,?)"
+            params:params];
 
   if (dbm.lastInsertID == -1) {
     NSLog(@"Insert data failed");
@@ -139,7 +148,10 @@
   [self testModelAdd];
 
   NSUInteger idToUpdate = dbm.lastInsertID;
-  NSArray *params = @[@"999", [NSString stringWithFormat:@"%lu", (unsigned long)idToUpdate]];
+  NSArray *params = @[
+    @"999",
+    [NSString stringWithFormat:@"%lu", (unsigned long)idToUpdate]
+  ];
   [dbm executeQuery:@"UPDATE USER SET NUMBER = ? WHERE ID = ?" params:params];
 
   NSDictionary *sourceDict = [dm fetchDataWithID:idToUpdate];

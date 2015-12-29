@@ -10,7 +10,7 @@
 
 @interface DBManager : NSObject
 
-@property (strong, nonatomic) NSString *dbPath;
+@property(strong, nonatomic) NSString *dbPath;
 
 - (instancetype)initWithDatabaseFilename:(NSString *)dbFilename;
 - (NSArray *)loadDataFromDB:(NSString *)query params:(NSArray *)params;
