@@ -48,16 +48,14 @@
     break;
 
   case SubViewCellTypeBirth: {
-    _datePicker =
-        [[UIDatePicker alloc] initWithFrame:CGRectMake(0, 80, 320, 164)];
+    _datePicker = [[UIDatePicker alloc] initWithFrame:CGRectMake(0, 80, 320, 164)];
     _datePicker.datePickerMode = UIDatePickerModeDate;
     _datePicker.maximumDate = [NSDate date];
 
     if (self.value.length == 0) {
       _datePicker.date = [NSDate date];
     } else {
-      _datePicker.date =
-          [NSDate dateWithTimeIntervalSince1970:[self.value doubleValue]];
+      _datePicker.date = [NSDate dateWithTimeIntervalSince1970:[self.value doubleValue]];
     }
 
     [self.view addSubview:_datePicker];
@@ -140,8 +138,7 @@
   }
 }
 
-- (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier
-                                  sender:(id)sender {
+- (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender {
   if (![identifier isEqualToString:@"fromInputViewSubmit"]) {
     return YES;
   }
@@ -155,16 +152,12 @@
     return YES;
   }
 
-  BOOL isValid =
-      [self p_checkWithRegexForType:self.cellType string:self.textField.text];
+  BOOL isValid = [self p_checkWithRegexForType:self.cellType string:self.textField.text];
   if (isValid) {
     return YES;
   } else {
-    UIAlertView *av = [[UIAlertView alloc] initWithTitle:alertMessage
-                                                 message:nil
-                                                delegate:nil
-                                       cancelButtonTitle:@"OK"
-                                       otherButtonTitles:nil];
+    UIAlertView *av =
+        [[UIAlertView alloc] initWithTitle:alertMessage message:nil delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
     [av show];
     return NO;
   }
@@ -176,21 +169,16 @@
   return 1;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView
- numberOfRowsInSection:(NSInteger)section {
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
   return self.genderTitles.count;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView
-         cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
   static NSString *cellIdentifier = @"cell";
-  UITableViewCell *cellView =
-      [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+  UITableViewCell *cellView = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
 
   if (!cellView) {
-    cellView =
-        [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
-                               reuseIdentifier:cellIdentifier];
+    cellView = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
   }
 
   cellView.textLabel.text = self.genderTitles[indexPath.row];
@@ -204,8 +192,7 @@
   return cellView;
 }
 
-- (void)tableView:(UITableView *)tableView
-    didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
   if (self.cellType != SubViewCellTypeGender) {
     return;
   }
@@ -234,23 +221,18 @@
 
 - (void)p_updateSubmitButtonFrameWithTargetFrame:(CGRect)tf {
   CGRect bf = self.submitButton.frame;
-  self.submitButton.frame =
-      (CGRect){bf.origin.x, (tf.origin.y + tf.size.height + 20), bf.size};
+  self.submitButton.frame = (CGRect){bf.origin.x, (tf.origin.y + tf.size.height + 20), bf.size};
 }
 
-- (BOOL)p_checkWithRegexForType:(SubViewCellType)inType
-                         string:(NSString *)aString {
+- (BOOL)p_checkWithRegexForType:(SubViewCellType)inType string:(NSString *)aString {
   NSString *regexPattern;
   if (inType == SubViewCellTypePhone) {
     regexPattern = @"^[0-9]*$";
   } else if (inType == SubViewCellTypeEmail) {
-    regexPattern = @"[A-Z0-9a-z]+([._%+-]{1}[A-Z0-9a-z]+)*@[A-Z0-9a-z]+([.-]{1}"
-                   @"[A-Z0-9a-z]+)*(\\.[A-Za-z]{2,"
-                   @"4}){0,1}";
+    regexPattern = @"[A-Z0-9a-z]+([._%+-]{1}[A-Z0-9a-z]+)*@[A-Z0-9a-z]+([.-]{1}[A-Z0-9a-z]+)*(\\.[A-Za-z]{2,4}){0,1}";
   }
 
-  NSPredicate *predicate =
-      [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regexPattern];
+  NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regexPattern];
   BOOL isValid = [predicate evaluateWithObject:aString];
   return isValid;
 }

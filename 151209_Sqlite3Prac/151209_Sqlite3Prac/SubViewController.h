@@ -19,8 +19,7 @@ typedef enum {
 
 #import <UIKit/UIKit.h>
 
-@interface SubViewController
-    : UIViewController <UITableViewDataSource, UITableViewDelegate>
+@interface SubViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
 @property(weak, nonatomic) IBOutlet UITableView *subTableView;
 @property(strong, nonatomic) NSMutableArray *cellInputItems;

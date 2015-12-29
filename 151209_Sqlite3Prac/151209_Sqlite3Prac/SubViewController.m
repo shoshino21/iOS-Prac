@@ -12,8 +12,7 @@
 #import "InputViewController.h"
 #import "PhotoTableViewCell.h"
 
-@interface SubViewController () <UINavigationControllerDelegate,
-                                 UIImagePickerControllerDelegate>
+@interface SubViewController () <UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 
 @property(strong, nonatomic) NSArray *cellTitles;
 @property(strong, nonatomic) PhotoTableViewCell *photoCellView;
@@ -29,23 +28,12 @@
 
   self.subTableView.dataSource = self;
   self.subTableView.delegate = self;
-  self.cellTitles = @[
-    @"照片",
-    @"編號 *",
-    @"名字 *",
-    @"性別 *",
-    @"生日 *",
-    @"電話",
-    @"E-mail",
-    @"住址"
-  ];
+  self.cellTitles = @[ @"照片", @"編號 *", @"名字 *", @"性別 *", @"生日 *", @"電話", @"E-mail", @"住址" ];
 
   if ([self.lastSegueIdentifier isEqualToString:@"addData"]) {
-    self.cellInputItems = [[NSMutableArray alloc]
-        initWithArray:@[ @"N", @"", @"", @"", @"", @"", @"", @"" ]];
+    self.cellInputItems = [[NSMutableArray alloc] initWithArray:@[ @"N", @"", @"", @"", @"", @"", @"", @"" ]];
   } else if ([self.lastSegueIdentifier isEqualToString:@"editData"]) {
-    NSDictionary *dict =
-        [DataModel sharedDataModel].items[self.currIndexPathRow];
+    NSDictionary *dict = [DataModel sharedDataModel].items[self.currIndexPathRow];
 
     self.cellInputItems = [[NSMutableArray alloc] initWithArray:@[
       dict[@"PHOTO_URL"] ?: @"N",
@@ -82,12 +70,10 @@
   InputViewController *ivc = segue.sourceViewController;
   self.cellInputItems[ivc.cellType] = ivc.value;
 
-  [self.subTableView
-          reloadData]; // This is required for reload data immediately!
+  [self.subTableView reloadData]; // This is required for reload data immediately!
 }
 
-- (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier
-                                  sender:(id)sender {
+- (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender {
   if (![identifier isEqualToString:@"fromSubView"]) {
     return YES;
   }
@@ -109,11 +95,8 @@
   }
 
   if (isNull1 || isNull2 || isNull3 || isNull4) {
-    UIAlertView *av = [[UIAlertView alloc] initWithTitle:alertMessage
-                                                 message:nil
-                                                delegate:nil
-                                       cancelButtonTitle:@"OK"
-                                       otherButtonTitles:nil];
+    UIAlertView *av =
+        [[UIAlertView alloc] initWithTitle:alertMessage message:nil delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
     [av show];
     return NO;
   } else {
@@ -127,31 +110,24 @@
   return 1;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView
- numberOfRowsInSection:(NSInteger)section {
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
   return self.cellTitles.count;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView
-    heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
   return (indexPath.row == SubViewCellTypePhoto) ? 100.f : 44.f;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView
-         cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
   static NSString *cellIdentifier;
-  cellIdentifier =
-      (indexPath.row == SubViewCellTypePhoto) ? @"photoCell" : @"dataCell";
-  UITableViewCell *cellView =
-      [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+  cellIdentifier = (indexPath.row == SubViewCellTypePhoto) ? @"photoCell" : @"dataCell";
+  UITableViewCell *cellView = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
 
   if (!cellView) {
     if (indexPath.row == SubViewCellTypePhoto) {
       cellView = [[PhotoTableViewCell alloc] init];
     } else {
-      cellView =
-          [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1
-                                 reuseIdentifier:cellIdentifier];
+      cellView = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellIdentifier];
     }
   }
 
@@ -184,8 +160,7 @@
     NSString *genderDisplay;
     if ([self.cellInputItems[SubViewCellTypeGender] isEqualToString:@"M"]) {
       genderDisplay = @"男";
-    } else if ([self.cellInputItems[SubViewCellTypeGender]
-                   isEqualToString:@"F"]) {
+    } else if ([self.cellInputItems[SubViewCellTypeGender] isEqualToString:@"F"]) {
       genderDisplay = @"女";
     } else {
       genderDisplay = @"不透露";
@@ -231,68 +206,51 @@
   return cellView;
 }
 
-- (void)tableView:(UITableView *)tableView
-    didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
   if (indexPath.row != SubViewCellTypePhoto) {
     return;
   }
 
   // iOS8~ //
-  UIAlertController *alertController = [UIAlertController
-      alertControllerWithTitle:nil
-                       message:nil
-                preferredStyle:UIAlertControllerStyleActionSheet];
+  UIAlertController *alertController =
+      [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
 
-  UIAlertAction *cameraAction =
-      [UIAlertAction actionWithTitle:@"拍照"
-                               style:UIAlertActionStyleDefault
-                             handler:^(UIAlertAction *action) {
-                               UIImagePickerController *imagePicker =
-                                   [[UIImagePickerController alloc] init];
-                               imagePicker.sourceType =
-                                   UIImagePickerControllerSourceTypeCamera;
-                               imagePicker.delegate = self;
-                               [self presentViewController:imagePicker
-                                                  animated:YES
-                                                completion:nil];
-                             }];
+  UIAlertAction *cameraAction = [UIAlertAction actionWithTitle:@"拍照"
+                                                         style:UIAlertActionStyleDefault
+                                                       handler:^(UIAlertAction *action) {
+                                                         UIImagePickerController *imagePicker =
+                                                             [[UIImagePickerController alloc] init];
+                                                         imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+                                                         imagePicker.delegate = self;
+                                                         [self presentViewController:imagePicker animated:YES completion:nil];
+                                                       }];
 
   // Check if camera available
-  cameraAction.enabled = [UIImagePickerController
-      isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera];
+  cameraAction.enabled = [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera];
 
-  UIAlertAction *libraryAction = [UIAlertAction
-      actionWithTitle:@"開啟相簿"
-                style:UIAlertActionStyleDefault
-              handler:^(UIAlertAction *action) {
-                UIImagePickerController *imagePicker =
-                    [[UIImagePickerController alloc] init];
-                imagePicker.sourceType =
-                    UIImagePickerControllerSourceTypePhotoLibrary;
-                imagePicker.delegate = self;
-                imagePicker.modalPresentationStyle = UIModalPresentationPopover;
-
-                UIPopoverPresentationController *popover =
-                    imagePicker.popoverPresentationController;
-                popover.permittedArrowDirections = UIPopoverArrowDirectionAny;
-                [self presentViewController:imagePicker
-                                   animated:YES
-                                 completion:nil];
-              }];
-
-  UIAlertAction *removeAction =
-      [UIAlertAction actionWithTitle:@"移除照片"
+  UIAlertAction *libraryAction =
+      [UIAlertAction actionWithTitle:@"開啟相簿"
                                style:UIAlertActionStyleDefault
                              handler:^(UIAlertAction *action) {
-                               self.resizedPhotoImage = nil;
-                               self.cellInputItems[SubViewCellTypePhoto] = @"N";
-                               [self p_reloadTableViewInMainThread];
+                               UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
+                               imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+                               imagePicker.delegate = self;
+                               imagePicker.modalPresentationStyle = UIModalPresentationPopover;
+
+                               UIPopoverPresentationController *popover = imagePicker.popoverPresentationController;
+                               popover.permittedArrowDirections = UIPopoverArrowDirectionAny;
+                               [self presentViewController:imagePicker animated:YES completion:nil];
                              }];
 
-  UIAlertAction *cancelAction =
-      [UIAlertAction actionWithTitle:@"取消"
-                               style:UIAlertActionStyleCancel
-                             handler:nil];
+  UIAlertAction *removeAction = [UIAlertAction actionWithTitle:@"移除照片"
+                                                         style:UIAlertActionStyleDefault
+                                                       handler:^(UIAlertAction *action) {
+                                                         self.resizedPhotoImage = nil;
+                                                         self.cellInputItems[SubViewCellTypePhoto] = @"N";
+                                                         [self p_reloadTableViewInMainThread];
+                                                       }];
+
+  UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
 
   [alertController addAction:cameraAction];
   [alertController addAction:libraryAction];
@@ -303,11 +261,9 @@
 
 #pragma mark - Delegate (UIImagePickerControllerDelegate)
 
-- (void)imagePickerController:(UIImagePickerController *)picker
-didFinishPickingMediaWithInfo:(NSDictionary *)info {
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
   UIImage *image = [info valueForKey:UIImagePickerControllerOriginalImage];
-  self.resizedPhotoImage =
-      [self p_imageWithImage:image scaledToSize:CGSizeMake(80.f, 80.f)];
+  self.resizedPhotoImage = [self p_imageWithImage:image scaledToSize:CGSizeMake(80.f, 80.f)];
   self.photoCellView.photoImageView.image = self.resizedPhotoImage;
   self.cellInputItems[SubViewCellTypePhoto] = @"Y";
 

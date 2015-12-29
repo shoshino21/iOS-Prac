@@ -9,8 +9,7 @@
 #import "SubViewController.h"
 #import <UIKit/UIKit.h>
 
-@interface InputViewController
-    : UIViewController <UITableViewDataSource, UITableViewDelegate>
+@interface InputViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
 @property(strong, nonatomic) NSString *value;
 @property(strong, nonatomic) NSMutableArray *cellInputItems;
