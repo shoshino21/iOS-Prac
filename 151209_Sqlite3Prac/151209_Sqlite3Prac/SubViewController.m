@@ -95,8 +95,11 @@
   }
 
   if (isNull1 || isNull2 || isNull3 || isNull4) {
-    UIAlertView *av =
-        [[UIAlertView alloc] initWithTitle:alertMessage message:nil delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    UIAlertView *av = [[UIAlertView alloc] initWithTitle:alertMessage
+                                                 message:nil
+                                                delegate:nil
+                                       cancelButtonTitle:@"OK"
+                                       otherButtonTitles:nil];
     [av show];
     return NO;
   } else {

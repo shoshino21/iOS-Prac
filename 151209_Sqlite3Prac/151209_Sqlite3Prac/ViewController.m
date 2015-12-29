@@ -60,7 +60,7 @@
 
   if ([segue.identifier isEqualToString:@"addData"]) {
     svc.navigationItem.title = @"新增資料";
-    
+
   } else if ([segue.identifier isEqualToString:@"editData"]) {
     svc.navigationItem.title = @"編輯資料";
 

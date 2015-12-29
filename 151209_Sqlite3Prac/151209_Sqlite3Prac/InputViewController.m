@@ -156,8 +156,11 @@
   if (isValid) {
     return YES;
   } else {
-    UIAlertView *av =
-        [[UIAlertView alloc] initWithTitle:alertMessage message:nil delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    UIAlertView *av = [[UIAlertView alloc] initWithTitle:alertMessage
+                                                 message:nil
+                                                delegate:nil
+                                       cancelButtonTitle:@"OK"
+                                       otherButtonTitles:nil];
     [av show];
     return NO;
   }
