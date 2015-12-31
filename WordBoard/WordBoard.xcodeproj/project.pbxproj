@@ -12,6 +12,7 @@
 		EF4506901C33009D0093003B /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF45068F1C33009D0093003B /* ViewController.m */; };
 		EF4506951C33009D0093003B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EF4506941C33009D0093003B /* Assets.xcassets */; };
 		EF4506981C33009D0093003B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EF4506961C33009D0093003B /* LaunchScreen.storyboard */; };
+		EFD4ED8C1C34316000A38B6F /* BoardView.m in Sources */ = {isa = PBXBuildFile; fileRef = EFD4ED8B1C34316000A38B6F /* BoardView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,8 @@
 		EF4506941C33009D0093003B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EF4506971C33009D0093003B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EF4506991C33009D0093003B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EFD4ED8A1C34316000A38B6F /* BoardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoardView.h; sourceTree = "<group>"; };
+		EFD4ED8B1C34316000A38B6F /* BoardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoardView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +61,8 @@
 			children = (
 				EF45068B1C33009D0093003B /* AppDelegate.h */,
 				EF45068C1C33009D0093003B /* AppDelegate.m */,
+				EFD4ED8A1C34316000A38B6F /* BoardView.h */,
+				EFD4ED8B1C34316000A38B6F /* BoardView.m */,
 				EF45068E1C33009D0093003B /* ViewController.h */,
 				EF45068F1C33009D0093003B /* ViewController.m */,
 				EF4506941C33009D0093003B /* Assets.xcassets */,
@@ -146,6 +151,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EF4506901C33009D0093003B /* ViewController.m in Sources */,
+				EFD4ED8C1C34316000A38B6F /* BoardView.m in Sources */,
 				EF45068D1C33009D0093003B /* AppDelegate.m in Sources */,
 				EF45068A1C33009D0093003B /* main.m in Sources */,
 			);
