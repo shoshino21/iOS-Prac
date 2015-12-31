@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+static const NSInteger kLengthByCell = 8;
+
 @class BoardView;
 
 @protocol BoardViewDelegate <NSObject>
