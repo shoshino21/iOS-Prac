@@ -22,7 +22,7 @@
 
 @interface SHOWebService2 : NSObject
 
-@property (weak, nonatomic) id<SHOWebService2Delegate> delegate;
+@property(weak, nonatomic) id<SHOWebService2Delegate> delegate;
 
 + (instancetype)sharedWebService;
 
