@@ -26,8 +26,7 @@
 }
 
 - (void)executeOperation {
-#warning is it possible to clean queue elegantly?
-  self.operationQueue = [NSOperationQueue new];
+  [self.operationQueue cancelAllOperations];
   HTTPBinManagerOperation *newOperation = [HTTPBinManagerOperation new];
   newOperation.delegate = self;
   [self.operationQueue addOperation:newOperation];

@@ -12,65 +12,116 @@
 
 @implementation HTTPBinManagerOperation {
   SHOWebService *_ws;
+  NSPort *_port;
+  BOOL _isRunloopRunning;
 }
 
 - (instancetype)init {
   self = [super init];
   if (self) {
     _ws = [SHOWebService sharedWebService];
+    _port = [NSPort new];
+    _isRunloopRunning = NO;
   }
   return self;
 }
 
 - (void)main {
-#warning it's legal to return directly in another thread?
+  @autoreleasepool {
+    __block NSDictionary *getData, *postData;
 
-  __block NSDictionary *getData, *postData;
+    [_ws fetchGetResponseWithCallback:^(NSDictionary *dict, NSError *error) {
+      [self p_quitRunLoop];
 
-  [_ws fetchGetResponseWithCallback:^(NSDictionary *dict, NSError *error) {
-    dispatch_async(dispatch_get_main_queue(), ^{
       if (error) {
-        [self.delegate HTTPBinManagerOperationDidFail:self];
+        dispatch_async(dispatch_get_main_queue(), ^{
+          [self.delegate HTTPBinManagerOperationDidFail:self];
+        });
         return;
+
       } else {
         getData = dict;
-        [self.delegate HTTPBinManagerOperation:self updateProgress:.33f];
+        dispatch_async(dispatch_get_main_queue(), ^{
+          [self.delegate HTTPBinManagerOperation:self updateProgress:.33f];
+        });
       }
-    });
-  }];
+    }];
 
-  [_ws postCustomerName:@"test"
-               callback:^(NSDictionary *dict, NSError *error) {
-                 dispatch_async(dispatch_get_main_queue(), ^{
+    if (self.isCancelled) {
+      return;
+    }
+    [self p_doRunLoop];
+
+    [_ws postCustomerName:@"test"
+                 callback:^(NSDictionary *dict, NSError *error) {
+                   [self p_quitRunLoop];
+
                    if (error) {
-                     [self.delegate HTTPBinManagerOperationDidFail:self];
+                     dispatch_async(dispatch_get_main_queue(), ^{
+                       [self.delegate HTTPBinManagerOperationDidFail:self];
+                     });
                      return;
+
                    } else {
                      postData = dict;
-                     [self.delegate HTTPBinManagerOperation:self updateProgress:.66f];
+                     dispatch_async(dispatch_get_main_queue(), ^{
+                       [self.delegate HTTPBinManagerOperation:self updateProgress:.66f];
+                     });
                    }
-                 });
-               }];
+                 }];
 
-  [_ws fetchImageWithCallback:^(UIImage *img, NSError *error) {
-    dispatch_async(dispatch_get_main_queue(), ^{
+    if (self.isCancelled) {
+      return;
+    }
+    [self p_doRunLoop];
+
+    [_ws fetchImageWithCallback:^(UIImage *img, NSError *error) {
+      [self p_quitRunLoop];
+
       if (error) {
-        [self.delegate HTTPBinManagerOperationDidFail:self];
+        dispatch_async(dispatch_get_main_queue(), ^{
+          [self.delegate HTTPBinManagerOperationDidFail:self];
+        });
         return;
+
       } else {
-        [self.delegate HTTPBinManagerOperation:self updateProgress:1.f];
-        [self.delegate HTTPBinManagerOperationDidSuccess:self fetchGetData:getData postData:postData image:img];
+        dispatch_async(dispatch_get_main_queue(), ^{
+          [self.delegate HTTPBinManagerOperation:self updateProgress:1.f];
+          [self.delegate HTTPBinManagerOperationDidSuccess:self fetchGetData:getData postData:postData image:img];
+        });
       }
-    });
-  }];
+    }];
+
+    [self p_doRunLoop];
+  }
 }
 
 - (void)cancel {
-#warning is it useful?
+  [super cancel];
+  [self p_quitRunLoop];
   [_ws cancelAllTaskInSession:[NSURLSession sharedSession]];
-  dispatch_async(dispatch_get_main_queue(), ^{
-    [self.delegate HTTPBinManagerOperationDidCancel:self];
-  });
+  [self.delegate HTTPBinManagerOperationDidCancel:self];
+}
+
+#pragma mark - RunLoop
+
+- (void)p_doRunLoop {
+  _isRunloopRunning = YES;
+  _port = [NSPort new];
+  [[NSRunLoop currentRunLoop] addPort:_port forMode:NSRunLoopCommonModes];
+
+  while (_isRunloopRunning && !self.isCancelled) {
+    @autoreleasepool {
+      [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.5]];
+    }
+  }
+
+  _port = nil;
+}
+
+- (void)p_quitRunLoop {
+  [_port invalidate];
+  _isRunloopRunning = NO;
 }
 
 @end
