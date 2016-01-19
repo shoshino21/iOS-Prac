@@ -92,6 +92,9 @@
       }
     }];
 
+    if (self.isCancelled) {
+      return;
+    }
     [self p_doRunLoop];
   }
 }
