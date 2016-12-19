@@ -1,12 +1,13 @@
 //
 //  AppDelegate.m
-//  161219_objc.io-issue-01
+//  TemplateProj
 //
-//  Created by shoshino21 on 12/19/16.
+//  Created by shoshino21 on 12/20/16.
 //  Copyright © 2016 shoshino21. All rights reserved.
 //
 
 #import "AppDelegate.h"
+#import "MainViewController.h"
 
 @interface AppDelegate ()
 
@@ -17,6 +18,12 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
   // Override point for customization after application launch.
+  self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+  MainViewController *vc = [[MainViewController alloc] init];
+  UINavigationController *nc = [[UINavigationController alloc] initWithRootViewController:vc];
+  self.window.rootViewController = nc;
+  [self.window makeKeyAndVisible];
+
   return YES;
 }
 

@@ -1,0 +1,14 @@
+//
+//  shoshino21-Prefix.pch
+//  TemplateProj
+//
+//  Created by shoshino21 on 12/20/16.
+//  Copyright © 2016 shoshino21. All rights reserved.
+//
+
+#ifdef __OBJC__
+  #import <Foundation/Foundation.h>
+  #import <UIKit/UIKit.h>
+  #import "Constant.h"
+  #import "Macro.h"
+#endif

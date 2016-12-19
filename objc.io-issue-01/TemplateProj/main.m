@@ -1,8 +1,8 @@
 //
 //  main.m
-//  161219_objc.io-issue-01
+//  TemplateProj
 //
-//  Created by shoshino21 on 12/19/16.
+//  Created by shoshino21 on 12/20/16.
 //  Copyright © 2016 shoshino21. All rights reserved.
 //
 
