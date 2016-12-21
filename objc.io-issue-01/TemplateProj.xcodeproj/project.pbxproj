@@ -19,7 +19,7 @@
 		0C94DD4F99DC00B1EAF45DD4 /* Pods-TemplateProj.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TemplateProj.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TemplateProj/Pods-TemplateProj.debug.xcconfig"; sourceTree = "<group>"; };
 		0D2446D2F083366506DBE477 /* Pods-TemplateProj.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TemplateProj.release.xcconfig"; path = "Pods/Target Support Files/Pods-TemplateProj/Pods-TemplateProj.release.xcconfig"; sourceTree = "<group>"; };
 		8DA7C01DD4A31A13651A0100 /* libPods-TemplateProj.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TemplateProj.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		EF53C5991E0863B0006F7955 /* objc.io-issue-01.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "objc.io-issue-01.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		EF53C5991E0863B0006F7955 /* TemplateProj.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TemplateProj.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EF53C59D1E0863B0006F7955 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		EF53C59F1E0863B0006F7955 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		EF53C5A01E0863B0006F7955 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -67,7 +67,7 @@
 		EF53C59A1E0863B0006F7955 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				EF53C5991E0863B0006F7955 /* objc.io-issue-01.app */,
+				EF53C5991E0863B0006F7955 /* TemplateProj.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -109,9 +109,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		EF53C5981E0863B0006F7955 /* objc.io-issue-01 */ = {
+		EF53C5981E0863B0006F7955 /* TemplateProj */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = EF53C5B01E0863B0006F7955 /* Build configuration list for PBXNativeTarget "objc.io-issue-01" */;
+			buildConfigurationList = EF53C5B01E0863B0006F7955 /* Build configuration list for PBXNativeTarget "TemplateProj" */;
 			buildPhases = (
 				7B32A9CF997C896B60141E9D /* [CP] Check Pods Manifest.lock */,
 				EF53C5951E0863B0006F7955 /* Sources */,
@@ -124,9 +124,9 @@
 			);
 			dependencies = (
 			);
-			name = "objc.io-issue-01";
+			name = TemplateProj;
 			productName = TemplateProj;
-			productReference = EF53C5991E0863B0006F7955 /* objc.io-issue-01.app */;
+			productReference = EF53C5991E0863B0006F7955 /* TemplateProj.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -144,7 +144,7 @@
 					};
 				};
 			};
-			buildConfigurationList = EF53C5941E0863B0006F7955 /* Build configuration list for PBXProject "objc.io-issue-01" */;
+			buildConfigurationList = EF53C5941E0863B0006F7955 /* Build configuration list for PBXProject "TemplateProj" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -157,7 +157,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				EF53C5981E0863B0006F7955 /* objc.io-issue-01 */,
+				EF53C5981E0863B0006F7955 /* TemplateProj */,
 			);
 		};
 /* End PBXProject section */
@@ -368,7 +368,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		EF53C5941E0863B0006F7955 /* Build configuration list for PBXProject "objc.io-issue-01" */ = {
+		EF53C5941E0863B0006F7955 /* Build configuration list for PBXProject "TemplateProj" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				EF53C5AE1E0863B0006F7955 /* Debug */,
@@ -377,7 +377,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		EF53C5B01E0863B0006F7955 /* Build configuration list for PBXNativeTarget "objc.io-issue-01" */ = {
+		EF53C5B01E0863B0006F7955 /* Build configuration list for PBXNativeTarget "TemplateProj" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				EF53C5B11E0863B0006F7955 /* Debug */,
