@@ -22,7 +22,7 @@
 
 // Color
 
-#define RGB(RED,GREEN,BLUE) [UIColor colorWithRed:RED/255.00 green:GREEN/255.00 blue:BLUE/255.00 alpha:1.0]
+#define RGB(R, G, B) [UIColor colorWithRed:R/255.00 green:G/255.00 blue:B/255.00 alpha:1.0]
 
 #define RGBHex(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 

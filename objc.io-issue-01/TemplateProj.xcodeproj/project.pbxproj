@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		A76834705476E133F34187FD /* libPods-TemplateProj.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DA7C01DD4A31A13651A0100 /* libPods-TemplateProj.a */; };
+		EF3669931E101F0F000A480C /* InputViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF3669921E101F0F000A480C /* InputViewController.m */; };
+		EF3669961E101F17000A480C /* InputSubViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF3669951E101F17000A480C /* InputSubViewController.m */; };
+		EF4285961E10D735004E7D88 /* Person.m in Sources */ = {isa = PBXBuildFile; fileRef = EF4285951E10D735004E7D88 /* Person.m */; };
 		EF53C59E1E0863B0006F7955 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EF53C59D1E0863B0006F7955 /* main.m */; };
 		EF53C5A11E0863B0006F7955 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EF53C5A01E0863B0006F7955 /* AppDelegate.m */; };
 		EF53C5A91E0863B0006F7955 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EF53C5A81E0863B0006F7955 /* Assets.xcassets */; };
@@ -19,6 +22,12 @@
 		0C94DD4F99DC00B1EAF45DD4 /* Pods-TemplateProj.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TemplateProj.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TemplateProj/Pods-TemplateProj.debug.xcconfig"; sourceTree = "<group>"; };
 		0D2446D2F083366506DBE477 /* Pods-TemplateProj.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TemplateProj.release.xcconfig"; path = "Pods/Target Support Files/Pods-TemplateProj/Pods-TemplateProj.release.xcconfig"; sourceTree = "<group>"; };
 		8DA7C01DD4A31A13651A0100 /* libPods-TemplateProj.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TemplateProj.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		EF3669911E101F0F000A480C /* InputViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InputViewController.h; sourceTree = "<group>"; };
+		EF3669921E101F0F000A480C /* InputViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InputViewController.m; sourceTree = "<group>"; };
+		EF3669941E101F17000A480C /* InputSubViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InputSubViewController.h; sourceTree = "<group>"; };
+		EF3669951E101F17000A480C /* InputSubViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InputSubViewController.m; sourceTree = "<group>"; };
+		EF4285941E10D735004E7D88 /* Person.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Person.h; sourceTree = "<group>"; };
+		EF4285951E10D735004E7D88 /* Person.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Person.m; sourceTree = "<group>"; };
 		EF53C5991E0863B0006F7955 /* TemplateProj.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TemplateProj.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EF53C59D1E0863B0006F7955 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		EF53C59F1E0863B0006F7955 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -54,6 +63,28 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		EF4285971E10D739004E7D88 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				EF4285941E10D735004E7D88 /* Person.h */,
+				EF4285951E10D735004E7D88 /* Person.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		EF4285981E10D744004E7D88 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				EF53C5B61E0864C7006F7955 /* MainViewController.h */,
+				EF53C5B71E0864C7006F7955 /* MainViewController.m */,
+				EF3669911E101F0F000A480C /* InputViewController.h */,
+				EF3669921E101F0F000A480C /* InputViewController.m */,
+				EF3669941E101F17000A480C /* InputSubViewController.h */,
+				EF3669951E101F17000A480C /* InputSubViewController.m */,
+			);
+			name = ViewController;
+			sourceTree = "<group>";
+		};
 		EF53C5901E0863B0006F7955 = {
 			isa = PBXGroup;
 			children = (
@@ -77,8 +108,8 @@
 			children = (
 				EF53C59F1E0863B0006F7955 /* AppDelegate.h */,
 				EF53C5A01E0863B0006F7955 /* AppDelegate.m */,
-				EF53C5B61E0864C7006F7955 /* MainViewController.h */,
-				EF53C5B71E0864C7006F7955 /* MainViewController.m */,
+				EF4285971E10D739004E7D88 /* Model */,
+				EF4285981E10D744004E7D88 /* ViewController */,
 				EF53C5A81E0863B0006F7955 /* Assets.xcassets */,
 				EF53C59C1E0863B0006F7955 /* Supporting Files */,
 			);
@@ -227,9 +258,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EF4285961E10D735004E7D88 /* Person.m in Sources */,
 				EF53C5A11E0863B0006F7955 /* AppDelegate.m in Sources */,
+				EF3669961E101F17000A480C /* InputSubViewController.m in Sources */,
 				EF53C5B81E0864C7006F7955 /* MainViewController.m in Sources */,
 				EF53C59E1E0863B0006F7955 /* main.m in Sources */,
+				EF3669931E101F0F000A480C /* InputViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
