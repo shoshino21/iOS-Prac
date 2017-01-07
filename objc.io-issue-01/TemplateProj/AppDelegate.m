@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegate.h"
-#import "MainViewController.h"
+#import "SHOMainViewController.h"
 
 @interface AppDelegate ()
 
@@ -20,8 +20,8 @@
   // Override point for customization after application launch.
 
   self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
-  MainViewController *vc = [[MainViewController alloc] init];
-  UINavigationController *nc = [[UINavigationController alloc] initWithRootViewController:vc];
+  SHOMainViewController *mvc = [[SHOMainViewController alloc] init];
+  UINavigationController *nc = [[UINavigationController alloc] initWithRootViewController:mvc];
   self.window.rootViewController = nc;
   [self.window makeKeyAndVisible];
 

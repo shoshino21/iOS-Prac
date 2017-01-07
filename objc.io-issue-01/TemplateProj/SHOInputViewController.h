@@ -6,6 +6,6 @@
 //  Copyright © 2016 shoshino21. All rights reserved.
 //
 
-@interface InputViewController : UIViewController
+@interface SHOInputViewController : UIViewController
 
 @end

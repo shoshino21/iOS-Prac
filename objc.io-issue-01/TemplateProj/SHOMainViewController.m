@@ -6,20 +6,24 @@
 //  Copyright © 2016 shoshino21. All rights reserved.
 //
 
-#import "MainViewController.h"
+#import "SHOMainViewController.h"
 
-#import "InputViewController.h"
+#import "SHOInputViewController.h"
+#import "SHOPersonTableViewCell.h"
 
 static CGFloat const kSegmentedCtrlWidth = 140.f;
 static CGFloat const kSegmentedCtrlHeight = 29.f;
 static CGFloat const kSegmentedCtrlMarginY = 10.f;
 static CGFloat const kSegmentedCtrlPaddingX = 20.f;
 
-@interface MainViewController () <UITableViewDataSource, UITableViewDelegate>
+static CGFloat const kMainTableViewCellHeight = 80.f;
+static NSString *const kPersonTableViewCellStr = @"kPersonTableViewCellStr";
+
+@interface SHOMainViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @end
 
-@implementation MainViewController {
+@implementation SHOMainViewController {
   UIView *_containerView;
   UITableView *_mainTableView;
   UISegmentedControl *_sortKindSegmentedCtrl;
@@ -59,8 +63,12 @@ static CGFloat const kSegmentedCtrlPaddingX = 20.f;
   _mainTableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
   _mainTableView.dataSource = self;
   _mainTableView.delegate = self;
+  _mainTableView.backgroundColor = [UIColor whiteColor];
   _mainTableView.allowsSelection = NO;
+  _mainTableView.showsVerticalScrollIndicator = NO;
   [_containerView addSubview:_mainTableView];
+
+  [_mainTableView registerClass:[SHOPersonTableViewCell class] forCellReuseIdentifier:kSHOPersonTableViewCellStr];
 }
 
 - (void)settingNavigationBar {
@@ -104,7 +112,7 @@ static CGFloat const kSegmentedCtrlPaddingX = 20.f;
 #pragma mark - Actions
 
 - (IBAction)addPerson:(id)sender {
-  InputViewController *inputViewCtrl = [InputViewController new];
+  SHOInputViewController *inputViewCtrl = [SHOInputViewController new];
   [self.navigationController pushViewController:inputViewCtrl animated:YES];
 }
 
@@ -119,14 +127,23 @@ static CGFloat const kSegmentedCtrlPaddingX = 20.f;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-  static NSString *cellIdentifierStr;
-  UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifierStr];
+  SHOPersonTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kPersonTableViewCellStr];
 
   if (!cell) {
-    cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifierStr];
+    cell = [[SHOPersonTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kPersonTableViewCellStr];
   }
 
-  cell.textLabel.text = [NSString stringWithFormat:@"%ld", indexPath.row];
+  cell.avatarImageView.backgroundColor = [UIColor brownColor];
+  if (indexPath.row % 2 == 0) {
+
+    cell.nameLabel.text = @"123213";
+  }
+  else
+  {
+    cell.nameLabel.text = @"123213ABCDEFGHJJIKqweruiopqweruiopqeruiop";
+
+  }
+  cell.birthLabel.text = @"2000/10/10";
 
   return cell;
 }
@@ -143,7 +160,7 @@ static CGFloat const kSegmentedCtrlPaddingX = 20.f;
 #pragma mark - UITableViewDelegate
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-  return 60.f;
+  return kMainTableViewCellHeight;
 }
 
 @end

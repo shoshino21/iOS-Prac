@@ -6,13 +6,13 @@
 //  Copyright © 2016 shoshino21. All rights reserved.
 //
 
-#import "InputSubViewController.h"
+#import "SHOInputSubViewController.h"
 
-@interface InputSubViewController ()
+@interface SHOInputSubViewController ()
 
 @end
 
-@implementation InputSubViewController
+@implementation SHOInputSubViewController
 
 #pragma mark - Lifecycle
 
